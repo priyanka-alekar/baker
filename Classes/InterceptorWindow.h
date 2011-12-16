@@ -30,11 +30,11 @@
 //  
 
 #import <Foundation/Foundation.h>
-#import	"RootViewController.h"
+#import	"ReaderViewController.h"
 
 @interface InterceptorWindow : UIWindow {
     UIView *target;
-	RootViewController *eventsDelegate;
+	ReaderViewController *eventsDelegate;
 	
     BOOL isScrolling;
 }

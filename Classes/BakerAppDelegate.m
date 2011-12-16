@@ -31,13 +31,25 @@
 
 
 #import "BakerAppDelegate.h"
-#import "RootViewController.h"
+//#import "RootViewController.h"
 #import "InterceptorWindow.h"
+#import "LibraryViewController.h"
+#import "ReaderViewController.h"
+#import "Issue.h"
+#import "Cover.h"
+#import "Content.h"
 
 @implementation BakerAppDelegate
 
 @synthesize window;
-@synthesize rootViewController;
+//@synthesize rootViewController;
+
+@synthesize navigationController = _navigationController;
+@synthesize rvc=_rvc;
+
+@synthesize managedObjectContext=__managedObjectContext;
+@synthesize managedObjectModel=__managedObjectModel;
+@synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -52,16 +64,30 @@
     // Disable Shake to undo
 	application.applicationSupportsShakeToEdit = NO;
     
+    //COMMENTED OUT FOR SHELF CODE FIRST
 	// Create the controller for the root view
-	self.rootViewController = [[[RootViewController alloc] init] autorelease];
+	//self.rootViewController = [[[RootViewController alloc] init] autorelease];
 	
 	// Create the application window
-	self.window = [[[InterceptorWindow alloc] initWithTarget:self.rootViewController.scrollView eventsDelegate:self.rootViewController frame:[[UIScreen mainScreen]bounds]] autorelease];
-	window.backgroundColor = [UIColor whiteColor];
+	//self.window = [[[InterceptorWindow alloc] initWithTarget:self.rootViewController.scrollView eventsDelegate:self.rootViewController frame:[[UIScreen mainScreen]bounds]] autorelease];
+	//window.backgroundColor = [UIColor whiteColor];
 	
 	// Add the root view to the application window
-	[window addSubview:rootViewController.view];
-    [window makeKeyAndVisible];
+	//[window addSubview:rootViewController.view];
+    //[window makeKeyAndVisible];
+    
+    
+    // Shelf View
+    LibraryViewController * LVrootViewController = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];  
+    _rvc = [[ReaderViewController alloc] init];
+    //[_rvc.pageControl hideUntilInitialised:3];
+    
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:LVrootViewController];  
+    [_navigationController setNavigationBarHidden:YES];
+    [_navigationController setToolbarHidden:NO];
+    
+    self.window.rootViewController = _navigationController;
+    [self.window makeKeyAndVisible];
 	
 	NSString *reqSysVer = @"3.2";
 	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
@@ -114,6 +140,8 @@
 	 */
 	
 	[self saveLastPageReference];
+    
+    [self saveContext];
 }
 
 - (void)saveLastPageReference {
@@ -121,18 +149,18 @@
 	NSUserDefaults *userDefs = [NSUserDefaults standardUserDefaults];
 	
 	// Save last page viewed reference
-	if (rootViewController.currentPageNumber > 0) {
-		NSString *lastPageViewed = [NSString stringWithFormat:@"%d", rootViewController.currentPageNumber];
-		[userDefs setObject:lastPageViewed forKey:@"lastPageViewed"];
-		NSLog(@"Saved last page viewed: %@", lastPageViewed);
-	}
+	//if (rootViewController.currentPageNumber > 0) {
+	//	NSString *lastPageViewed = [NSString stringWithFormat:@"%d", rootViewController.currentPageNumber];
+	//	[userDefs setObject:lastPageViewed forKey:@"lastPageViewed"];
+	//	NSLog(@"Saved last page viewed: %@", lastPageViewed);
+	//}
 	
 	// Save last scroll index reference
-	if (rootViewController.currPage != nil) {
-		NSString *lastScrollIndex = [rootViewController.currPage stringByEvaluatingJavaScriptFromString:@"window.scrollY;"];
-		[userDefs setObject:lastScrollIndex forKey:@"lastScrollIndex"];	
-		NSLog(@"Saved last scroll index: %@", lastScrollIndex);
-	}
+	//if (rootViewController.currPage != nil) {
+	//	NSString *lastScrollIndex = [rootViewController.currPage stringByEvaluatingJavaScriptFromString:@"window.scrollY;"];
+	//	[userDefs setObject:lastScrollIndex forKey:@"lastScrollIndex"];	
+	//	NSLog(@"Saved last scroll index: %@", lastScrollIndex);
+	//}
 }
 
 #pragma mark -
@@ -144,10 +172,119 @@
 }
 - (void)dealloc {
     
-	[rootViewController release];
+	//[rootViewController release];
 	[window release];
+    [__managedObjectContext release];
+    [__managedObjectModel release];
+    [__persistentStoreCoordinator release];
+    [_navigationController release];
     [super dealloc];
 }
 
+- (void)awakeFromNib
+{
+    /*
+     Typically you should set up the Core Data stack here, usually by passing the managed object context to the first view controller.
+     self.<#View controller#>.managedObjectContext = self.managedObjectContext;
+     */
+    NSManagedObjectContext *context = [self managedObjectContext];
+    if (!context) {
+        // Handle the error.
+        NSLog(@"Could not get a context!");
+    }
+    
+}
+
+- (void)saveContext
+{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil)
+    {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
+        {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+             
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+             */
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        } 
+    }
+}
+
+#pragma mark - Core Data stack
+
+/**
+ Returns the managed object context for the application.
+ If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+ */
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (__managedObjectContext != nil)
+    {
+        return __managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil)
+    {
+        __managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return __managedObjectContext;
+}
+
+/**
+ Returns the managed object model for the application.
+ If the model doesn't already exist, it is created from the application's model.
+ */
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (__managedObjectModel != nil)
+    {
+        return __managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"SitelessMagazine" withExtension:@"momd"];
+    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
+    return __managedObjectModel;
+}
+
+/**
+ Returns the persistent store coordinator for the application.
+ If the coordinator doesn't already exist, it is created and the application's store added to it.
+ */
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (__persistentStoreCoordinator != nil)
+    {
+        return __persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"SitelessMagazine.sqlite"];
+    
+    NSLog(@"Store URL %@", storeURL);
+    
+    NSError *error = nil;
+    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }    
+    
+    return __persistentStoreCoordinator;
+}
+
+#pragma mark - Application's Documents directory
+
+/**
+ Returns the URL to the application's Documents directory.
+ */
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
 
 @end
