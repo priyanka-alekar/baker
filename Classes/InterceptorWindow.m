@@ -30,7 +30,7 @@
 //  
 
 #import "InterceptorWindow.h"
-#import "RootViewController.h"
+#import "ReaderViewController.h"
 
 @implementation InterceptorWindow
 
@@ -41,7 +41,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         target = targetView;
-        eventsDelegate = (RootViewController *)delegateController;
+        eventsDelegate = (ReaderViewController *)delegateController;
     }
     return self;
 }
