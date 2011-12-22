@@ -111,7 +111,7 @@ UIProgressView *progressViewC;
     float progress;
     progress = [receivedData length]/[filesize floatValue];
 
-    NSLog(@"PROGRESS: %f", progress);
+    //NSLog(@"PROGRESS: %f", progress);
     
     // Update the progress value
     progressViewC.hidden = NO;
