@@ -16,13 +16,14 @@
 @dynamic path;
 @dynamic url;
 @dynamic issue;
-
-//long long dataSize;
-//NSNumber *filesize;
+UIProgressView *progressViewC;
 
 
--(void)resolve
+- (void)resolve:(UIProgressView *) progressView
 {
+    // Set the progress view
+    progressViewC = progressView;
+    
     // Create the request.
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[[NSURL alloc] initWithString:[self url]]
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -51,13 +52,6 @@
     // It can be called multiple times, for example in the case of a
     // redirect, so each time we reset the data.
     
-    
-    //dataSize = [response expectedContentLength];
-    //NSLog(@"DDDDDDDDDDD TAMANHO: %@", [response expectedContentLength]);
-    //- (long long)expectedContentLength
-
-    
-    
     // receivedData is an instance variable declared elsewhere.
     [receivedData setLength:0];
 }
@@ -66,17 +60,12 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response 
 {
 	NSDictionary *allHeaders = [((NSHTTPURLResponse *)response) allHeaderFields];
-    //NSNumber *filesize;
 	NSLog(@"%@", allHeaders);
-    
-    
-    //[[[response allHeaderFields] objectForKey:@"Content-Length"] unsignedIntegerValue];
 
     
 	if ([response respondsToSelector:@selector(statusCode)]) 
 	{
 		int statusCode = [((NSHTTPURLResponse *)response) statusCode];
-		//NSLog(@"statusCode = %d", statusCode);
 		
 		// IF THE PAGE CANNOT BE FOUND CANCEL THE DOWNLOAD AND PRESENT A WARNING MESSAGE
         if (statusCode != 200)  
@@ -100,8 +89,8 @@
 				//NSDictionary *allHeaders = 
 				NSLog(@"Length NOT Avaialble");
 			}
+            
 			//NSLog(@"Started to receive data");
-			//[responseData setLength:0];
             [receivedData setLength:0];
 		}
     }
@@ -122,28 +111,15 @@
     float progress;
     progress = [receivedData length]/[filesize floatValue];
 
-    //NSLog(@"RECEBIMENTO: %d de %lld (--> %f perc.)", [receivedData length], [filesize longLongValue], progress);
-    //NSLog(@"RECEBIMENTO: %d de %f (--> %f perc.)", [receivedData length], [filesize floatValue], progress);
-    NSLog(@"RECEBIMENTO: %f", progress);
+    NSLog(@"PROGRESS: %f", progress);
     
-    
-    
-    
-    //[self setDownloadProgress:1.*[receivedData length]/expectedTotalBytes];
-    //[self setDownloadProgress:0.0f];                              // <------------
-    //[IssueViewController setDownloadProgress:0];
-    //[IssueViewController setVersion:123];
-    
-    
+    // Update the progress value
+    progressViewC.hidden = NO;
+    progressViewC.progress = progress;
+
     [receivedData appendData:data];
     return;
 }
-
-
-
-
-
-
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -167,9 +143,10 @@
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
     
     
-    // ATUALIZAR A BARRA DE PROGRESSO PARA 100%             // <---------------------
+    // Make progress bar invisible
+    progressViewC.hidden = YES;
     
-    
+
     // we've downloaded the cover image
     // now we're storing it on a path on the file system
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

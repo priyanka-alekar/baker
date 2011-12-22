@@ -19,7 +19,7 @@
     IBOutlet UIImageView* coverView;
     IBOutlet UIButton* buttonView;
     
-    IBOutlet UIProgressView* progressView;  // <---------------------
+    IBOutlet UIProgressView* progressView;
     
 }
 
@@ -31,8 +31,5 @@
 
 - (void) resolvedCover:(NSNotification *) notification;
 - (void) downloadedContent:(NSNotification *) notification;
-
-- (void) setDownloadProgress:(float) value;      // <----------
-
 
 @end

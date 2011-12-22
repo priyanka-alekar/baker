@@ -68,7 +68,7 @@
 								<string key="NSFrame">{{164, 15}, {197, 22}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="691318575"/>
+								<reference key="NSNextKeyView" ref="866002786"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIAutoresizesSubviews">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -103,6 +103,7 @@
 								<string key="NSFrame">{{157, 52}, {149, 225}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="191892722">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MCAwAA</bytes>
@@ -149,6 +150,7 @@
 								<string key="NSFrame">{{157, 32}, {149, 27}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="732320622"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -186,7 +188,7 @@
 							<object class="IBUIButton" id="691318575">
 								<reference key="NSNextResponder" ref="564902640"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{36, 234}, {98, 28}}</string>
+								<string key="NSFrame">{{36, 214}, {98, 28}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="874925043"/>
@@ -229,7 +231,7 @@
 								<string key="NSFrame">{{21, 15}, {129, 182}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="732320622"/>
+								<reference key="NSNextKeyView" ref="157821659"/>
 								<float key="IBUIAlpha">0.10000000149011612</float>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -259,9 +261,10 @@
 							<object class="IBUIProgressView" id="866002786">
 								<reference key="NSNextResponder" ref="564902640"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 205}, {130, 11}}</string>
+								<string key="NSFrame">{{20, 252}, {130, 11}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="691318575"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<float key="IBUIProgress">0.5</float>
@@ -523,11 +526,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>btnClicked:</string>
 							<string>btnRead:</string>
-							<string>setDownloadProgress:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -538,7 +539,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>btnClicked:</string>
 							<string>btnRead:</string>
-							<string>setDownloadProgress:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -548,10 +548,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">btnRead:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">setDownloadProgress:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
