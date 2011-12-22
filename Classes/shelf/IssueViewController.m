@@ -22,7 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+                
     }
     return self;
 }
@@ -76,8 +76,30 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadedContent:) name:@"contentDownloaded" object:nil ] ;
 
     
+    
+    //UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    //[setDownloadProgress progressView.progress = 0.0f;          // <------------
+    [self setDownloadProgress:0.0f];                              // <------------
+    
+
+    
+    
     return;
 }
+
+
+
+
+
+- (void) setDownloadProgress:(float) value
+{
+    progressView.progress = value; 
+}
+
+
+
+
+
 
 - (void)viewDidUnload
 {
@@ -94,20 +116,30 @@
 
 
 -(IBAction) btnClicked:(id) sender {
+    
+    NSLog(@"MMMMMMMMMMMMMMM");
+    
     if ([[issue status] intValue] == 1 ) // issue is not downloaded
     {
         [(Content *)[issue content] resolve];
-        
+        NSLog(@"NNNNNNNNNNNNNNN");
+
         
     }
     else // issue is downloaded - needs to be archived
     {
+        NSLog(@"OOOOOOOOOOOOOOOO");
+
         NSError * error = nil;
         [[NSFileManager defaultManager] removeItemAtPath:[(Content *)[issue content] path]  error:&error];
         if (error) {
             // implement error handling
         }
         else {
+            
+            NSLog(@"PPPPPPPPPP");
+
+            
             Content * c = (Content *)[issue content];
             [c setPath:@""];
             [issue setStatus:[NSNumber numberWithInt:1]];

@@ -73,6 +73,8 @@
     if ([[notification name] isEqualToString:@"contentDownloaded"]){
         NSLog (@"LibraryViewController: Received the contentDownloaded notification!");
         
+        NSLog(@"download content AAAAAAAA");
+        
         // propagate the change to the database
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
@@ -89,6 +91,9 @@
     
     if ([[notification name] isEqualToString:@"contentArchived"]){
         NSLog (@"LibraryViewController: Received the contentArchived notification!");
+        
+        NSLog(@"download content BBBBBBBBBBB");
+
         
         // propagate the change to the database
         NSError *error = nil;

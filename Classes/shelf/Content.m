@@ -9,12 +9,17 @@
 #import "Content.h"
 #import "Issue.h"
 #import "SSZipArchive.h"
+#import "IssueViewController.h"
 
 
 @implementation Content
 @dynamic path;
 @dynamic url;
 @dynamic issue;
+
+//long long dataSize;
+//NSNumber *filesize;
+
 
 -(void)resolve
 {
@@ -37,6 +42,7 @@
     
 }
 
+/*
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     // This method is called when the server has determined that it
@@ -45,17 +51,100 @@
     // It can be called multiple times, for example in the case of a
     // redirect, so each time we reset the data.
     
+    
+    //dataSize = [response expectedContentLength];
+    //NSLog(@"DDDDDDDDDDD TAMANHO: %@", [response expectedContentLength]);
+    //- (long long)expectedContentLength
+
+    
+    
     // receivedData is an instance variable declared elsewhere.
     [receivedData setLength:0];
 }
+ */
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response 
+{
+	NSDictionary *allHeaders = [((NSHTTPURLResponse *)response) allHeaderFields];
+    //NSNumber *filesize;
+	NSLog(@"%@", allHeaders);
+    
+    
+    //[[[response allHeaderFields] objectForKey:@"Content-Length"] unsignedIntegerValue];
+
+    
+	if ([response respondsToSelector:@selector(statusCode)]) 
+	{
+		int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+		//NSLog(@"statusCode = %d", statusCode);
+		
+		// IF THE PAGE CANNOT BE FOUND CANCEL THE DOWNLOAD AND PRESENT A WARNING MESSAGE
+        if (statusCode != 200)  
+		{
+			[connection cancel]; 
+			NSString *errorMessage = [NSString stringWithFormat:@"Unable to download the prices file.  Prices shown may therefore not be current."];
+			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occured" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			
+			[alertView show];
+			[alertView release], alertView = nil;
+            
+            // OTHERWISE CONTINUE WITH THE DOWNLOAD
+		} else {
+			if ( [response expectedContentLength] != NSURLResponseUnknownLength )
+			{
+				filesize = [[NSNumber numberWithLong: [response expectedContentLength] ] retain];
+				NSLog(@"Length Avaialble (%@)", filesize);
+			}
+			else
+			{
+				//NSDictionary *allHeaders = 
+				NSLog(@"Length NOT Avaialble");
+			}
+			//NSLog(@"Started to receive data");
+			//[responseData setLength:0];
+            [receivedData setLength:0];
+		}
+    }
+}
+
+
+/*
+// this message allows us to update the download progress
+-(void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    [self setDownloadProgress:1.*totalBytesWritten/expectedTotalBytes];
+}
+*/
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     // Append the new data to receivedData.
     // receivedData is an instance variable declared elsewhere.
+    float progress;
+    progress = [receivedData length]/[filesize floatValue];
+
+    //NSLog(@"RECEBIMENTO: %d de %lld (--> %f perc.)", [receivedData length], [filesize longLongValue], progress);
+    //NSLog(@"RECEBIMENTO: %d de %f (--> %f perc.)", [receivedData length], [filesize floatValue], progress);
+    NSLog(@"RECEBIMENTO: %f", progress);
+    
+    
+    
+    
+    //[self setDownloadProgress:1.*[receivedData length]/expectedTotalBytes];
+    //[self setDownloadProgress:0.0f];                              // <------------
+    //[IssueViewController setDownloadProgress:0];
+    //[IssueViewController setVersion:123];
+    
+    
     [receivedData appendData:data];
     return;
 }
+
+
+
+
+
+
+
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
@@ -76,6 +165,9 @@
     // do something with the data
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+    
+    
+    // ATUALIZAR A BARRA DE PROGRESSO PARA 100%             // <---------------------
     
     
     // we've downloaded the cover image

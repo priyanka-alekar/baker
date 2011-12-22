@@ -2,22 +2,23 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.SystemVersion">10K549</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">933</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUITextView</string>
-			<string>IBUIButton</string>
-			<string>IBUIImageView</string>
 			<string>IBUIView</string>
+			<string>IBUIImageView</string>
 			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
+			<string>IBUIProgressView</string>
+			<string>IBUITextView</string>
+			<string>IBUIButton</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -102,7 +103,6 @@
 								<string key="NSFrame">{{157, 52}, {149, 225}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="191892722">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MCAwAA</bytes>
@@ -186,7 +186,7 @@
 							<object class="IBUIButton" id="691318575">
 								<reference key="NSNextResponder" ref="564902640"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{36, 213}, {98, 28}}</string>
+								<string key="NSFrame">{{36, 234}, {98, 28}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="874925043"/>
@@ -255,6 +255,17 @@
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
+							</object>
+							<object class="IBUIProgressView" id="866002786">
+								<reference key="NSNextResponder" ref="564902640"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{20, 205}, {130, 11}}</string>
+								<reference key="NSSuperview" ref="564902640"/>
+								<reference key="NSWindow"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<float key="IBUIProgress">0.5</float>
+								<int key="IBUIProgressViewStyle">1</int>
 							</object>
 						</object>
 						<string key="NSFrame">{{-1, 0}, {320, 282}}</string>
@@ -336,6 +347,14 @@
 					<int key="connectionID">17</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">progressView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="866002786"/>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">btnClicked:</string>
 						<reference key="source" ref="691318575"/>
@@ -394,8 +413,9 @@
 							<reference ref="732320622"/>
 							<reference ref="874925043"/>
 							<reference ref="35784773"/>
-							<reference ref="691318575"/>
 							<reference ref="157821659"/>
+							<reference ref="691318575"/>
+							<reference ref="866002786"/>
 						</object>
 						<reference key="parent" ref="766721923"/>
 						<string key="objectName">Issue</string>
@@ -431,6 +451,11 @@
 						<reference key="object" ref="157821659"/>
 						<reference key="parent" ref="564902640"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">21</int>
+						<reference key="object" ref="866002786"/>
+						<reference key="parent" ref="564902640"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -448,6 +473,7 @@
 					<string>18.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>2.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
+					<string>21.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
@@ -468,6 +494,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -482,7 +509,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">20</int>
+			<int key="maxID">22</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -496,9 +523,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>btnClicked:</string>
 							<string>btnRead:</string>
+							<string>setDownloadProgress:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -509,6 +538,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>btnClicked:</string>
 							<string>btnRead:</string>
+							<string>setDownloadProgress:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -518,6 +548,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">btnRead:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">setDownloadProgress:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -531,6 +565,7 @@
 							<string>descriptionView</string>
 							<string>issueView</string>
 							<string>labelView</string>
+							<string>progressView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -539,6 +574,7 @@
 							<string>UITextView</string>
 							<string>UIView</string>
 							<string>UILabel</string>
+							<string>UIProgressView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -550,6 +586,7 @@
 							<string>descriptionView</string>
 							<string>issueView</string>
 							<string>labelView</string>
+							<string>progressView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -572,6 +609,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">labelView</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">progressView</string>
+								<string key="candidateClassName">UIProgressView</string>
 							</object>
 						</object>
 					</object>
