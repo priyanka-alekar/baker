@@ -212,9 +212,7 @@ __VA_ARGS__ \
     [toolbar setItems:items animated:NO];
     [webView addSubview:toolbar];
 
-    
-    
-    
+
     webView.delegate = self;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
