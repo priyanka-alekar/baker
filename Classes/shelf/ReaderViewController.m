@@ -173,13 +173,46 @@ __VA_ARGS__ \
 
 - (void)setupWebView:(UIWebView *)webView {
     NSLog(@"• Setup webView");
+    
+    /*
     UIButton *libraryButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [libraryButton addTarget:self action:@selector(btnClicked:)
             forControlEvents:UIControlEventTouchDown];
     [libraryButton setTitle:@"Library" forState:UIControlStateNormal];
     libraryButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
     [webView addSubview:libraryButton];
+     */
     
+    // Create tollbar
+    UIToolbar *toolbar = [UIToolbar new];
+    toolbar.barStyle = UIBarStyleDefault;
+    toolbar.tintColor = [UIColor blackColor];
+    [toolbar sizeToFit];
+    toolbar.frame = CGRectMake(0, 0, 768, 44);
+    
+    // Add buttons
+    UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithTitle:@"See all issues" 
+                                                            style:UIBarButtonItemStyleBordered 
+                                                            target:self 
+                                                            action:@selector(btnClicked:)];
+    
+    // Use this to put space in between your toolbox buttons
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                              target:nil
+                                                                              action:nil];
+    
+    // Add buttons to the array
+    NSArray *items = [NSArray arrayWithObjects: flexItem, systemItem1, nil];
+    
+    // Release buttons
+    [systemItem1 release];
+    [flexItem release];
+                                 
+    // Add array of buttons to toolbar
+    [toolbar setItems:items animated:NO];
+    [webView addSubview:toolbar];
+
+
     webView.delegate = self;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	

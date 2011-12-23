@@ -13,13 +13,17 @@
 
 @interface Content : NSManagedObject {
     NSMutableData * receivedData;
+    NSNumber *filesize;
+
 @private
 }
 @property (nonatomic, retain) NSString * path;
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) Issue * issue;
 
--(void)resolve;
+
+//-(void)resolve;
+- (void)resolve:(UIProgressView *) progressViewC;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;

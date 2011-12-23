@@ -22,7 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+                
     }
     return self;
 }
@@ -76,6 +76,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadedContent:) name:@"contentDownloaded" object:nil ] ;
 
     
+    // Clear the progressbar and make it invisible
+    progressView.progress = 0;
+    progressView.hidden = YES;
+    
     return;
 }
 
@@ -94,11 +98,11 @@
 
 
 -(IBAction) btnClicked:(id) sender {
+        
     if ([[issue status] intValue] == 1 ) // issue is not downloaded
     {
-        [(Content *)[issue content] resolve];
-        
-        
+        // Set progressView to Content
+        [(Content *)[issue content] resolve:progressView];
     }
     else // issue is downloaded - needs to be archived
     {
@@ -115,9 +119,6 @@
             // notify all interested parties of the archived content
             [[NSNotificationCenter defaultCenter] postNotificationName:@"contentArchived" object:self]; // make sure its persisted!
         }
-        
-        
-
     }
 }
 

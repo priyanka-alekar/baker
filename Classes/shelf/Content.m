@@ -9,15 +9,21 @@
 #import "Content.h"
 #import "Issue.h"
 #import "SSZipArchive.h"
+#import "IssueViewController.h"
 
 
 @implementation Content
 @dynamic path;
 @dynamic url;
 @dynamic issue;
+UIProgressView *progressViewC;
 
--(void)resolve
+
+- (void)resolve:(UIProgressView *) progressView
 {
+    // Set the progress view
+    progressViewC = progressView;
+    
     // Create the request.
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[[NSURL alloc] initWithString:[self url]]
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -37,6 +43,7 @@
     
 }
 
+/*
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     // This method is called when the server has determined that it
@@ -48,14 +55,72 @@
     // receivedData is an instance variable declared elsewhere.
     [receivedData setLength:0];
 }
+ */
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response 
+{
+	NSDictionary *allHeaders = [((NSHTTPURLResponse *)response) allHeaderFields];
+	NSLog(@"%@", allHeaders);
+
+    
+	if ([response respondsToSelector:@selector(statusCode)]) 
+	{
+		int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+		
+		// IF THE PAGE CANNOT BE FOUND CANCEL THE DOWNLOAD AND PRESENT A WARNING MESSAGE
+        if (statusCode != 200)  
+		{
+			[connection cancel]; 
+			NSString *errorMessage = [NSString stringWithFormat:@"Unable to download the prices file.  Prices shown may therefore not be current."];
+			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occured" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			
+			[alertView show];
+			[alertView release], alertView = nil;
+            
+            // OTHERWISE CONTINUE WITH THE DOWNLOAD
+		} else {
+			if ( [response expectedContentLength] != NSURLResponseUnknownLength )
+			{
+				filesize = [[NSNumber numberWithLong: [response expectedContentLength] ] retain];
+				NSLog(@"Length Avaialble (%@)", filesize);
+			}
+			else
+			{
+				//NSDictionary *allHeaders = 
+				NSLog(@"Length NOT Avaialble");
+			}
+            
+			//NSLog(@"Started to receive data");
+            [receivedData setLength:0];
+		}
+    }
+}
+
+
+/*
+// this message allows us to update the download progress
+-(void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    [self setDownloadProgress:1.*totalBytesWritten/expectedTotalBytes];
+}
+*/
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     // Append the new data to receivedData.
     // receivedData is an instance variable declared elsewhere.
+    float progress;
+    progress = [receivedData length]/[filesize floatValue];
+
+    //NSLog(@"PROGRESS: %f", progress);
+    
+    // Update the progress value
+    progressViewC.hidden = NO;
+    progressViewC.progress = progress;
+
     [receivedData appendData:data];
     return;
 }
+
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
@@ -78,6 +143,10 @@
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
     
     
+    // Make progress bar invisible
+    progressViewC.hidden = YES;
+    
+
     // we've downloaded the cover image
     // now we're storing it on a path on the file system
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
