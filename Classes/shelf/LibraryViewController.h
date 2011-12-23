@@ -22,6 +22,9 @@
     @private NSInteger numberOfPagesShown; 
     
     NSMutableData * receivedData;
+    
+    IBOutlet UIToolbar *shelfToolBar;
+    IBOutlet UILabel *shelfTitle;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;

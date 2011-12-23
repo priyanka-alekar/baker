@@ -252,6 +252,25 @@
 	return YES;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+                                         duration:(NSTimeInterval)duration
+{
+    // Update the size/position of some objects
+    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+        toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        scrollView.frame = CGRectMake(0, 239, 1024, 768); 
+        shelfToolBar.frame = CGRectMake(0, 0, 1024, 44);
+        shelfTitle.frame = CGRectMake(360, 11, 266, 21);
+    }
+    else
+    {
+        scrollView.frame = CGRectMake(0, 239, 768, 1024); 
+        shelfToolBar.frame = CGRectMake(0, 0, 768, 44);
+        shelfTitle.frame = CGRectMake(255, 11, 266, 21);
+    }
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     // This method is called when the server has determined that it
