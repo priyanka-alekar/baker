@@ -14,6 +14,7 @@
 @interface Content : NSManagedObject {
     NSMutableData * receivedData;
     NSNumber *filesize;
+    UIProgressView *progressViewC;
 
 @private
 }

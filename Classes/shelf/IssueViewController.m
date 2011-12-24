@@ -22,7 +22,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-                
+        
+        // Initiate issue status
+        [issue setStatus:[NSNumber numberWithInt:-1]];
     }
     return self;
 }
@@ -96,29 +98,35 @@
 	return YES;
 }
 
-
 -(IBAction) btnClicked:(id) sender {
-        
-    if ([[issue status] intValue] == 1 ) // issue is not downloaded
+    
+    if ([[issue status] intValue] != 0 ) // issue is NOT downloading
     {
-        // Set progressView to Content
-        [(Content *)[issue content] resolve:progressView];
-    }
-    else // issue is downloaded - needs to be archived
-    {
-        NSError * error = nil;
-        [[NSFileManager defaultManager] removeItemAtPath:[(Content *)[issue content] path]  error:&error];
-        if (error) {
-            // implement error handling
-        }
-        else {
-            Content * c = (Content *)[issue content];
-            [c setPath:@""];
-            [issue setStatus:[NSNumber numberWithInt:1]];
-            [buttonView setTitle:@"Download" forState:UIControlStateNormal];
-            // notify all interested parties of the archived content
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"contentArchived" object:self]; // make sure its persisted!
-        }
+      if ([[issue status] intValue] == 1 ) // issue is not downloaded
+      {
+          // Set status do 0 -> DOWNLOADING
+          [issue setStatus:[NSNumber numberWithInt:0]];
+          [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
+
+          // Set progressView to Content
+          [(Content *)[issue content] resolve:progressView];
+      }
+      else if ([[issue status] intValue] == 2 ) // issue is downloaded - needs to be archived
+      {
+          NSError * error = nil;
+          [[NSFileManager defaultManager] removeItemAtPath:[(Content *)[issue content] path]  error:&error];
+          if (error) {
+              // implement error handling
+          }
+          else {
+              Content * c = (Content *)[issue content];
+              [c setPath:@""];
+              [issue setStatus:[NSNumber numberWithInt:1]];
+              [buttonView setTitle:@"Download" forState:UIControlStateNormal];
+              // notify all interested parties of the archived content
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"contentArchived" object:self]; // make sure its persisted!
+          }
+      }
     }
 }
 
@@ -160,7 +168,6 @@
         [navigationController setToolbarHidden:YES animated:NO];
         
         [UIView commitAnimations];
-
             
     }
     else // issue is not downloaded 
@@ -168,9 +175,6 @@
         NSLog(@"Cannot read");        
     }
 }
-
-
-
 
 - (void) resolvedCover:(NSNotification *) notification
 {
