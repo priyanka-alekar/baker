@@ -74,9 +74,9 @@
 						<int key="IBUIContentMode">5</int>
 						<int key="IBUITag">1</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIAlwaysBounceHorizontal">YES</bool>
+						<bool key="IBUIAlwaysBounceVertical">YES</bool>
 						<bool key="IBUIPagingEnabled">YES</bool>
-						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
+						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 					</object>
 					<object class="IBUIToolbar" id="543841542">
 						<reference key="NSNextResponder" ref="766721923"/>
@@ -128,7 +128,6 @@
 						<string key="NSFrame">{{0, 980}, {768, 44}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="457880334"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>

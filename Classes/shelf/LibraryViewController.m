@@ -27,7 +27,7 @@
 - (void)sync:(id) sender {
     
     NSLog(@"Sync button pushed");
-
+    
     // get info from json rest service
     // Create the request.
     NSString * library_url = @"http://public.nin9creative.com/baker/issues/issueslist.json";
@@ -46,24 +46,24 @@
         NSLog(@"LibraryViewController - refresh: connection failed");
     }
     return;
-
+    
 }
 
 - (void) resolvedCover:(NSNotification *) notification
 {
-
-     if ([[notification name] isEqualToString:@"coverResolved"]){
-         NSLog (@"LibraryViewController: Received the coverResolved notification!");
-
-         // propagate the change to the database
-         NSError *error = nil;
-         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+    
+    if ([[notification name] isEqualToString:@"coverResolved"]){
+        NSLog (@"LibraryViewController: Received the coverResolved notification!");
+        
+        // propagate the change to the database
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
-
-    }
         
+    }
+    
     
 }
 
@@ -72,7 +72,7 @@
     
     if ([[notification name] isEqualToString:@"contentDownloaded"]){
         NSLog (@"LibraryViewController: Received the contentDownloaded notification!");
-
+        
         // propagate the change to the database
         NSError *error = nil;
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
@@ -110,14 +110,16 @@
     if (position == 0) position = 4;
     
     NSInteger pageWidth = scrollView.frame.size.width;
+    NSInteger pageHeight = scrollView.frame.size.height;
+    
     
     if (position == 1) // new page situation
     {
-        // extend the scrollview's contentsize width with 1 page
-        [scrollView setContentSize:CGSizeMake(pageWidth*(numberOfPagesShown+1), scrollView.frame.size.height)];
+        // extend the scrollview's contentsize height with 1 page
+        [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
         numberOfPagesShown++;
     }
-
+    
     // 4 ivc's on a page as follows - numbers below indicate the value of the position variable
     // 1    2
     // 3    4
@@ -129,7 +131,11 @@
     
     UIView * ivcView = [ivc view];
     
-    CGRect frame = CGRectMake( (numberOfPagesShown-1)*pageWidth + 20 + col*pageWidth/2, 20 + row*(ivcView.frame.size.height+20) ,ivcView.frame.size.width, ivcView.frame.size.height);
+    CGRect frame = CGRectMake(col*pageWidth/2 + 20,
+                              row*pageHeight/2 + (numberOfPagesShown-1)*pageHeight + 20,
+                              ivcView.frame.size.width, 
+                              ivcView.frame.size.height
+                              );
     [ivcView setFrame:frame];
     return;
 }
@@ -143,7 +149,7 @@
         // get and set the managedObjectContext  from the appdelegate object
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
         [self setManagedObjectContext:[appDelegate managedObjectContext]];
-
+        
         UIBarButtonItem* syncButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
                                                                                      target:self 
                                                                                      action:@selector(sync:)] autorelease];
@@ -152,7 +158,7 @@
                           syncButton,
                           nil];
         [self setToolbarItems:items];
-
+        
     }
     return self;
 }
@@ -206,11 +212,11 @@
         NSLog(@"Database is empty or an error occurred");
     }
     
-       
+    
     // iterate over the issues and create the issueview controllers and issues
     issueViewControllers = [[NSMutableArray alloc] initWithCapacity:[issuesArray count]];
     
-     
+    
     for (Issue *i in issuesArray)
 	{
         
@@ -224,7 +230,7 @@
         
         // layout the ivc and adapt the scroll view if necessary
         [self layout:ivc];
-
+        
         [scrollView addSubview:[ivc view]];
         
         [ivc release];
@@ -234,7 +240,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resolvedCover:) name:@"coverResolved" object:nil ] ; 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadedContent:) name:@"contentDownloaded" object:nil ] ;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(archivedContent:) name:@"contentArchived" object:nil ] ;
-
+    
     
 }
 
@@ -250,25 +256,6 @@
 {
     // Return YES for supported orientations
 	return YES;
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
-                                         duration:(NSTimeInterval)duration
-{
-    // Update the size/position of some objects
-    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
-        toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
-    {
-        scrollView.frame = CGRectMake(0, 239, 1024, 768); 
-        shelfToolBar.frame = CGRectMake(0, 0, 1024, 44);
-        shelfTitle.frame = CGRectMake(360, 11, 266, 21);
-    }
-    else
-    {
-        scrollView.frame = CGRectMake(0, 239, 768, 1024); 
-        shelfToolBar.frame = CGRectMake(0, 0, 768, 44);
-        shelfTitle.frame = CGRectMake(255, 11, 266, 21);
-    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
