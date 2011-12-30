@@ -24,8 +24,9 @@
 @synthesize numberOfPagesShown;
 
 
-- (void)sync:(id) sender {
-    
+//- (void)sync:(id) sender {
+-(IBAction) sync:(id) sender
+{
     NSLog(@"Sync button pushed");
     
     // get info from json rest service
@@ -35,6 +36,7 @@
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[[NSURL alloc] initWithString:library_url]
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                           timeoutInterval:60.0];
+    
     // create the connection with the request
     // and start loading the data
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -100,43 +102,132 @@
     }
 }
 
--(void) layout:(IssueViewController *)ivc
+//-(void) layout: (IssueViewController *)ivc 
+-(void) layout:(IssueViewController *)ivc setOrientation:(UIInterfaceOrientation) interfaceOrientation 
 {
-    // determine position to place the ivc based on 4 views per page 
-    numberOfIssuesShown ++; // note that this may be confusing - just avoiding '+1' everywhere in this method
     
-    // position indicates position on a page
-    NSInteger position = (numberOfIssuesShown)%4;
-    if (position == 0) position = 4;
-    
-    NSInteger pageWidth = scrollView.frame.size.width;
-    NSInteger pageHeight = scrollView.frame.size.height;
-    
-    
-    if (position == 1) // new page situation
+    if (interfaceOrientation != UIInterfaceOrientationLandscapeLeft &&
+        interfaceOrientation != UIInterfaceOrientationLandscapeRight)
     {
-        // extend the scrollview's contentsize height with 1 page
-        [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
-        numberOfPagesShown++;
+        // determine position to place the ivc based on 4 views per page 
+        numberOfIssuesShown ++; // note that this may be confusing - just avoiding '+1' everywhere in this method
+        
+        // position indicates position on a page
+        NSInteger position = (numberOfIssuesShown)%4;
+        if (position == 0) position = 4;
+        
+        NSInteger pageWidth = scrollView.frame.size.width;
+        NSInteger pageHeight = scrollView.frame.size.height;
+        NSLog(@"pageWidth=%d, pageHeight=%d", pageWidth, pageHeight);
+        
+        
+        if (position == 1) // new page situation
+        {
+            // extend the scrollview's contentsize height with 1 page
+            [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
+            numberOfPagesShown++;
+        }
+        
+        // 4 ivc's on a page as follows - numbers below indicate the value of the position variable
+        // 1    2
+        // 3    4
+        
+        NSInteger row = 0;
+        NSInteger col = 0;
+        if (position > 2) row = 1;
+        if (position == 2 || position == 4) col = 1;
+        
+        UIView * ivcView = [ivc view];
+        
+        CGRect frame = CGRectMake(col*pageWidth/2 + 20,
+                                  row*pageHeight/2 + (numberOfPagesShown-1)*pageHeight + 20,
+                                  ivcView.frame.size.width, 
+                                  ivcView.frame.size.height
+                                  );
+        [ivcView setFrame:frame];   
+        
+    } else {
+        
+        // Show horizontally
+        NSLog(@"HORIZONTAL!!!!!!!!");
+        
+        // determine position to place the ivc based on 6 views per page 
+        numberOfIssuesShown ++; // note that this may be confusing - just avoiding '+1' everywhere in this method
+        
+        
+        NSLog(@"numberOfIssuesShown=%d", numberOfIssuesShown);
+        
+        // position indicates position on a page
+        NSInteger position = (numberOfIssuesShown)%6;
+        if (position == 0) position = 6;
+        
+        
+        NSLog(@"position=%d", position);
+        
+        
+        NSInteger pageWidth = scrollView.frame.size.width;
+        NSInteger pageHeight = scrollView.frame.size.height;
+        
+        
+        if (position == 1) // new page situation
+        {
+            // extend the scrollview's contentsize height with 1 page
+            [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
+            numberOfPagesShown++;
+        }
+        
+        // 6 ivc's on a page as follows - numbers below indicate the value of the position variable
+        // 1    2   3
+        // 4    5   6
+        
+        NSInteger row = 0;
+        NSInteger col = 0;
+        //const NSInteger w = 320;
+        const NSInteger h = 282;
+        
+        
+        if (position > 3) row = 1;
+        if (position == 2 || position == 5) col = 1;
+        if (position == 3 || position == 6) col = 2;
+        
+        
+        UIView * ivcView = [ivc view];
+        
+        
+        NSLog(@"col0=%d, row0=%d", col, row);
+        NSLog(@"pageWidth=%d, pageHeight=%d", pageWidth, pageHeight);
+        
+        
+        // set col position
+        switch (col) {
+            case  1:
+                col = pageWidth/2 - 140;
+                break;
+            case  2:
+                col = pageWidth - 300;
+                break;
+        }
+        
+        // set row position
+        switch (row) {
+            case  1:
+                row = pageHeight/2 - h/2 + 10;
+                break;
+        }
+        
+        
+        CGRect frame = CGRectMake(col,
+                                  row + ((numberOfPagesShown-1) * pageHeight),
+                                  ivcView.frame.size.width, 
+                                  ivcView.frame.size.height
+                                  );
+        
+        NSLog(@"col=%d, row=%d", col, row + (numberOfPagesShown-1)*pageHeight + 20);
+        
+        [ivcView setFrame:frame];        
     }
     
-    // 4 ivc's on a page as follows - numbers below indicate the value of the position variable
-    // 1    2
-    // 3    4
     
-    NSInteger row = 0;
-    NSInteger col = 0;
-    if (position > 2) row = 1;
-    if (position == 2 || position == 4) col = 1;
-    
-    UIView * ivcView = [ivc view];
-    
-    CGRect frame = CGRectMake(col*pageWidth/2 + 20,
-                              row*pageHeight/2 + (numberOfPagesShown-1)*pageHeight + 20,
-                              ivcView.frame.size.width, 
-                              ivcView.frame.size.height
-                              );
-    [ivcView setFrame:frame];
     return;
 }
 
@@ -150,14 +241,17 @@
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
         [self setManagedObjectContext:[appDelegate managedObjectContext]];
         
+        /*
         UIBarButtonItem* syncButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
                                                                                      target:self 
                                                                                      action:@selector(sync:)] autorelease];
+        
         
         NSArray *items = [NSArray arrayWithObjects: 
                           syncButton,
                           nil];
         [self setToolbarItems:items];
+        */
         
     }
     return self;
@@ -180,27 +274,27 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
+
+
+- (void)updateShelf:(UIInterfaceOrientation)interfaceOrientation
 {
-    [super viewDidLoad];
-    
     numberOfIssuesShown = 0;
     numberOfPagesShown = 0; 
-    
+
     NSManagedObjectModel *model = [[managedObjectContext persistentStoreCoordinator] managedObjectModel];
     NSError *error = nil;
-    
+
     NSFetchRequest *fetchRequest =
     [model fetchRequestFromTemplateWithName:@"AllIssues"
                       substitutionVariables:nil];
-    
+
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
                                         initWithKey:@"date" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [sortDescriptor release];
-    
+
     NSArray *results =[[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    
+
     if (error){
         NSLog(@"Error fetching data from store: %@, %@", error, [error userInfo]);
     }
@@ -211,37 +305,43 @@
     else {
         NSLog(@"Database is empty or an error occurred");
     }
-    
-    
+
+
     // iterate over the issues and create the issueview controllers and issues
     issueViewControllers = [[NSMutableArray alloc] initWithCapacity:[issuesArray count]];
-    
-    
+
+
     for (Issue *i in issuesArray)
-	{
-        
+    {
+    
         // instantiate a issueviewcontroller object
         IssueViewController *ivc = [[IssueViewController alloc] initWithNibName:@"IssueViewController" bundle:[NSBundle mainBundle]];
-        
+    
         // register the issue as model instance at the issueviewcontroller
         [ivc setIssue:i];
-        
+    
         [issueViewControllers addObject:ivc];
-        
+    
         // layout the ivc and adapt the scroll view if necessary
-        [self layout:ivc];
-        
+        [self layout:ivc setOrientation:interfaceOrientation];
+    
         [scrollView addSubview:[ivc view]];
-        
+    
         [ivc release];
     }
-    
+
     // notification to save the changes to the managed object context
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resolvedCover:) name:@"coverResolved" object:nil ] ; 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadedContent:) name:@"contentDownloaded" object:nil ] ;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(archivedContent:) name:@"contentArchived" object:nil ] ;
-    
-    
+}
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self updateShelf:1];
 }
 
 - (void)viewDidUnload
@@ -262,20 +362,32 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                          duration:(NSTimeInterval)duration
 {
+    
     // Update the size/position of some objects
     if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
         toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
     {
-        scrollView.frame = CGRectMake(0, 239, 1024, 768); 
+        scrollView.frame = CGRectMake(0, 239, 1024, 785); 
         shelfToolBar.frame = CGRectMake(0, 0, 1024, 44);
         shelfTitle.frame = CGRectMake(360, 11, 266, 21);
     }
     else
     {
-        scrollView.frame = CGRectMake(0, 239, 768, 1024); 
+        scrollView.frame = CGRectMake(0, 239, 768, 785); 
         shelfToolBar.frame = CGRectMake(0, 0, 768, 44);
         shelfTitle.frame = CGRectMake(255, 11, 266, 21);
     }
+    
+    
+    // Clear existing views from the content
+    for (UIView *view in scrollView.subviews)
+    {
+        if (![view isKindOfClass:[UIImageView class]])
+            [view removeFromSuperview];
+    }
+    
+    // Update issues view
+    [self updateShelf:toInterfaceOrientation];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -314,6 +426,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    
     // do something with the data
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
@@ -337,7 +450,7 @@
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    for (NSDictionary *json_issue in json_issues){
+    for (NSDictionary *json_issue in json_issues) {
         
         // Get mag, number,date, title, descr, issueurl, coverurl
         NSString *mag = [json_issue objectForKey:@"mag"];
@@ -360,8 +473,10 @@
         }
         
         if (!found){
+                        
             newissues++;
             // we have not found the issue. Add the new issue in the context
+            
             
             // Create and configure a new instance of the Issue entity.
             
@@ -410,12 +525,11 @@
             [issueViewControllers addObject:ivc];
             
             // layout the ivc and adapt the scroll view if necessary
-            [self layout:ivc];
+            [self layout:ivc setOrientation:1];
             
             [scrollView addSubview:[ivc view]];
             
             [ivc release];
-            
         } 
     }
     

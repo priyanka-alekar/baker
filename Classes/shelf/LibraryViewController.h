@@ -33,9 +33,11 @@
 @property (nonatomic) NSInteger numberOfPagesShown;
 
 
-- (void)sync:(id) sender;
+//- (void)sync:(id) sender;
+-(IBAction) sync:(id) sender;
 
-- (void) layout:(IssueViewController *)ivc;
+//- (void) layout:(IssueViewController *)ivc;
+- (void) layout: (IssueViewController *)ivc setOrientation: (UIInterfaceOrientation) interfaceOrientation;
 - (void) resolvedCover:(NSNotification *) notification;
 - (void) downloadedContent:(NSNotification *) notification;
 - (void) archivedContent:(NSNotification *) notification;
