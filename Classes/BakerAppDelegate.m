@@ -84,7 +84,7 @@
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:LVrootViewController];  
     [_navigationController setNavigationBarHidden:YES];
-    [_navigationController setToolbarHidden:NO];
+    //[_navigationController setToolbarHidden:NO];      // Disabled
     
     self.window.rootViewController = _navigationController;
     [self.window makeKeyAndVisible];
