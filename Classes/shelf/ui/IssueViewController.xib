@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">10K549</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1038.36</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">933</string>
@@ -68,7 +68,7 @@
 								<string key="NSFrame">{{164, 15}, {197, 22}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="866002786"/>
+								<reference key="NSNextKeyView" ref="691318575"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIAutoresizesSubviews">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -164,7 +164,7 @@
 								<bool key="IBUICanCancelContentTouches">NO</bool>
 								<bool key="IBUIBouncesZoom">NO</bool>
 								<bool key="IBUIEditable">NO</bool>
-								<string key="IBUIText">$2.99</string>
+								<string key="IBUIText">FREE</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4yIDAuOCAxAA</bytes>
@@ -191,7 +191,7 @@
 								<string key="NSFrame">{{36, 214}, {98, 28}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="874925043"/>
+								<reference key="NSNextKeyView" ref="866002786"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">6</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -199,7 +199,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<int key="IBUIButtonType">1</int>
 								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">Buy</string>
+								<string key="IBUINormalTitle">Download</string>
 								<object class="NSColor" key="IBUIHighlightedTitleColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -264,7 +264,7 @@
 								<string key="NSFrame">{{20, 252}, {130, 11}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="691318575"/>
+								<reference key="NSNextKeyView" ref="874925043"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<float key="IBUIProgress">0.5</float>
