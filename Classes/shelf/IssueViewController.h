@@ -18,9 +18,7 @@
     IBOutlet UIView* issueView;
     IBOutlet UIImageView* coverView;
     IBOutlet UIButton* buttonView;
-    
     IBOutlet UIProgressView* progressView;
-    
 }
 
 @property (nonatomic, retain) Issue* issue;

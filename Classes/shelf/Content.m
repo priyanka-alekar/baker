@@ -16,7 +16,6 @@
 @dynamic path;
 @dynamic url;
 @dynamic issue;
-UIProgressView *progressViewC;
 
 
 - (void)resolve:(UIProgressView *) progressView
