@@ -145,29 +145,29 @@
         
         NSLog(@"IssueViewController - opening reader");  
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
-        UINavigationController* navigationController = [appDelegate navigationController];
+        //UINavigationController* navigationController = [appDelegate navigationController];
         ReaderViewController* rvc = [appDelegate rvc];
         
         [rvc setIssue:issue];
         [rvc init];
         
-        //appDelegate.window =[[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]] autorelease];
+        appDelegate.window =[[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]] autorelease];
         //appDelegate.window.backgroundColor = [UIColor whiteColor];
-        //[appDelegate.window addSubview:rvc.view];
-        //[appDelegate.window makeKeyAndVisible];
+        [appDelegate.window addSubview:rvc.view];
+        [appDelegate.window makeKeyAndVisible];
         
         
         
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration: 0.50];
+        //[UIView beginAnimations:nil context:NULL];
+        //[UIView setAnimationDuration: 0.50];
         
         //Hook To MainView
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:navigationController.view cache:YES];
+        //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:navigationController.view cache:YES];
         
-        [navigationController pushViewController:(UIViewController*)rvc animated:YES];    
-        [navigationController setToolbarHidden:YES animated:NO];
+        //[navigationController pushViewController:(UIViewController*)rvc animated:YES];    
+        //[navigationController setToolbarHidden:YES animated:NO];
         
-        [UIView commitAnimations];
+        //[UIView commitAnimations];
             
     }
     else // issue is not downloaded 

@@ -1621,20 +1621,30 @@ __VA_ARGS__ \
     NSLog(@"button clicked");
     
     BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UINavigationController* navigationController = [appDelegate navigationController];
+    //UINavigationController* navigationController = [appDelegate navigationController];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration: 0.50];
+    //[UIView beginAnimations:nil context:NULL];
+    //[UIView setAnimationDuration: 0.50];
     
     //Hook To MainView
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:navigationController.view cache:YES];
+    //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:navigationController.view cache:YES];
     
-    [navigationController popViewControllerAnimated:YES];    
-    [navigationController setToolbarHidden:NO animated:NO];
+    //avigationController popViewControllerAnimated:NO];    
+    //[navigationController setToolbarHidden:NO animated:NO];
     
     
-    [UIView commitAnimations];
-
+    //[UIView commitAnimations];
+    self.scrollView.delegate = nil;
+    
+    [self.view removeFromSuperview];
+    
+    //appDelegate.window = nil;
+    
+    //appDelegate.window =[[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]] autorelease];
+    //appDelegate.window.backgroundColor = [UIColor whiteColor];
+    //[appDelegate.window addSubview:rvc.view];
+    //[appDelegate.window makeKeyAndVisible];
+    
 }
 
 @end
