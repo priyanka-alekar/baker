@@ -1638,6 +1638,8 @@ __VA_ARGS__ \
     
     [self.view removeFromSuperview];
     
+    [appDelegate reloadShelf];
+    
     //appDelegate.window = nil;
     
     //appDelegate.window =[[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]] autorelease];

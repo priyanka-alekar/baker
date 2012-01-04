@@ -55,6 +55,7 @@
 
 - (void)saveLastPageReference;
 - (void)saveContext;
+- (void)reloadShelf;
 - (NSURL *)applicationDocumentsDirectory;
 
 @end
