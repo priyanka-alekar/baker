@@ -31,7 +31,7 @@
     
     // get info from json rest service
     // Create the request.
-    NSString * library_url = @"http://public.nin9creative.com/baker/issues/issueslist.json";
+    NSString * library_url = @"http://www.bakershelf.com/issues/issueslist.json";
     
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[[NSURL alloc] initWithString:library_url]
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
