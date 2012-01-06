@@ -133,41 +133,18 @@
 -(IBAction) btnRead:(id) sender{
     if ([[issue status] intValue] == 2 ) // issue is downloaded
     {
-
-        // Create the application window
-        //self.window = [[[InterceptorWindow alloc] initWithTarget:self.rootViewController.scrollView eventsDelegate:self.rootViewController frame:[[UIScreen mainScreen]bounds]] autorelease];
-        //window.backgroundColor = [UIColor whiteColor];
-        
-        // Add the root view to the application window
-        //[window addSubview:rootViewController.view];
-        //[window makeKeyAndVisible];
-    
-        
-        NSLog(@"IssueViewController - opening reader");  
+        NSLog(@"IssueViewController - Opening Reader");  
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
-        //UINavigationController* navigationController = [appDelegate navigationController];
+
         ReaderViewController* rvc = [appDelegate rvc];
         
         [rvc setIssue:issue];
         [rvc init];
         
-        appDelegate.window =[[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]] autorelease];
-        //appDelegate.window.backgroundColor = [UIColor whiteColor];
+        appDelegate.window =[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]];
+        appDelegate.window.backgroundColor = [UIColor whiteColor];
         [appDelegate.window addSubview:rvc.view];
         [appDelegate.window makeKeyAndVisible];
-        
-        
-        
-        //[UIView beginAnimations:nil context:NULL];
-        //[UIView setAnimationDuration: 0.50];
-        
-        //Hook To MainView
-        //[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:navigationController.view cache:YES];
-        
-        //[navigationController pushViewController:(UIViewController*)rvc animated:YES];    
-        //[navigationController setToolbarHidden:YES animated:NO];
-        
-        //[UIView commitAnimations];
             
     }
     else // issue is not downloaded 

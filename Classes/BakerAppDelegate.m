@@ -64,23 +64,9 @@
     // Disable Shake to undo
 	application.applicationSupportsShakeToEdit = NO;
     
-    //COMMENTED OUT FOR SHELF CODE FIRST
-	// Create the controller for the root view
-	//self.rootViewController = [[[RootViewController alloc] init] autorelease];
-	
-	// Create the application window
-	//self.window = [[[InterceptorWindow alloc] initWithTarget:self.rootViewController.scrollView eventsDelegate:self.rootViewController frame:[[UIScreen mainScreen]bounds]] autorelease];
-	//window.backgroundColor = [UIColor whiteColor];
-	
-	// Add the root view to the application window
-	//[window addSubview:rootViewController.view];
-    //[window makeKeyAndVisible];
-    
-    
     // Shelf View
     LibraryViewController * LVrootViewController = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];  
     _rvc = [[ReaderViewController alloc] init];
-    //[_rvc.pageControl hideUntilInitialised:3];
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:LVrootViewController];  
     [_navigationController setNavigationBarHidden:YES];
@@ -101,24 +87,8 @@
 
 - (void)reloadShelf {
     
-    self.window = nil;
+    //self.window = nil;
 	
-    // Disable Shake to undo
-	//application.applicationSupportsShakeToEdit = NO;
-    
-    //COMMENTED OUT FOR SHELF CODE FIRST
-	// Create the controller for the root view
-	//self.rootViewController = [[[RootViewController alloc] init] autorelease];
-	
-	// Create the application window
-	//self.window = [[[InterceptorWindow alloc] initWithTarget:self.rootViewController.scrollView eventsDelegate:self.rootViewController frame:[[UIScreen mainScreen]bounds]] autorelease];
-	//window.backgroundColor = [UIColor whiteColor];
-	
-	// Add the root view to the application window
-	//[window addSubview:rootViewController.view];
-    //[window makeKeyAndVisible];
-    
-    
     // Shelf View
     LibraryViewController * LVrootViewController = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];  
     _rvc = [[ReaderViewController alloc] init];
