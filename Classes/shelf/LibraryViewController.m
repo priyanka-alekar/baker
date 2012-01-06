@@ -289,7 +289,7 @@
                       substitutionVariables:nil];
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"date" ascending:YES];
+                                        initWithKey:@"date" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [sortDescriptor release];
 
