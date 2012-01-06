@@ -154,6 +154,37 @@ __VA_ARGS__ \
         indexViewController = [[IndexViewController alloc] initWithBookBundlePath:bundleBookPath documentsBookPath:documentsBookPath fileName:INDEX_FILE_NAME webViewDelegate:self];
         [self.view addSubview:indexViewController.view];
         
+        // ******* ADD TOOLBAR
+        UIToolbar *toolbar = [UIToolbar new];
+        toolbar.barStyle = UIBarStyleDefault;
+        toolbar.tintColor = [UIColor blackColor];
+        [toolbar sizeToFit];
+        toolbar.frame = CGRectMake(0, 0, 768, 44);
+
+        // Add buttons to toolbar
+        UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithTitle:@"See all issues" 
+                                                                        style:UIBarButtonItemStyleBordered 
+                                                                       target:self 
+                                                                       action:@selector(btnClicked:)];
+        
+        // Use this to put space in between your toolbox buttons
+        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                  target:nil
+                                                                                  action:nil];
+        
+        // Add buttons to the array
+        NSArray *items = [NSArray arrayWithObjects: flexItem, systemItem1, nil];
+
+        // Add array of buttons to toolbar
+        [toolbar setItems:items animated:NO];
+        [self.view addSubview:toolbar];
+
+        // Release buttons and toolbar
+        [systemItem1 release];
+        [flexItem release];
+        [toolbar release];
+        
+        
         // ****** BOOK INIT
         if ([[NSFileManager defaultManager] fileExistsAtPath:documentsBookPath]) {
             [self initBook:documentsBookPath];
@@ -183,6 +214,8 @@ __VA_ARGS__ \
     [webView addSubview:libraryButton];
      */
     
+    
+    /*
     // Create tollbar
     UIToolbar *toolbar = [UIToolbar new];
     toolbar.barStyle = UIBarStyleDefault;
@@ -211,7 +244,7 @@ __VA_ARGS__ \
     // Add array of buttons to toolbar
     [toolbar setItems:items animated:NO];
     [webView addSubview:toolbar];
-
+    */
 
     webView.delegate = self;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
