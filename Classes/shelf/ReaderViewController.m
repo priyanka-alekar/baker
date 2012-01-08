@@ -154,36 +154,9 @@ __VA_ARGS__ \
         indexViewController = [[IndexViewController alloc] initWithBookBundlePath:bundleBookPath documentsBookPath:documentsBookPath fileName:INDEX_FILE_NAME webViewDelegate:self];
         [self.view addSubview:indexViewController.view];
         
-        // ******* ADD TOOLBAR
-        UIToolbar *toolbar = [UIToolbar new];
-        toolbar.barStyle = UIBarStyleDefault;
-        toolbar.tintColor = [UIColor blackColor];
-        [toolbar sizeToFit];
-        toolbar.frame = CGRectMake(0, 0, 768, 44);
-
-        // Add buttons to toolbar
-        UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithTitle:@"See all issues" 
-                                                                        style:UIBarButtonItemStyleBordered 
-                                                                       target:self 
-                                                                       action:@selector(btnClicked:)];
-        
-        // Use this to put space in between your toolbox buttons
-        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                  target:nil
-                                                                                  action:nil];
-        
-        // Add buttons to the array
-        NSArray *items = [NSArray arrayWithObjects: flexItem, systemItem1, nil];
-
-        // Add array of buttons to toolbar
-        [toolbar setItems:items animated:NO];
-        [self.view addSubview:toolbar];
-
-        // Release buttons and toolbar
-        [systemItem1 release];
-        [flexItem release];
-        [toolbar release];
-        
+        // ****** TOLLBAR VIEW  INIT
+        toolbarViewController = [[ToolbarViewController alloc] initWithNibName:nil bundle:nil];
+        [self.view addSubview:toolbarViewController.view];
         
         // ****** BOOK INIT
         if ([[NSFileManager defaultManager] fileExistsAtPath:documentsBookPath]) {
@@ -205,47 +178,6 @@ __VA_ARGS__ \
 - (void)setupWebView:(UIWebView *)webView {
     NSLog(@"• Setup webView");
     
-    /*
-    UIButton *libraryButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [libraryButton addTarget:self action:@selector(btnClicked:)
-            forControlEvents:UIControlEventTouchDown];
-    [libraryButton setTitle:@"Library" forState:UIControlStateNormal];
-    libraryButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
-    [webView addSubview:libraryButton];
-     */
-    
-    
-    /*
-    // Create tollbar
-    UIToolbar *toolbar = [UIToolbar new];
-    toolbar.barStyle = UIBarStyleDefault;
-    toolbar.tintColor = [UIColor blackColor];
-    [toolbar sizeToFit];
-    toolbar.frame = CGRectMake(0, 0, 768, 44);
-    
-    // Add buttons
-    UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithTitle:@"See all issues" 
-                                                            style:UIBarButtonItemStyleBordered 
-                                                            target:self 
-                                                            action:@selector(btnClicked:)];
-    
-    // Use this to put space in between your toolbox buttons
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                              target:nil
-                                                                              action:nil];
-    
-    // Add buttons to the array
-    NSArray *items = [NSArray arrayWithObjects: flexItem, systemItem1, nil];
-    
-    // Release buttons
-    [systemItem1 release];
-    [flexItem release];
-                                 
-    // Add array of buttons to toolbar
-    [toolbar setItems:items animated:NO];
-    [webView addSubview:toolbar];
-    */
-
     webView.delegate = self;
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
@@ -581,6 +513,7 @@ __VA_ARGS__ \
         [self handlePageLoading];
         
         [indexViewController loadContentFromBundle:[path isEqualToString:bundleBookPath]];
+        
 		
 	} else if (![path isEqualToString:bundleBookPath]) {
 		
@@ -1426,6 +1359,11 @@ __VA_ARGS__ \
         if(![indexViewController isDisabled]) {
             [indexViewController setIndexViewHidden:!hidden withAnimation:YES];
         }
+        
+        if(![toolbarViewController isDisabled]) {
+            [toolbarViewController setToolbarViewHidden:!hidden withAnimation:YES];
+        }
+        
 	}
 }
 - (void)hideStatusBar {
@@ -1438,6 +1376,11 @@ __VA_ARGS__ \
     if(![indexViewController isDisabled]) {
         [indexViewController setIndexViewHidden:YES withAnimation:YES];
     }
+    
+    if(![toolbarViewController isDisabled]) {           // ******************
+        [toolbarViewController setToolbarViewHidden:YES withAnimation:YES];
+    }
+
 }
 
 #pragma mark - DOWNLOAD NEW BOOKS
@@ -1574,6 +1517,9 @@ __VA_ARGS__ \
     // Notify the index view
     [indexViewController willRotate];
     
+    // Notify toolbar
+    [toolbarViewController willRotate];
+        
     // Since the UIWebView doesn't handle orientationchange events correctly we have to do handle them ourselves 
     // 1. Set the correct value for window.orientation property
     NSString *jsOrientationGetter;
@@ -1606,6 +1552,10 @@ __VA_ARGS__ \
 }
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [indexViewController rotateFromOrientation:fromInterfaceOrientation toOrientation:self.interfaceOrientation];
+    
+    
+    [toolbarViewController rotateFromOrientation:fromInterfaceOrientation toOrientation:self.interfaceOrientation];  // *****************
+
     
     [self setPageSize:[self getCurrentInterfaceOrientation]];
     [self getPageHeight];    
@@ -1641,6 +1591,8 @@ __VA_ARGS__ \
     [pages release];
     
     [indexViewController release];
+    [toolbarViewController release];
+    
     [scrollView release];
     [currPage release];
 	[nextPage release];
@@ -1649,7 +1601,7 @@ __VA_ARGS__ \
     [super dealloc];
 }
 
-
+/*
 -(IBAction) btnClicked:(id) sender {
     NSLog(@"button clicked");
     
@@ -1681,5 +1633,6 @@ __VA_ARGS__ \
     //[appDelegate.window makeKeyAndVisible];
     
 }
+*/
 
 @end

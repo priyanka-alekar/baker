@@ -131,7 +131,7 @@
     if (hidden) {
         frame = CGRectMake(0, pageHeight + pageY, pageWidth, indexHeight);
     } else {
-        frame = CGRectMake(0, pageHeight + pageY - indexHeight, pageWidth, indexHeight);
+        frame = CGRectMake(0, pageHeight + pageY - indexHeight, pageWidth, indexHeight);    //**************
     }
     
     if (animation) {
