@@ -73,8 +73,9 @@
     UIToolbar *toolbar = [UIToolbar new];
     toolbar.barStyle = UIBarStyleDefault;
     toolbar.tintColor = [UIColor blackColor];
+    toolbar.alpha = 0.9;
     [toolbar sizeToFit];
-    toolbar.frame = CGRectMake(0, -54, pageWidth, 44);
+    toolbar.frame = CGRectMake(0, -60, pageWidth, 44);
 
     // Add buttons to toolbar
     UIBarButtonItem *systemItem1 = [[UIBarButtonItem alloc] initWithTitle:@"See all issues" 
@@ -139,7 +140,7 @@
     CGRect frame;
     if (hidden) {
         //frame = CGRectMake(0, pageHeight + pageY, pageWidth, indexHeight);
-        frame = CGRectMake(0, -54 + pageY, pageWidth, 44); // ******************
+        frame = CGRectMake(0, -60 + pageY, pageWidth, 44); // ******************
 
     } else {
         //frame = CGRectMake(0, pageHeight + pageY - indexHeight, pageWidth, indexHeight);
