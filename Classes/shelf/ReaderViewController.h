@@ -9,6 +9,7 @@
 //#import "Pugpig/Pugpig.h"
 #import "Issue.h"
 #import "IndexViewController.h"
+#import "ToolbarViewController.h"
 #import "Properties.h"
 
 
@@ -69,6 +70,7 @@
 	UIAlertView *feedbackAlert;
     
     IndexViewController *indexViewController;
+    ToolbarViewController *toolbarViewController;
     
     Properties *properties;
     
@@ -145,7 +147,7 @@
 
 #pragma mark - ORIENTATION
 - (NSString *)getCurrentInterfaceOrientation;
--(IBAction) btnClicked:(id) sender;
+//-(IBAction) btnClicked:(id) sender;
 
 
 @end

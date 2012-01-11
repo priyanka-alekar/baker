@@ -12,6 +12,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		8D5A1C2814BCB722005BE276 /* nkicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5A1C2714BCB722005BE276 /* nkicon.png */; };
+		8DEA3CD014B9204B00CD047E /* ToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEA3CCF14B9204B00CD047E /* ToolbarViewController.m */; };
 		9E12CF091495A97E00FFB1DF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12CF081495A97E00FFB1DF /* CoreData.framework */; };
 		9E12CF131495AEB100FFB1DF /* IssueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CF0F1495AEB100FFB1DF /* IssueViewController.xib */; };
 		9E12CF141495AEB100FFB1DF /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CF101495AEB100FFB1DF /* LibraryViewController.xib */; };
@@ -119,6 +121,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Baker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baker_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Baker-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Baker-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D5A1C2714BCB722005BE276 /* nkicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nkicon.png; sourceTree = "<group>"; };
+		8DEA3CCE14B9204B00CD047E /* ToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarViewController.h; sourceTree = "<group>"; };
+		8DEA3CCF14B9204B00CD047E /* ToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarViewController.m; sourceTree = "<group>"; };
 		9E12CF081495A97E00FFB1DF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9E12CF0F1495AEB100FFB1DF /* IssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IssueViewController.xib; path = shelf/ui/IssueViewController.xib; sourceTree = "<group>"; };
 		9E12CF101495AEB100FFB1DF /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryViewController.xib; path = shelf/ui/LibraryViewController.xib; sourceTree = "<group>"; };
@@ -273,6 +278,8 @@
 				D2690B5D13EB46200011CC7D /* ui */,
 				D2A198A81375972600C6BE2F /* IndexViewController.h */,
 				D2A198A91375972600C6BE2F /* IndexViewController.m */,
+				8DEA3CCE14B9204B00CD047E /* ToolbarViewController.h */,
+				8DEA3CCF14B9204B00CD047E /* ToolbarViewController.m */,
 				D20915BE13CB9C7800D3B55B /* Properties.h */,
 				D20915BF13CB9C7800D3B55B /* Properties.m */,
 				1D3623240D0F684500981E51 /* BakerAppDelegate.h */,
@@ -325,6 +332,7 @@
 				BFEC41E51309D9CA00628DF3 /* ios-icon-iphone57.png */,
 				BFEC41E71309D9CE00628DF3 /* ios-icon-iphone114.png */,
 				BFBACF321274CD38009D9595 /* ios-icon-ipad72.png */,
+				8D5A1C2714BCB722005BE276 /* nkicon.png */,
 				8D1107310486CEB800E47090 /* Baker-Info.plist */,
 			);
 			name = Resources;
@@ -637,6 +645,7 @@
 				9E12CF231495AEC600FFB1DF /* magazine_ico_30x30.png in Resources */,
 				9E12CF241495AEC600FFB1DF /* magazine_ico_60x60.png in Resources */,
 				9E476AAC149B8C9B00CAB08E /* issueslist.json in Resources */,
+				8D5A1C2814BCB722005BE276 /* nkicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +723,7 @@
 				9E12CF601495AF2F00FFB1DF /* Issue.m in Sources */,
 				9E12CF611495AF2F00FFB1DF /* IssueViewController.m in Sources */,
 				9E12CF621495AF2F00FFB1DF /* LibraryViewController.m in Sources */,
+				8DEA3CD014B9204B00CD047E /* ToolbarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
