@@ -178,8 +178,18 @@
             NSLog (@"IssueViewController: Received the contentDownloaded notification!");
             [issue setStatus:[NSNumber numberWithInt:2]];
             [buttonView setTitle:@"Archive" forState:UIControlStateNormal];
+            
+            
+            // Update the Newsstand icon
+            if (isOS5()) {
+              UIImage *img = [[UIImage alloc] initWithContentsOfFile:[(Cover *)[issue cover] path]];
+
+              if (img) {
+                  [[UIApplication sharedApplication] setNewsstandIconImage:img];
+                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
+              }
+            }
         }
-        
     }
     
 }
