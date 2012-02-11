@@ -63,11 +63,13 @@
     
     // Shelf View
     LibraryViewController * LVrootViewController = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];  
-    //_bvc = [BakerViewController alloc];
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:LVrootViewController];  
     [_navigationController setNavigationBarHidden:YES];
-    //[_navigationController setToolbarHidden:NO];      // Disabled
+    
+    // Can Release this as it's being retained in the _navigationController
+    [LVrootViewController release];
+    
     
     self.window.rootViewController = _navigationController;
     [self.window makeKeyAndVisible];
