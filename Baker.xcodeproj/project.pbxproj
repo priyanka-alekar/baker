@@ -84,7 +84,6 @@
 		D2690B6113EB46A30011CC7D /* PageTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2690B6013EB46A30011CC7D /* PageTitleLabel.m */; };
 		D2700BD81355BC3100889DD8 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2700BD71355BC3100889DD8 /* OCMock.framework */; };
 		D2700BDB1356048800889DD8 /* OCMock.framework in Copy OCMock */ = {isa = PBXBuildFile; fileRef = D2700BD71355BC3100889DD8 /* OCMock.framework */; };
-		D281D06A13549EF4009F1B11 /* InterceptorWindowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D281D02E13546BB1009F1B11 /* InterceptorWindowTests.m */; };
 		D281D06B13549F08009F1B11 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		D281D06C13549F08009F1B11 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		D281D06D13549F08009F1B11 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -158,7 +157,7 @@
 		9E12CF3E1495AED700FFB1DF /* SBStateStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBStateStack.m; path = shelf/lib/json/SBStateStack.m; sourceTree = "<group>"; };
 		9E12CF3F1495AED700FFB1DF /* SBUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBUTF8Stream.h; path = shelf/lib/json/SBUTF8Stream.h; sourceTree = "<group>"; };
 		9E12CF401495AED700FFB1DF /* SBUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBUTF8Stream.m; path = shelf/lib/json/SBUTF8Stream.m; sourceTree = "<group>"; };
-		9E12CF511495AF0400FFB1DF /* SitelessMagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SitelessMagazine.xcdatamodel; sourceTree = "<group>"; };
+		9E12CF511495AF0400FFB1DF /* SitelessMagazine.xcdatamodel */ = {isa = PBXFileReference; path = SitelessMagazine.xcdatamodel; sourceTree = "<group>"; };
 		9E12CF541495AF2F00FFB1DF /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Content.h; path = shelf/Content.h; sourceTree = "<group>"; };
 		9E12CF551495AF2F00FFB1DF /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Content.m; path = shelf/Content.m; sourceTree = "<group>"; };
 		9E12CF561495AF2F00FFB1DF /* Cover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cover.h; path = shelf/Cover.h; sourceTree = "<group>"; };
@@ -220,8 +219,6 @@
 		D2690B5F13EB46A30011CC7D /* PageTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageTitleLabel.h; path = ui/PageTitleLabel.h; sourceTree = "<group>"; };
 		D2690B6013EB46A30011CC7D /* PageTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = PageTitleLabel.m; path = ui/PageTitleLabel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D2700BD71355BC3100889DD8 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
-		D281D02D13546BB1009F1B11 /* InterceptorWindowTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterceptorWindowTests.h; sourceTree = "<group>"; };
-		D281D02E13546BB1009F1B11 /* InterceptorWindowTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterceptorWindowTests.m; sourceTree = "<group>"; };
 		D281D06313549EDC009F1B11 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D281D06413549EDC009F1B11 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		D2A198A81375972600C6BE2F /* IndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexViewController.h; sourceTree = "<group>"; };
@@ -522,8 +519,6 @@
 			isa = PBXGroup;
 			children = (
 				D2700BD61355BC0800889DD8 /* Frameworks */,
-				D281D02D13546BB1009F1B11 /* InterceptorWindowTests.h */,
-				D281D02E13546BB1009F1B11 /* InterceptorWindowTests.m */,
 				D20915C213CB9FDC00D3B55B /* PropertiesTest.h */,
 				D20915C313CB9FDC00D3B55B /* PropertiesTest.m */,
 			);
@@ -718,7 +713,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D281D06A13549EF4009F1B11 /* InterceptorWindowTests.m in Sources */,
 				D20915C413CB9FDC00D3B55B /* PropertiesTest.m in Sources */,
 				D20915C513CBA1C600D3B55B /* Properties.m in Sources */,
 				D20A5535144B300D0083A369 /* CDataScanner.m in Sources */,

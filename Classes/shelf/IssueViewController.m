@@ -1,9 +1,8 @@
 //
 //  IssueViewController.m
-//  SitelessMag
 //
 //  Created by Bart Termorshuizen on 6/18/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Modified/Adapted for BakerShelf by Andrew Krowczyk @nin9creative on 2/18/2012
 //
 
 #import "IssueViewController.h"

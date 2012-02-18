@@ -1,9 +1,8 @@
 //
 //  Content.h
-//  SitelessMagazine
 //
 //  Created by Bart Termorshuizen on 7/10/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Modified/Adapted for BakerShelf by Andrew Krowczyk @nin9creative on 2/18/2012
 //
 
 #import <Foundation/Foundation.h>
