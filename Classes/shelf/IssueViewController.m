@@ -11,7 +11,7 @@
 #import "Cover.h"
 #import "Content.h"
 #import "BakerAppDelegate.h"
-#import "InterceptorWindow.h"
+#import "BakerViewController.h"
 
 @implementation IssueViewController
 
@@ -132,20 +132,27 @@
 
 -(IBAction) btnRead:(id) sender{
     if ([[issue status] intValue] == 2 ) // issue is downloaded
-    {
-        NSLog(@"IssueViewController - Opening Reader");  
+    {       
+        NSLog(@"IssueViewController - Opening BakerViewController");  
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
+        UINavigationController* navigationController = [appDelegate navigationController];
 
-        ReaderViewController* rvc = [appDelegate rvc];
+        BakerViewController * bvc = [BakerViewController alloc];
         
-        [rvc setIssue:issue];
-        [rvc init];
+        [bvc initWithMaterial:issue];
         
-        appDelegate.window =[[InterceptorWindow alloc] initWithTarget:rvc.scrollView eventsDelegate:rvc frame:[[UIScreen mainScreen]bounds]];
-        appDelegate.window.backgroundColor = [UIColor whiteColor];
-        [appDelegate.window addSubview:rvc.view];
-        [appDelegate.window makeKeyAndVisible];
-            
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration: 0.50];
+        
+        //Hook To MainView
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:navigationController.view cache:YES];
+        
+        [navigationController pushViewController:(UIViewController*)bvc animated:YES];    
+        [navigationController setToolbarHidden:YES animated:NO];
+        
+        [bvc release];
+        
+        [UIView commitAnimations];            
     }
     else // issue is not downloaded 
     {
