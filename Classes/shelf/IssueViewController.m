@@ -148,6 +148,7 @@
         
         [navigationController pushViewController:(UIViewController*)bvc animated:YES];    
         [navigationController setToolbarHidden:YES animated:NO];
+        [navigationController setNavigationBarHidden:YES];
         
         [bvc release];
         

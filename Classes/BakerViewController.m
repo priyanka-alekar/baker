@@ -156,12 +156,14 @@
         
         [self setPageSize:[self getCurrentInterfaceOrientation]];
                 
-        
+        //CGRectMake(0, 0, 1024, 44);
         // ****** TOOLBAR
         toolbar = [[UIToolbar alloc]init];
-        toolbar.tintColor = [UIColor colorWithRed:0.1176470588 green:0.1176470588 blue:0.1176470588 alpha:1];
+        toolbar.barStyle = UIBarStyleDefault;
+        toolbar.tintColor = [UIColor blackColor];
         toolbar.tag = 0;
         [toolbar sizeToFit];
+        //toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         toolbar.frame = CGRectMake(0, 0, pageWidth, 44);
         
         UIBarButtonItem *back = [[[UIBarButtonItem alloc]initWithTitle:@"Back to Library" style:UIBarButtonItemStyleBordered target:self action:@selector(Close)] autorelease];

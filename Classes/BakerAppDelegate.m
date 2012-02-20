@@ -66,6 +66,7 @@
     
     _navigationController = [[UINavigationController alloc] initWithRootViewController:LVrootViewController];  
     [_navigationController setNavigationBarHidden:YES];
+    [_navigationController setToolbarHidden:YES];
     
     // Can Release this as it's being retained in the _navigationController
     [LVrootViewController release];
