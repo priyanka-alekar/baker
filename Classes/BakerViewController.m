@@ -1451,7 +1451,8 @@
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:navigationController.view cache:YES];
     
     [navigationController popViewControllerAnimated:YES];    
-    [navigationController setToolbarHidden:NO animated:NO];
+    [navigationController setToolbarHidden:YES animated:NO];
+    [navigationController setNavigationBarHidden:YES];
     
     
     [UIView commitAnimations];
