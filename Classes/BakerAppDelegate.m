@@ -42,7 +42,6 @@
 @synthesize window;
 
 @synthesize navigationController = _navigationController;
-//@synthesize bvc=_bvc;
 
 @synthesize managedObjectContext=__managedObjectContext;
 @synthesize managedObjectModel=__managedObjectModel;

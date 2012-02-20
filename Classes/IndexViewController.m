@@ -129,9 +129,9 @@
 - (void)setIndexViewHidden:(BOOL)hidden withAnimation:(BOOL)animation {
     CGRect frame;
     if (hidden) {
-        frame = CGRectMake(0, pageHeight + pageY, pageWidth, indexHeight);
+        frame = CGRectMake(0, pageHeight + pageY + 20, pageWidth, indexHeight);
     } else {
-        frame = CGRectMake(0, pageHeight + pageY - indexHeight, pageWidth, indexHeight);    //**************
+        frame = CGRectMake(0, pageHeight + pageY + 20 - indexHeight, pageWidth, indexHeight);    //**************
     }
     
     if (animation) {

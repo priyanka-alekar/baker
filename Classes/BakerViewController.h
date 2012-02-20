@@ -99,8 +99,6 @@
     UIInterfaceOrientation orientation;
       
     UIToolbar *toolbar;
-    
-    UIPopoverController *objListaFavoritosPop;
 }
 
 #pragma mark - PROPERTIES
@@ -108,7 +106,6 @@
 @property (nonatomic, retain) UIWebView *currPage;
 @property (nonatomic, retain) NSMutableArray *pages;
 @property (nonatomic, retain) Issue* objIssue;
-@property (nonatomic, retain) UIPopoverController *objListaFavoritosPop;
 @property int currentPageNumber;
 
 -(IBAction)tapGesture:(id)sender;
