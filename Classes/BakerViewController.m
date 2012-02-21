@@ -1450,11 +1450,11 @@
     [UIView setAnimationDuration: 0.50];
     
     //Hook To MainView
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:navigationController.view cache:YES];
-    
-    [navigationController popViewControllerAnimated:YES];    
+    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:navigationController.view cache:YES];
     [navigationController setToolbarHidden:YES animated:NO];
-    [navigationController setNavigationBarHidden:YES];
+    [navigationController setNavigationBarHidden:YES];    
+    [navigationController popViewControllerAnimated:YES];    
+
     
     
     [UIView commitAnimations];

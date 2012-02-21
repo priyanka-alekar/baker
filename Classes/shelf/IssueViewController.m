@@ -165,11 +165,11 @@
         [UIView setAnimationDuration: 0.50];
         
         //Hook To MainView
-        [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:navigationController.view cache:YES];
-        
-        [navigationController pushViewController:(UIViewController*)bvc animated:YES];    
+        [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:navigationController.view cache:YES];
         [navigationController setToolbarHidden:YES animated:NO];
         [navigationController setNavigationBarHidden:YES];
+        [navigationController pushViewController:(UIViewController*)bvc animated:YES];    
+
         
         [bvc release];
         
