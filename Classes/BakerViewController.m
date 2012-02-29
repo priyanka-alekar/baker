@@ -83,7 +83,6 @@
 @implementation BakerViewController
 
 #pragma mark - SYNTHESIS
-@synthesize objListaFavoritosPop;
 @synthesize scrollView;
 @synthesize currPage;
 @synthesize currentPageNumber;
