@@ -50,3 +50,9 @@
 - (void) downloadedContent:(NSNotification *) notification;
 
 @end
+
+
+@interface alertView: UIAlertView <UIActionSheetDelegate> {
+    
+}
+@end
