@@ -31,9 +31,11 @@
 
 
 #import <UIKit/UIKit.h>
+#import <NewsstandKit/NewsstandKit.h>
+
 #import "IndexViewController.h"
 #import "Properties.h"
-#import "Issue.h"
+
 
 @class Downloader;
 
@@ -41,7 +43,7 @@
 	
 	CGRect screenBounds;
     
-    Issue* objIssue;
+    NKIssue* objIssue;
 	
 	NSString *documentsBookPath;
     NSString *bundleBookPath;
@@ -105,13 +107,13 @@
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UIWebView *currPage;
 @property (nonatomic, retain) NSMutableArray *pages;
-@property (nonatomic, retain) Issue* objIssue;
+@property (nonatomic, retain) NKIssue* objIssue;
 @property int currentPageNumber;
 
 -(IBAction)tapGesture:(id)sender;
 
 #pragma mark - INIT
-- (void)initWithMaterial:(Issue *) _objIssue;
+- (void)initWithMaterial:(NKIssue *) _objIssue;
 - (void)setupWebView:(UIWebView *)webView;
 - (void)setPageSize:(NSString *)orientation;
 - (void)setTappableAreaSize;

@@ -42,10 +42,6 @@
 		9E12CF4B1495AED700FFB1DF /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF3C1495AED700FFB1DF /* SBJsonWriter.m */; };
 		9E12CF4C1495AED700FFB1DF /* SBStateStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF3E1495AED700FFB1DF /* SBStateStack.m */; };
 		9E12CF4D1495AED700FFB1DF /* SBUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF401495AED700FFB1DF /* SBUTF8Stream.m */; };
-		9E12CF531495AF0400FFB1DF /* SitelessMagazine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF501495AF0400FFB1DF /* SitelessMagazine.xcdatamodeld */; };
-		9E12CF5E1495AF2F00FFB1DF /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF551495AF2F00FFB1DF /* Content.m */; };
-		9E12CF5F1495AF2F00FFB1DF /* Cover.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF571495AF2F00FFB1DF /* Cover.m */; };
-		9E12CF601495AF2F00FFB1DF /* Issue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF591495AF2F00FFB1DF /* Issue.m */; };
 		9E12CF611495AF2F00FFB1DF /* IssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF5B1495AF2F00FFB1DF /* IssueViewController.m */; };
 		9E12CF621495AF2F00FFB1DF /* LibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CF5D1495AF2F00FFB1DF /* LibraryViewController.m */; };
 		9E476AAC149B8C9B00CAB08E /* issueslist.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E476AAB149B8C9B00CAB08E /* issueslist.json */; };
@@ -57,6 +53,9 @@
 		BFBACF331274CD38009D9595 /* ios-icon-ipad72.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBACF321274CD38009D9595 /* ios-icon-ipad72.png */; };
 		BFEC41E61309D9CA00628DF3 /* ios-icon-iphone57.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC41E51309D9CA00628DF3 /* ios-icon-iphone57.png */; };
 		BFEC41E81309D9CE00628DF3 /* ios-icon-iphone114.png in Resources */ = {isa = PBXBuildFile; fileRef = BFEC41E71309D9CE00628DF3 /* ios-icon-iphone114.png */; };
+		CC2BB9CF1529C84100B5361C /* Publisher.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2BB9CE1529C84100B5361C /* Publisher.m */; };
+		CC2BB9D01529C84100B5361C /* Publisher.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2BB9CE1529C84100B5361C /* Publisher.m */; };
+		CC2BB9D21529DF1A00B5361C /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2BB9D11529DF1A00B5361C /* NewsstandKit.framework */; };
 		D20915C013CB9C7800D3B55B /* Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D20915BF13CB9C7800D3B55B /* Properties.m */; };
 		D20915C413CB9FDC00D3B55B /* PropertiesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D20915C313CB9FDC00D3B55B /* PropertiesTest.m */; };
 		D20915C513CBA1C600D3B55B /* Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D20915BF13CB9C7800D3B55B /* Properties.m */; };
@@ -168,13 +167,6 @@
 		9E12CF3E1495AED700FFB1DF /* SBStateStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBStateStack.m; path = shelf/lib/json/SBStateStack.m; sourceTree = "<group>"; };
 		9E12CF3F1495AED700FFB1DF /* SBUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBUTF8Stream.h; path = shelf/lib/json/SBUTF8Stream.h; sourceTree = "<group>"; };
 		9E12CF401495AED700FFB1DF /* SBUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBUTF8Stream.m; path = shelf/lib/json/SBUTF8Stream.m; sourceTree = "<group>"; };
-		9E12CF511495AF0400FFB1DF /* SitelessMagazine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SitelessMagazine.xcdatamodel; sourceTree = "<group>"; };
-		9E12CF541495AF2F00FFB1DF /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Content.h; path = shelf/Content.h; sourceTree = "<group>"; };
-		9E12CF551495AF2F00FFB1DF /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Content.m; path = shelf/Content.m; sourceTree = "<group>"; };
-		9E12CF561495AF2F00FFB1DF /* Cover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cover.h; path = shelf/Cover.h; sourceTree = "<group>"; };
-		9E12CF571495AF2F00FFB1DF /* Cover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cover.m; path = shelf/Cover.m; sourceTree = "<group>"; };
-		9E12CF581495AF2F00FFB1DF /* Issue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Issue.h; path = shelf/Issue.h; sourceTree = "<group>"; };
-		9E12CF591495AF2F00FFB1DF /* Issue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Issue.m; path = shelf/Issue.m; sourceTree = "<group>"; };
 		9E12CF5A1495AF2F00FFB1DF /* IssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IssueViewController.h; path = shelf/IssueViewController.h; sourceTree = "<group>"; };
 		9E12CF5B1495AF2F00FFB1DF /* IssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IssueViewController.m; path = shelf/IssueViewController.m; sourceTree = "<group>"; };
 		9E12CF5C1495AF2F00FFB1DF /* LibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LibraryViewController.h; path = shelf/LibraryViewController.h; sourceTree = "<group>"; };
@@ -190,6 +182,9 @@
 		BFBACF321274CD38009D9595 /* ios-icon-ipad72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-ipad72.png"; sourceTree = "<group>"; };
 		BFEC41E51309D9CA00628DF3 /* ios-icon-iphone57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-iphone57.png"; sourceTree = "<group>"; };
 		BFEC41E71309D9CE00628DF3 /* ios-icon-iphone114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-iphone114.png"; sourceTree = "<group>"; };
+		CC2BB9CD1529C84100B5361C /* Publisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Publisher.h; sourceTree = "<group>"; };
+		CC2BB9CE1529C84100B5361C /* Publisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Publisher.m; sourceTree = "<group>"; };
+		CC2BB9D11529DF1A00B5361C /* NewsstandKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewsstandKit.framework; path = System/Library/Frameworks/NewsstandKit.framework; sourceTree = SDKROOT; };
 		D20915BE13CB9C7800D3B55B /* Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Properties.h; sourceTree = "<group>"; };
 		D20915BF13CB9C7800D3B55B /* Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Properties.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D20915C213CB9FDC00D3B55B /* PropertiesTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertiesTest.h; sourceTree = "<group>"; };
@@ -246,6 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC2BB9D21529DF1A00B5361C /* NewsstandKit.framework in Frameworks */,
 				9E12CF091495A97E00FFB1DF /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -342,6 +338,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC2BB9D11529DF1A00B5361C /* NewsstandKit.framework */,
 				9E12CF081495A97E00FFB1DF /* CoreData.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -355,19 +352,14 @@
 		9E12CF021495A86300FFB1DF /* shelf */ = {
 			isa = PBXGroup;
 			children = (
-				9E12CF541495AF2F00FFB1DF /* Content.h */,
-				9E12CF551495AF2F00FFB1DF /* Content.m */,
-				9E12CF561495AF2F00FFB1DF /* Cover.h */,
-				9E12CF571495AF2F00FFB1DF /* Cover.m */,
-				9E12CF581495AF2F00FFB1DF /* Issue.h */,
-				9E12CF591495AF2F00FFB1DF /* Issue.m */,
+				CC2BB9CD1529C84100B5361C /* Publisher.h */,
+				CC2BB9CE1529C84100B5361C /* Publisher.m */,
 				1A650F9D14FB13D10017DBAA /* Toolbar.h */,
 				1A650F9E14FB13D10017DBAA /* Toolbar.m */,
 				9E12CF5A1495AF2F00FFB1DF /* IssueViewController.h */,
 				9E12CF5B1495AF2F00FFB1DF /* IssueViewController.m */,
 				9E12CF5C1495AF2F00FFB1DF /* LibraryViewController.h */,
 				9E12CF5D1495AF2F00FFB1DF /* LibraryViewController.m */,
-				9E12CF501495AF0400FFB1DF /* SitelessMagazine.xcdatamodeld */,
 				9E12CF0E1495AE7900FFB1DF /* supporting files */,
 				9E12CF0B1495A9D100FFB1DF /* ui */,
 				9E12CF0A1495A9C800FFB1DF /* lib */,
@@ -720,14 +712,11 @@
 				9E12CF4B1495AED700FFB1DF /* SBJsonWriter.m in Sources */,
 				9E12CF4C1495AED700FFB1DF /* SBStateStack.m in Sources */,
 				9E12CF4D1495AED700FFB1DF /* SBUTF8Stream.m in Sources */,
-				9E12CF531495AF0400FFB1DF /* SitelessMagazine.xcdatamodeld in Sources */,
-				9E12CF5E1495AF2F00FFB1DF /* Content.m in Sources */,
-				9E12CF5F1495AF2F00FFB1DF /* Cover.m in Sources */,
-				9E12CF601495AF2F00FFB1DF /* Issue.m in Sources */,
 				9E12CF611495AF2F00FFB1DF /* IssueViewController.m in Sources */,
 				9E12CF621495AF2F00FFB1DF /* LibraryViewController.m in Sources */,
 				9E57EFEB14EAAB48000BD3B4 /* BakerViewController.m in Sources */,
 				1A650F9F14FB13D10017DBAA /* Toolbar.m in Sources */,
+				CC2BB9CF1529C84100B5361C /* Publisher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +736,7 @@
 				D20A5543144B300D0083A369 /* CJSONDeserializer.m in Sources */,
 				D20A5545144B300D0083A369 /* CJSONScanner.m in Sources */,
 				D20A5547144B300D0083A369 /* CJSONSerializer.m in Sources */,
+				CC2BB9D01529C84100B5361C /* Publisher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,20 +995,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9E12CF501495AF0400FFB1DF /* SitelessMagazine.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9E12CF511495AF0400FFB1DF /* SitelessMagazine.xcdatamodel */,
-			);
-			currentVersion = 9E12CF511495AF0400FFB1DF /* SitelessMagazine.xcdatamodel */;
-			name = SitelessMagazine.xcdatamodeld;
-			path = shelf/SitelessMagazine.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

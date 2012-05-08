@@ -40,7 +40,6 @@
 #import "SSZipArchive.h"
 #import "PageTitleLabel.h"
 #import "Utils.h"
-#import "Content.h"
 #import "BakerAppDelegate.h"
 #import "Toolbar.h"
 
@@ -100,7 +99,7 @@
 	return self;
 }
 
-- (void)initWithMaterial:(Issue *) _objIssue {
+- (void)initWithMaterial:(NKIssue *) _objIssue {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         NSLog(@"• INIT initWithMaterial");
@@ -131,7 +130,10 @@
             [[NSFileManager defaultManager] createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
         }
         
-        bundleBookPath        = [(Content*)[ objIssue content] path];
+        // /Users/Bart/Library/Application Support/iPhone Simulator/5.0/Applications/2EF45869-CFA7-433E-AB31-42BFE798BDDF/Documents/Magazine Title1issue
+        // //localhost/Users/Bart/Library/Application%20Support/iPhone%20Simulator/5.1/Applications/4FA14792-3B5E-4CC6-8BC7-5E0A0E5247C6/Library/Caches/Newsstand/A6894A8A-7C56-40FC-B425-F2F5E1C8FCB6/
+        [[NKLibrary sharedLibrary] setCurrentlyReadingIssue:_objIssue];
+        bundleBookPath        = [_objIssue.contentURL path];
         documentsBookPath     = [[privateDocsPath stringByAppendingPathComponent:@"book"] retain];
         
         NSLog(@"• Loading Issue Content %@",bundleBookPath);

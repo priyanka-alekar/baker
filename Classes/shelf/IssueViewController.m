@@ -27,24 +27,22 @@
 // 
 
 #import "IssueViewController.h"
-#import "Issue.h"
-#import "Cover.h"
-#import "Content.h"
 #import "BakerAppDelegate.h"
 #import "BakerViewController.h"
+#import "SSZipArchive.h"
+
+NSString *LibraryViewDidFinishDownloading = @"LibraryViewDidFinishDowloading";
+NSString *LibraryViewDidFailDownloading = @"LibraryViewDidFailDowloading";
 
 @implementation IssueViewController
 
-@synthesize issue;
+@synthesize publisher, index;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
-        // Initiate issue status
-        [issue setStatus:[NSNumber numberWithInt:-1]];
     }
     return self;
 }
@@ -72,37 +70,51 @@
     CGRect frame = issueView.frame;                    
     [[self view] setFrame:frame];
     
-    [labelView setText:[issue title]];
-    [descriptionView setText:[issue descr]];
     
-    Cover *c =(Cover *)[issue cover];
-    if ([[c path] isEqualToString:@""] || [c path] == nil) {
-        // use dummy image
-    }
-    else {
-        UIImage * coverImage = [[UIImage alloc] initWithContentsOfFile:[(Cover *)[issue cover] path]];
-        [coverView setImage:coverImage];
-        [coverImage release];
-    }
+    NKLibrary *nkLib = [NKLibrary sharedLibrary];
+    NSString* issueTitle=[publisher titleOfIssueAtIndex:index];
+    nkIssue = [nkLib issueWithName:issueTitle];
     
-    if ([[issue status] intValue] == 1 ) // issue is not downloaded
-    {
-        [buttonView setTitle:@"Download" forState:UIControlStateNormal];
-    }
-    if ([[issue status] intValue] == 2) // issue is downloaded - can be archived
-    {
+    [labelView setText:[[self publisher] titleOfIssueAtIndex:[self index]]];
+    [descriptionView setText:[[self publisher] descriptionOfIssueAtIndex:[self index]]];
+    
+    coverView.image=nil; // reset image as it will be retrieved asychronously
+    [publisher setCoverOfIssueAtIndex:index completionBlock:^(UIImage *img) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            coverView.image=img;
+        });
+    }];
+    //
+    
+    [progressView setHidden:YES];
+    
+    if(nkIssue.status==NKIssueContentStatusAvailable) {
         [buttonView setTitle:@"Archive" forState:UIControlStateNormal];
-    }    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resolvedCover:) name:@"coverResolved" object:nil ] ;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadedContent:) name:@"contentDownloaded" object:nil ] ;
-
-    
-    // Clear the progressbar and make it invisible
-    progressView.progress = 0;
-    progressView.hidden = YES;
-    
+    } 
+    else if(nkIssue.status==NKIssueContentStatusDownloading) {
+        [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LibraryViewDidFinishDownloading:) name:LibraryViewDidFinishDownloading object:nkIssue];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LibraryViewDidFailDownloading:) name:LibraryViewDidFailDownloading object:nkIssue];
+    } 
+    else {
+        [buttonView setTitle:@"Download" forState:UIControlStateNormal];
+        
+    }
     return;
+}
+
+- (void)LibraryViewDidFinishDownloading:(NSNotification*)not
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFinishDownloading object:nkIssue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFailDownloading object:nkIssue];
+    [buttonView setTitle:@"Archive" forState:UIControlStateNormal];
+}
+
+- (void)LibraryViewDidFailDownloading:(NSNotification*)not
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFinishDownloading object:nkIssue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFailDownloading object:nkIssue];
+    [buttonView setTitle:@"Download" forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload
@@ -120,33 +132,36 @@
 
 -(IBAction) btnClicked:(id) sender {
     
-    if ([[issue status] intValue] != 0 ) // issue is NOT downloading
-    {
-      if ([[issue status] intValue] == 1 ) // issue is not downloaded
-      {
-          // Set status do 0 -> DOWNLOADING
-          [issue setStatus:[NSNumber numberWithInt:0]];
-          [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
-
-          // Set progressView to Content
-          [(Content *)[issue content] resolve:progressView];
-      }
-      else if ([[issue status] intValue] == 2 ) // issue is downloaded - needs to be archived
-      {
-          UIAlertView *updateAlert = [[UIAlertView alloc] 
-                                      initWithTitle: @"Are you sure you want to archive this item?"
-                                      message: @"This item will be removed from your device. You may download it at anytime for free."
-                                      delegate: self
-                                      cancelButtonTitle: @"Cancel"
-                                      otherButtonTitles:@"Archive",nil];
-          [updateAlert show];
-          [updateAlert release];
-      }
+    if  (nkIssue.status==NKIssueContentStatusDownloading){
+        // still downloading
+        [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
+    }
+    else if (nkIssue.status==NKIssueContentStatusNone){
+        // start download
+        NSURL *downloadURL = [publisher contentURLForIssueWithName:nkIssue.name];
+        if(!downloadURL) return;
+        NSURLRequest *req = [NSURLRequest requestWithURL:downloadURL];
+        NKAssetDownload *assetDownload = [nkIssue addAssetWithRequest:req];
+        [assetDownload downloadWithDelegate:self];
+        [assetDownload setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSNumber numberWithInt:index],@"Index",
+                                    nil]];
+    }
+    else if (nkIssue.status==NKIssueContentStatusAvailable){
+        // archive
+        UIAlertView *updateAlert = [[UIAlertView alloc] 
+                                    initWithTitle: @"Are you sure you want to archive this item?"
+                                    message: @"This item will be removed from your device. You may download it at anytime for free."
+                                    delegate: self
+                                    cancelButtonTitle: @"Cancel"
+                                    otherButtonTitles:@"Archive",nil];
+        [updateAlert show];
+        [updateAlert release];
     }
 }
 
 -(IBAction) btnRead:(id) sender{
-    if ([[issue status] intValue] == 2 ) // issue is downloaded
+    if (nkIssue.status == NKIssueContentStatusAvailable) // issue is downloaded
     {       
         NSLog(@"IssueViewController - Opening BakerViewController");  
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -154,7 +169,7 @@
 
         BakerViewController * bvc = [BakerViewController alloc];
         
-        [bvc initWithMaterial:issue];
+        [bvc initWithMaterial:nkIssue];
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration: 0.50];
@@ -181,62 +196,47 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1){
-        NSError * error = nil;
-        [[NSFileManager defaultManager] removeItemAtPath:[(Content *)[issue content] path]  error:&error];
-        if (error) {
-            // implement error handling
-        } else {
-            Content * c = (Content *)[issue content];
-            [c setPath:@""];
-            [issue setStatus:[NSNumber numberWithInt:1]];
-            [buttonView setTitle:@"Download" forState:UIControlStateNormal];
-            // notify all interested parties of the archived content
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"contentArchived" object:self]; // make sure its persisted!
-        }
+        NSLog(@"Archiving %@",nkIssue);
+        nkIssue = [publisher removeIssueAtIndex:[self index]];
+        [buttonView setTitle:@"Download" forState:UIControlStateNormal];
+        [progressView setHidden:YES];
     }
-    
 }
 
-- (void) resolvedCover:(NSNotification *) notification
-{
-    
-    if ([[notification name] isEqualToString:@"coverResolved"]){
-        // check if it is the correct cover
-        if ([notification object] == [issue cover]){
-            NSLog (@"IssueViewController: Received the coverResolved notification!");
-            UIImage * coverImage = [[UIImage alloc] initWithContentsOfFile:[(Cover *)[issue cover] path]];
-            [coverView setImage:coverImage];
-            [coverImage release];
-        }
-                
-    }
-    
+#pragma mark - NSURLConnectionDownloadDelegate
+
+
+-(void)updateProgressOfConnection:(NSURLConnection *)connection withTotalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    [progressView setHidden:NO];
+    progressView.progress=1.f*totalBytesWritten/expectedTotalBytes;   
 }
 
-- (void) downloadedContent:(NSNotification *) notification
-{
-    
-    if ([[notification name] isEqualToString:@"contentDownloaded"]){
-        // check if it is the correct cover
-        if ([notification object] == [issue content]){
-            NSLog (@"IssueViewController: Received the contentDownloaded notification!");
-            [issue setStatus:[NSNumber numberWithInt:2]];
-            [buttonView setTitle:@"Archive" forState:UIControlStateNormal];
-            
-            
-            // Update the Newsstand icon
-            if (isOS5()) {
-              UIImage *img = [[UIImage alloc] initWithContentsOfFile:[(Cover *)[issue cover] path]];
+-(void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    [self updateProgressOfConnection:connection withTotalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];
+}
 
-              if (img) {
-                  [[UIApplication sharedApplication] setNewsstandIconImage:img];
-                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
-              }
-                [img release];
-            }
-        }
+-(void)connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    NSLog(@"Resume downloading %f",1.f*totalBytesWritten/expectedTotalBytes);
+    [self updateProgressOfConnection:connection withTotalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];    
+}
+
+-(void)connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL {
+    // copy file to destination URL
+    [progressView setHidden:YES];
+    NKAssetDownload *dnl = connection.newsstandAssetDownload;
+    NKIssue *dnlIssue = dnl.issue;
+    NSLog(@"Issue downloaded: %@", dnlIssue); // should be the same as nkIssue
+    NSString *contentPath = [publisher downloadPathForIssue:nkIssue];
+    NSLog(@"File is being unzipped to %@",contentPath);
+
+    [SSZipArchive unzipFileAtPath:[destinationURL path] toDestination:contentPath];
+    // update the Newsstand icon
+    UIImage *img = [publisher coverImageForIssue:nkIssue];
+    if(img) {
+        [[UIApplication sharedApplication] setNewsstandIconImage:img]; 
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
     }
-    
+    [buttonView setTitle:@"Archive" forState:UIControlStateNormal];
 }
 
 @end

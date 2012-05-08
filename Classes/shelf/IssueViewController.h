@@ -26,28 +26,25 @@
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
 #import <UIKit/UIKit.h>
+#import "Publisher.h"
 
-@class Issue;
 
-
-@interface IssueViewController : UIViewController {
-    Issue* issue;
+@interface IssueViewController : UIViewController <NSURLConnectionDownloadDelegate>{ 
     IBOutlet UILabel* labelView;
     IBOutlet UITextView* descriptionView;
     IBOutlet UIView* issueView;
     IBOutlet UIImageView* coverView;
     IBOutlet UIButton* buttonView;
     IBOutlet UIProgressView* progressView;
+    NKIssue *nkIssue;
 }
 
-@property (nonatomic, retain) Issue* issue;
-
+@property (nonatomic, retain) Publisher* publisher;
+@property int index;
 
 -(IBAction) btnClicked:(id) sender;
 -(IBAction) btnRead:(id) sender;
 
-- (void) resolvedCover:(NSNotification *) notification;
-- (void) downloadedContent:(NSNotification *) notification;
 
 @end
 

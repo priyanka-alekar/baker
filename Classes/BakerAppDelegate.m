@@ -33,9 +33,6 @@
 #import "BakerAppDelegate.h"
 #import "LibraryViewController.h"
 #import "BakerViewController.h"
-#import "Issue.h"
-#import "Cover.h"
-#import "Content.h"
 
 @implementation BakerAppDelegate
 
@@ -43,9 +40,6 @@
 
 @synthesize navigationController = _navigationController;
 
-@synthesize managedObjectContext=__managedObjectContext;
-@synthesize managedObjectModel=__managedObjectModel;
-@synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -56,6 +50,7 @@
 // check http://stackoverflow.com/questions/3612460/lauching-app-with-url-via-uiapplicationdelegates-handleopenurl-working-under-i for hints
 //- (void)applicationDidFinishLaunching:(UIApplication *)application {    
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
 	
     // Disable Shake to undo
 	application.applicationSupportsShakeToEdit = NO;
@@ -66,6 +61,11 @@
     _navigationController = [[UINavigationController alloc] initWithRootViewController:LVrootViewController];  
     [_navigationController setNavigationBarHidden:YES];
     [_navigationController setToolbarHidden:YES];
+    
+    NKLibrary *nkLib = [NKLibrary sharedLibrary];
+    for(NKAssetDownload *asset in [nkLib downloadingAssets]) {
+        [asset downloadWithDelegate:LVrootViewController];
+    }
     
     // Can Release this as it's being retained in the _navigationController
     [LVrootViewController release];
@@ -81,6 +81,9 @@
 		[self application:application handleOpenURL:url];
 	}
 	
+    
+    
+    
 	return YES;
 }
 
@@ -126,8 +129,6 @@
 	 */
 	
 	[self saveLastPageReference];
-    
-    [self saveContext];
 }
 
 - (void)saveLastPageReference {
@@ -161,9 +162,6 @@
 - (void)dealloc {
 
 	[window release];
-    [__managedObjectContext release];
-    [__managedObjectModel release];
-    [__persistentStoreCoordinator release];
     [_navigationController release];
     [super dealloc];
 }
@@ -175,94 +173,8 @@
      Typically you should set up the Core Data stack here, usually by passing the managed object context to the first view controller.
      self.<#View controller#>.managedObjectContext = self.managedObjectContext;
      */
-    NSManagedObjectContext *context = [self managedObjectContext];
-    if (!context) {
-        // Handle the error.
-        NSLog(@"Could not get a context!");
-    }
-    
-}
 
-- (void)saveContext
-{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil)
-    {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
-        {
-            /*
-             Replace this implementation with code to handle the error appropriately.
-             
-             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-             */
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
-    }
-}
-
-#pragma mark - Core Data stack
-
-/**
- Returns the managed object context for the application.
- If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
- */
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (__managedObjectContext != nil)
-    {
-        return __managedObjectContext;
-    }
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil)
-    {
-        __managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [__managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return __managedObjectContext;
-}
-
-/**
- Returns the managed object model for the application.
- If the model doesn't already exist, it is created from the application's model.
- */
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (__managedObjectModel != nil)
-    {
-        return __managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"SitelessMagazine" withExtension:@"momd"];
-    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
-    return __managedObjectModel;
-}
-
-/**
- Returns the persistent store coordinator for the application.
- If the coordinator doesn't already exist, it is created and the application's store added to it.
- */
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (__persistentStoreCoordinator != nil)
-    {
-        return __persistentStoreCoordinator;
-    }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"SitelessMagazine.sqlite"];
-    
-    NSLog(@"Store URL %@", storeURL);
-    
-    NSError *error = nil;
-    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
-    {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }    
-    
-    return __persistentStoreCoordinator;
 }
 
 #pragma mark - Application's Documents directory

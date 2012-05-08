@@ -26,17 +26,16 @@
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
 #import <UIKit/UIKit.h>
+#import "Publisher.h"
+#import "SSZipArchive.h"
+
 @class IssueViewController;
 
 
-@interface LibraryViewController : UIViewController {
+@interface LibraryViewController : UIViewController <NSURLConnectionDownloadDelegate> {
 
     NSMutableArray *issueViewControllers;
     IBOutlet UIScrollView *scrollView;
-    
-    NSManagedObjectContext *managedObjectContext;
-    
-    NSMutableArray *issuesArray;
     @private NSInteger numberOfIssuesShown; 
     @private NSInteger numberOfPagesShown; 
     
@@ -45,28 +44,16 @@
     IBOutlet UIToolbar *shelfToolBar;
     IBOutlet UILabel *shelfTitle;
 	IBOutlet UIImageView *shelfImage;
+    Publisher *publisher;
 }
 
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSMutableArray *issuesArray;
+
 @property (nonatomic) NSInteger numberOfIssuesShown;
 @property (nonatomic) NSInteger numberOfPagesShown;
 
 
-//- (void)sync:(id) sender;
 -(IBAction) sync:(id) sender;
 -(IBAction) subscribe:(id) sender;
 
-//- (void) layout:(IssueViewController *)ivc;
-- (void) layout: (IssueViewController *)ivc setOrientation: (UIInterfaceOrientation) interfaceOrientation;
-- (void) resolvedCover:(NSNotification *) notification;
-- (void) downloadedContent:(NSNotification *) notification;
-- (void) archivedContent:(NSNotification *) notification;
-- (void) updateList;
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
 @end
