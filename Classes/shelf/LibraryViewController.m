@@ -29,12 +29,10 @@
 #import  "LibraryViewController.h"
 #include "IssueViewController.h"
 #include "BakerAppDelegate.h"
+#include "SubscriptionsViewController.h"
 
 #import "JSON.h"
 
-
-NSString *DidFinishDownloading = @"LibraryViewDidFinishDowloading";
-NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
 
 @implementation LibraryViewController
 
@@ -52,13 +50,46 @@ NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
 //Subscribe button
 -(IBAction) subscribe:(id) sender
 {
-    NSLog(@"Subscribe button pushed");
-	UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Subscribe to Magazine" message: @"Subscription action!" delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-	
-	[someError show];
-	[someError release];
+    if (!popover) {
+        SubscriptionsViewController* svc = [[SubscriptionsViewController alloc] init];
+        [svc setDelegate:self];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:svc];  
+        popover = [[UIPopoverController alloc] initWithContentViewController:navController];
+        [popover setDelegate:self];
+        [popover setPopoverContentSize:svc.view.frame.size];
+        UIBarButtonItem* b = (UIBarButtonItem*)[[shelfToolBar items] objectAtIndex:0];
+        [popover presentPopoverFromBarButtonItem:b permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
+#pragma mark ModalViewControllerDelegate 
+- (void) modalViewControllerIsDone{   
+    if (popover)
+    { 
+        //SubscriptionsViewController* svc = (SubscriptionsViewController*)[(UINavigationController*)[popover contentViewController] topViewController];
+        [popover dismissPopoverAnimated:YES];
+        popover = nil;
+        // a subscription may be bought, so we need to update the list
+    }
+}
+- (void) modalViewControllerCanceled{
+    if (popover)
+    { 
+        //SubscriptionsViewController* svc = (SubscriptionsViewController*)[(UINavigationController*)[popover contentViewController] topViewController];
+        [popover dismissPopoverAnimated:YES];
+        popover = nil;
+    }    
+}
+
+#pragma mark UIPopoverControllerDelegate
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    if (popover){
+        popover = nil;
+    }
+}
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
+    return YES;
+}
 
 -(void) layout:(IssueViewController *)ivc setOrientation:(UIInterfaceOrientation) interfaceOrientation 
 {
@@ -198,6 +229,7 @@ NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         publisher = [[Publisher alloc] init];
+        downloadingAssets = 0;
     }
     return self;
 }
@@ -262,23 +294,92 @@ NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
     //Library background
     [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]]];
     
+    if ([self isDownloadingAssets]){
+        [self updateDownloadingAssetsOverlay:[self interfaceOrientation]];        
+    }
+    
+    
+}
+
+- (void) updateDownloadingAssetsOverlay:(UIInterfaceOrientation)interfaceOrientation
+{
+    float currentProgress = 0.0f;
+    
+    if (downloadView){
+        if (progressView) currentProgress = [progressView progress];
+        for (UIView* v in [downloadView subviews]){
+            [v removeFromSuperview];
+            [v release];
+        }
+        [downloadView removeFromSuperview];
+        [downloadView release];
+    }
+     
+    downloadView = [[UIView alloc] init];
+    progressView =  [[UIProgressView alloc] init];
+    UILabel* l = [[[UILabel alloc] init] retain];
+
+    [downloadView setFrame:scrollView.frame];
+    [downloadView setBackgroundColor : [UIColor blackColor]];
+    [downloadView setAlpha : 0.8f];
+    
+    CGRect labelFrame = CGRectMake(0, 50, scrollView.frame.size.width, 100);
+    [l setFrame : labelFrame];
+    [l setText : @"Continuing previous downloads..."];
+    [l setBackgroundColor : [UIColor clearColor]];
+    [l setTextColor: [UIColor whiteColor]];
+    [l setTextAlignment:UITextAlignmentCenter];
+    
+    CGFloat pfw = 200;
+    CGFloat pfh = 60;
+    CGRect progressFrame;
+
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+        interfaceOrientation == UIInterfaceOrientationPortrait)
+    {
+        progressFrame = CGRectMake((scrollView.frame.size.width - pfw)/2, 200, pfw, pfh);
+    }
+    else {
+        progressFrame = CGRectMake(200, (scrollView.frame.size.height - pfw)/2, pfh, pfw);
+    }
+    
+    [progressView setFrame:progressFrame];
+    [progressView setHidden:NO];
+    [progressView setProgress:currentProgress];
+    
+    [downloadView addSubview:l];
+    [downloadView addSubview:progressView];
+    [self.view addSubview:downloadView];
+    [l release];
+}
+
+- (void) hideDownloadingAssetsOverlay
+{
+    if (downloadView){
+        for (UIView* v in [downloadView subviews]){
+            [v removeFromSuperview];
+            [v release];
+        }
+        [downloadView removeFromSuperview];
+        [downloadView release];
+    }
 }
 
 -(void)loadIssues {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(publisherReady:) name:PublisherDidUpdateNotification object:publisher];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(publisherFailed:) name:PublisherFailedUpdateNotification object:publisher];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(publisherReady:) name:kPublisherDidUpdateNotification object:publisher];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(publisherFailed:) name:kPublisherFailedUpdateNotification object:publisher];
     [publisher getIssuesList];    
 }
 
 -(void)publisherReady:(NSNotification *)not {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PublisherDidUpdateNotification object:publisher];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PublisherFailedUpdateNotification object:publisher];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPublisherDidUpdateNotification object:publisher];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPublisherFailedUpdateNotification object:publisher];
     [self updateShelf:1];
 }
 
 -(void)publisherFailed:(NSNotification *)not {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PublisherDidUpdateNotification object:publisher];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PublisherFailedUpdateNotification object:publisher];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPublisherDidUpdateNotification object:publisher];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPublisherFailedUpdateNotification object:publisher];
     NSLog(@"%@",not);
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:@"Cannot get issues from publisher server."
@@ -295,6 +396,14 @@ NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     for (IssueViewController *ivc in issueViewControllers) [ivc release];
+    if (downloadView){
+        for (UIView* v in [downloadView subviews]){
+            [v removeFromSuperview];
+            [v release];
+        }
+        [downloadView removeFromSuperview];
+        [downloadView release];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -335,16 +444,36 @@ NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
     
     // Update issues view
     [self updateShelf:toInterfaceOrientation];
+    
+    // update overlay if necessary
+    if ([self isDownloadingAssets]){
+        [self updateDownloadingAssetsOverlay:toInterfaceOrientation];
+    }
 }
 
+- (void) incrementDownloadingAssets{
+    downloadingAssets++;
+}
+- (void) decrementDownloadingAssets{
+    downloadingAssets--;
+}
+
+- (BOOL) isDownloadingAssets{
+    return (downloadingAssets>0);
+}
+
+#pragma mark NSURLConnection protocol for the support of resuming downloads
 -(void)updateProgressOfConnection:(NSURLConnection *)connection withTotalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    progressView.progress= 1.f*totalBytesWritten/expectedTotalBytes;
 }
 
 -(void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
+    [self updateProgressOfConnection:connection withTotalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes];
 }
 
 -(void)connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes {
     NSLog(@"Resume downloading %f",1.f*totalBytesWritten/expectedTotalBytes);
+    [self updateProgressOfConnection:connection withTotalBytesWritten:totalBytesWritten expectedTotalBytes:expectedTotalBytes]; 
 }
 
 -(void)connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL {
@@ -365,13 +494,24 @@ NSString *DidFailDownloading = @"LibraryViewDidFailDowloading";
             [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
         }
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:DidFinishDownloading object:dnlIssue];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryViewControllerDidFinishDownloading object:dnlIssue];
+        [self decrementDownloadingAssets];
+        if (![self isDownloadingAssets])
+        {
+            [self hideDownloadingAssetsOverlay];
+        }
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     NKAssetDownload *dnl = connection.newsstandAssetDownload;
     NKIssue *dnlIssue = dnl.issue;
-    [[NSNotificationCenter defaultCenter] postNotificationName:DidFailDownloading object:dnlIssue];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryViewControllerDidFailDownloading object:dnlIssue];
+    [self decrementDownloadingAssets];
+    if (![self isDownloadingAssets])
+    {
+        [self hideDownloadingAssetsOverlay];
+    }
 }
+
 @end

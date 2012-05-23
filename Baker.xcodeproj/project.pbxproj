@@ -18,7 +18,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		8D5A1C2814BCB722005BE276 /* newstand.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5A1C2714BCB722005BE276 /* newstand.png */; };
-		9E12CF091495A97E00FFB1DF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12CF081495A97E00FFB1DF /* CoreData.framework */; };
 		9E12CF131495AEB100FFB1DF /* IssueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CF0F1495AEB100FFB1DF /* IssueViewController.xib */; };
 		9E12CF141495AEB100FFB1DF /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CF101495AEB100FFB1DF /* LibraryViewController.xib */; };
 		9E12CF151495AEB100FFB1DF /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CF111495AEB100FFB1DF /* MainWindow.xib */; };
@@ -56,6 +55,15 @@
 		CC2BB9CF1529C84100B5361C /* Publisher.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2BB9CE1529C84100B5361C /* Publisher.m */; };
 		CC2BB9D01529C84100B5361C /* Publisher.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2BB9CE1529C84100B5361C /* Publisher.m */; };
 		CC2BB9D21529DF1A00B5361C /* NewsstandKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2BB9D11529DF1A00B5361C /* NewsstandKit.framework */; };
+		CC7AFD23152C45A90019D1DC /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7AFD22152C45A80019D1DC /* NSData+Base64.m */; };
+		CC7AFD29152C52040019D1DC /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7AFD22152C45A80019D1DC /* NSData+Base64.m */; };
+		CC7AFD2C152C56870019D1DC /* IAPReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7AFD2B152C56860019D1DC /* IAPReceipt.m */; };
+		CC7AFD2D152C57B50019D1DC /* IAPReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7AFD2B152C56860019D1DC /* IAPReceipt.m */; };
+		CC96EBBD152ADEFB00F85399 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC96EBBB152ADEFB00F85399 /* SubscriptionsViewController.m */; };
+		CC96EBBE152ADEFB00F85399 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC96EBBB152ADEFB00F85399 /* SubscriptionsViewController.m */; };
+		CC96EBBF152ADEFB00F85399 /* SubscriptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC96EBBC152ADEFB00F85399 /* SubscriptionsViewController.xib */; };
+		CC96EBC8152AE86100F85399 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC96EBC7152AE86100F85399 /* StoreKit.framework */; };
+		CC96EBD1152AECA200F85399 /* IAPProducts.m in Sources */ = {isa = PBXBuildFile; fileRef = CC96EBD0152AECA200F85399 /* IAPProducts.m */; };
 		D20915C013CB9C7800D3B55B /* Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D20915BF13CB9C7800D3B55B /* Properties.m */; };
 		D20915C413CB9FDC00D3B55B /* PropertiesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D20915C313CB9FDC00D3B55B /* PropertiesTest.m */; };
 		D20915C513CBA1C600D3B55B /* Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = D20915BF13CB9C7800D3B55B /* Properties.m */; };
@@ -121,14 +129,13 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* BakerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BakerAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* BakerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BakerAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Baker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* sitelessmagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sitelessmagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Baker_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baker_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Baker-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Baker-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		8D5A1C2714BCB722005BE276 /* newstand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newstand.png; sourceTree = "<group>"; };
-		9E12CF081495A97E00FFB1DF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9E12CF0F1495AEB100FFB1DF /* IssueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IssueViewController.xib; path = shelf/ui/IssueViewController.xib; sourceTree = "<group>"; };
 		9E12CF101495AEB100FFB1DF /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryViewController.xib; path = shelf/ui/LibraryViewController.xib; sourceTree = "<group>"; };
 		9E12CF111495AEB100FFB1DF /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = shelf/ui/MainWindow.xib; sourceTree = "<group>"; };
@@ -185,6 +192,17 @@
 		CC2BB9CD1529C84100B5361C /* Publisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Publisher.h; sourceTree = "<group>"; };
 		CC2BB9CE1529C84100B5361C /* Publisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Publisher.m; sourceTree = "<group>"; };
 		CC2BB9D11529DF1A00B5361C /* NewsstandKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewsstandKit.framework; path = System/Library/Frameworks/NewsstandKit.framework; sourceTree = SDKROOT; };
+		CC7AFD21152C45A80019D1DC /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		CC7AFD22152C45A80019D1DC /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		CC7AFD2A152C56860019D1DC /* IAPReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPReceipt.h; sourceTree = "<group>"; };
+		CC7AFD2B152C56860019D1DC /* IAPReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPReceipt.m; sourceTree = "<group>"; };
+		CC96EBBA152ADEFB00F85399 /* SubscriptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsViewController.h; sourceTree = "<group>"; };
+		CC96EBBB152ADEFB00F85399 /* SubscriptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsViewController.m; sourceTree = "<group>"; };
+		CC96EBBC152ADEFB00F85399 /* SubscriptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionsViewController.xib; sourceTree = "<group>"; };
+		CC96EBC6152AE4AD00F85399 /* ModalViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalViewControllerDelegate.h; sourceTree = "<group>"; };
+		CC96EBC7152AE86100F85399 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CC96EBCF152AECA200F85399 /* IAPProducts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPProducts.h; sourceTree = "<group>"; };
+		CC96EBD0152AECA200F85399 /* IAPProducts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPProducts.m; sourceTree = "<group>"; };
 		D20915BE13CB9C7800D3B55B /* Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Properties.h; sourceTree = "<group>"; };
 		D20915BF13CB9C7800D3B55B /* Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Properties.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D20915C213CB9FDC00D3B55B /* PropertiesTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertiesTest.h; sourceTree = "<group>"; };
@@ -241,8 +259,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC96EBC8152AE86100F85399 /* StoreKit.framework in Frameworks */,
 				CC2BB9D21529DF1A00B5361C /* NewsstandKit.framework in Frameworks */,
-				9E12CF091495A97E00FFB1DF /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -290,7 +308,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Baker.app */,
+				1D6058910D05DD3D006BFB54 /* sitelessmagazine.app */,
 				D281D06313549EDC009F1B11 /* UnitTests.octest */,
 			);
 			name = Products;
@@ -338,8 +356,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC96EBC7152AE86100F85399 /* StoreKit.framework */,
 				CC2BB9D11529DF1A00B5361C /* NewsstandKit.framework */,
-				9E12CF081495A97E00FFB1DF /* CoreData.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -352,14 +370,23 @@
 		9E12CF021495A86300FFB1DF /* shelf */ = {
 			isa = PBXGroup;
 			children = (
-				CC2BB9CD1529C84100B5361C /* Publisher.h */,
-				CC2BB9CE1529C84100B5361C /* Publisher.m */,
-				1A650F9D14FB13D10017DBAA /* Toolbar.h */,
-				1A650F9E14FB13D10017DBAA /* Toolbar.m */,
+				CC7AFD21152C45A80019D1DC /* NSData+Base64.h */,
+				CC7AFD22152C45A80019D1DC /* NSData+Base64.m */,
+				CC7AFD2A152C56860019D1DC /* IAPReceipt.h */,
+				CC7AFD2B152C56860019D1DC /* IAPReceipt.m */,
+				CC96EBCF152AECA200F85399 /* IAPProducts.h */,
+				CC96EBD0152AECA200F85399 /* IAPProducts.m */,
 				9E12CF5A1495AF2F00FFB1DF /* IssueViewController.h */,
 				9E12CF5B1495AF2F00FFB1DF /* IssueViewController.m */,
 				9E12CF5C1495AF2F00FFB1DF /* LibraryViewController.h */,
 				9E12CF5D1495AF2F00FFB1DF /* LibraryViewController.m */,
+				CC96EBC6152AE4AD00F85399 /* ModalViewControllerDelegate.h */,
+				CC2BB9CD1529C84100B5361C /* Publisher.h */,
+				CC2BB9CE1529C84100B5361C /* Publisher.m */,
+				CC96EBBA152ADEFB00F85399 /* SubscriptionsViewController.h */,
+				CC96EBBB152ADEFB00F85399 /* SubscriptionsViewController.m */,
+				1A650F9D14FB13D10017DBAA /* Toolbar.h */,
+				1A650F9E14FB13D10017DBAA /* Toolbar.m */,
 				9E12CF0E1495AE7900FFB1DF /* supporting files */,
 				9E12CF0B1495A9D100FFB1DF /* ui */,
 				9E12CF0A1495A9C800FFB1DF /* lib */,
@@ -381,6 +408,7 @@
 				9E12CF0F1495AEB100FFB1DF /* IssueViewController.xib */,
 				9E12CF101495AEB100FFB1DF /* LibraryViewController.xib */,
 				9E12CF111495AEB100FFB1DF /* MainWindow.xib */,
+				CC96EBBC152ADEFB00F85399 /* SubscriptionsViewController.xib */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -567,7 +595,7 @@
 			);
 			name = Baker;
 			productName = Baker;
-			productReference = 1D6058910D05DD3D006BFB54 /* Baker.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* sitelessmagazine.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D281D06213549EDC009F1B11 /* UnitTests */ = {
@@ -643,6 +671,7 @@
 				1A07A25314F490D800586B30 /* bg.png in Resources */,
 				1AA03F1114F7718500DCC462 /* toolbar.png in Resources */,
 				1A7FC2D514F9D0920089916E /* top_bg.png in Resources */,
+				CC96EBBF152ADEFB00F85399 /* SubscriptionsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +705,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC7AFD2D152C57B50019D1DC /* IAPReceipt.m in Sources */,
+				CC7AFD29152C52040019D1DC /* NSData+Base64.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* BakerAppDelegate.m in Sources */,
 				9F123763129F133700B7E8C8 /* Downloader.m in Sources */,
@@ -717,6 +748,8 @@
 				9E57EFEB14EAAB48000BD3B4 /* BakerViewController.m in Sources */,
 				1A650F9F14FB13D10017DBAA /* Toolbar.m in Sources */,
 				CC2BB9CF1529C84100B5361C /* Publisher.m in Sources */,
+				CC96EBBD152ADEFB00F85399 /* SubscriptionsViewController.m in Sources */,
+				CC96EBD1152AECA200F85399 /* IAPProducts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +770,9 @@
 				D20A5545144B300D0083A369 /* CJSONScanner.m in Sources */,
 				D20A5547144B300D0083A369 /* CJSONSerializer.m in Sources */,
 				CC2BB9D01529C84100B5361C /* Publisher.m in Sources */,
+				CC96EBBE152ADEFB00F85399 /* SubscriptionsViewController.m in Sources */,
+				CC7AFD23152C45A90019D1DC /* NSData+Base64.m in Sources */,
+				CC7AFD2C152C56870019D1DC /* IAPReceipt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,7 +796,7 @@
 				INFOPLIST_FILE = "Baker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Baker;
+				PRODUCT_NAME = sitelessmagazine;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -782,7 +818,7 @@
 				INFOPLIST_FILE = "Baker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Baker;
+				PRODUCT_NAME = sitelessmagazine;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -821,7 +857,7 @@
 				INFOPLIST_FILE = "Baker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Baker;
+				PRODUCT_NAME = sitelessmagazine;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;

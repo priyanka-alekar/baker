@@ -65,6 +65,7 @@
     NKLibrary *nkLib = [NKLibrary sharedLibrary];
     for(NKAssetDownload *asset in [nkLib downloadingAssets]) {
         [asset downloadWithDelegate:LVrootViewController];
+        [LVrootViewController incrementDownloadingAssets];
     }
     
     // Can Release this as it's being retained in the _navigationController

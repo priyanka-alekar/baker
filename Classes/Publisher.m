@@ -10,8 +10,7 @@
 #import <NewsstandKit/NewsstandKit.h>
 #import "JSON.h"
 
-NSString *PublisherDidUpdateNotification = @"PublisherDidUpdate";
-NSString *PublisherFailedUpdateNotification = @"PublisherFailedUpdate";
+
 
 @interface Publisher ()
 
@@ -43,14 +42,25 @@ NSString *PublisherFailedUpdateNotification = @"PublisherFailedUpdate";
                        // The Info.plist is considered the mainBundle.
                        NSBundle* mainBundle = [NSBundle mainBundle]; 
                        NSString* library_url = [NSString stringWithFormat:@"%@issueslist.json", [mainBundle objectForInfoDictionaryKey:@"IssueListURL"]];
-                       NSData* tmpData = [NSData dataWithContentsOfURL:[NSURL URLWithString:library_url]];  
-
+                       NSData* tmpData = [NSData dataWithContentsOfURL:[NSURL URLWithString:library_url]]; 
+                       
+                       NSString* cacheDir = CacheDirectory;
+                       NSString* cachePath = [cacheDir stringByAppendingPathComponent:@"issueslist.json"];
+                       
+                       if (!tmpData){
+                           // attempt to get the data from the cache
+                           tmpData = [NSData dataWithContentsOfFile:cachePath];
+                       }
+                       
                        if(!tmpData) {
-                           dispatch_async(dispatch_get_main_queue(), ^{
-                               [[NSNotificationCenter defaultCenter] postNotificationName:PublisherFailedUpdateNotification object:self];
+                          dispatch_async(dispatch_get_main_queue(), ^{
+                                   [[NSNotificationCenter defaultCenter] postNotificationName:kPublisherFailedUpdateNotification object:self];
                            });
                           
                        } else {
+                           //write in the cachedir
+                           
+                           [tmpData writeToFile:cachePath atomically:YES];
                            
                            NSString *jsonString = [[NSString alloc] initWithData:tmpData encoding:NSASCIIStringEncoding];
                            NSDictionary *results = [jsonString JSONValue];
@@ -66,7 +76,7 @@ NSString *PublisherFailedUpdateNotification = @"PublisherFailedUpdate";
                            [self addIssuesInNewsstand];
                            NSLog(@"%@",issues);
                            dispatch_async(dispatch_get_main_queue(), ^{
-                               [[NSNotificationCenter defaultCenter] postNotificationName:PublisherDidUpdateNotification object:self];
+                               [[NSNotificationCenter defaultCenter] postNotificationName:kPublisherDidUpdateNotification object:self];
                            });
                        }
                    });
@@ -84,8 +94,8 @@ NSString *PublisherFailedUpdateNotification = @"PublisherFailedUpdate";
             NSDate* d = [df dateFromString:[(NSDictionary *)obj objectForKey:@"date"]];
             nkIssue = [nkLib addIssueWithName:name date:d];
         }
-        NSLog(@"Issue: %@",nkIssue);
     }];
+    ready = YES;
 }
 
 -(NSInteger)numberOfIssues {
@@ -157,7 +167,6 @@ NSString *PublisherFailedUpdateNotification = @"PublisherFailedUpdate";
 
 -(NSString *)downloadPathForIssue:(NKIssue *)nkIssue {
     return [nkIssue.contentURL path];
-    //return [[nkIssue.contentURL path] stringByAppendingPathComponent:@"magazine.pdf"];
 }
 
 -(NKIssue*)removeIssueAtIndex:(NSInteger)index

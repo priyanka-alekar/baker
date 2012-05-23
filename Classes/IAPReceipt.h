@@ -1,8 +1,7 @@
 //
-//  LibraryViewController.h
+//  IAPReceipt.h
 //
-//  Created by Bart Termorshuizen on 6/17/11.
-//  Modified/Adapted for BakerShelf by Andrew Krowczyk @nin9creative on 2/18/2012
+//  Created by Bart Termorshuizen on 3/4/12.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are 
 //  permitted provided that the following conditions are met:
@@ -24,50 +23,12 @@
 //  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
 //  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-// 
-#import <UIKit/UIKit.h>
-#import "Publisher.h"
-#import "SSZipArchive.h"
-#import "ModalViewControllerDelegate.h"
 
-#define kLibraryViewControllerDidFinishDownloading @"LibraryViewControllerDidFinishDownloading"
-#define kLibraryViewControllerDidFailDownloading @"LibraryViewControllerDidFailDownloading"
+#import <Foundation/Foundation.h>
+#define kSharedSecret @"d709be0b3d82446eb77133b6bd1d2eb0"
 
-@class IssueViewController;
-
-
-
-@interface LibraryViewController : UIViewController <NSURLConnectionDownloadDelegate, UIPopoverControllerDelegate, ModalViewControllerDelegate> {
-
-    NSMutableArray *issueViewControllers;
-    IBOutlet UIScrollView *scrollView;
-    @private NSInteger numberOfIssuesShown; 
-    @private NSInteger numberOfPagesShown; 
-    
-    NSMutableData * receivedData;
-    
-    IBOutlet UIToolbar *shelfToolBar;
-    IBOutlet UILabel *shelfTitle;
-	IBOutlet UIImageView *shelfImage;
-    Publisher *publisher;
-    NSInteger downloadingAssets;
-    UIView* downloadView;
-    UIProgressView* progressView;
-    UIPopoverController *popover;
-}
-
-
-@property (nonatomic) NSInteger numberOfIssuesShown;
-@property (nonatomic) NSInteger numberOfPagesShown;
-
-
-
--(IBAction) sync:(id) sender;
--(IBAction) subscribe:(id) sender;
-
-
-- (void) incrementDownloadingAssets;
-- (void) decrementDownloadingAssets;
-- (BOOL) isDownloadingAssets;
-
+@interface IAPReceipt : NSObject
+@property (retain, nonatomic) NSMutableData* receiptResponse;
+-(void)checkReceipt:(NSData*)receipt ofProductID:(NSString*)pid withCompletionBlock:(void(^)(NSDictionary *, BOOL))completion;
+@property (nonatomic,copy) void(^completionBlock)(NSDictionary*,BOOL);
 @end

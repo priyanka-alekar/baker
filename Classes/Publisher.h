@@ -10,13 +10,14 @@
 #import <NewsstandKit/NewsstandKit.h>
 
 #define CacheDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#define kPublisherDidUpdateNotification @"PublisherDidUpdate"
+#define kPublisherFailedUpdateNotification @"PublisherFailedUpdate"
 
 extern  NSString *PublisherDidUpdateNotification;
 extern  NSString *PublisherFailedUpdateNotification;
 
 @interface Publisher : NSObject {
     NSArray *issues;
-    
 }
 
 @property (nonatomic,readonly,getter = isReady) BOOL ready;

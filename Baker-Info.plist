@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>org.siteless.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -66,6 +66,59 @@
 	<true/>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow</string>
+	<key>Subscriptions</key>
+	<array>
+		<dict>
+			<key>Duration</key>
+			<integer>6</integer>
+			<key>LocalizedDuration</key>
+			<string>6 Months</string>
+			<key>Type</key>
+			<string>Auto-Renewable</string>
+			<key>ProductIdentifier</key>
+			<string>org.siteless.magazine.subscription.6months</string>
+		</dict>
+		<dict>
+			<key>Duration</key>
+			<integer>3</integer>
+			<key>LocalizedDuration</key>
+			<string>3 Months</string>
+			<key>Type</key>
+			<string>Auto-Renewable</string>
+			<key>ProductIdentifier</key>
+			<string>org.siteless.magazine.subscription.3months</string>
+		</dict>
+		<dict>
+			<key>Duration</key>
+			<integer>2</integer>
+			<key>LocalizedDuration</key>
+			<string>2 Months</string>
+			<key>Type</key>
+			<string>Auto-Renewable</string>
+			<key>ProductIdentifier</key>
+			<string>org.siteless.magazine.subscription.2months</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>Free Subscription</string>
+			<key>ProductIdentifier</key>
+			<string>org.siteless.magazine.subscription.free</string>
+		</dict>
+		<dict>
+			<key>Duration</key>
+			<integer>1</integer>
+			<key>LocalizedDuration</key>
+			<string>1 Month</string>
+			<key>Type</key>
+			<string>Auto-Renewable</string>
+			<key>ProductIdentifier</key>
+			<string>org.siteless.magazine.subscription.1month</string>
+		</dict>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>newsstand-content</string>
+	</array>
 	<key>UINewsstandApp</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
@@ -74,10 +127,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>newsstand-content</string>
 	</array>
 </dict>
 </plist>

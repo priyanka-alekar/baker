@@ -30,9 +30,7 @@
 #import "BakerAppDelegate.h"
 #import "BakerViewController.h"
 #import "SSZipArchive.h"
-
-NSString *LibraryViewDidFinishDownloading = @"LibraryViewDidFinishDowloading";
-NSString *LibraryViewDidFailDownloading = @"LibraryViewDidFailDowloading";
+#import "LibraryViewController.h"
 
 @implementation IssueViewController
 
@@ -93,8 +91,8 @@ NSString *LibraryViewDidFailDownloading = @"LibraryViewDidFailDowloading";
     } 
     else if(nkIssue.status==NKIssueContentStatusDownloading) {
         [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LibraryViewDidFinishDownloading:) name:LibraryViewDidFinishDownloading object:nkIssue];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LibraryViewDidFailDownloading:) name:LibraryViewDidFailDownloading object:nkIssue];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kLibraryViewDidFinishDownloading:) name:kLibraryViewControllerDidFinishDownloading object:nkIssue];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LibraryViewDidFailDownloading:) name:kLibraryViewControllerDidFailDownloading object:nkIssue];
     } 
     else {
         [buttonView setTitle:@"Download" forState:UIControlStateNormal];
@@ -105,15 +103,15 @@ NSString *LibraryViewDidFailDownloading = @"LibraryViewDidFailDowloading";
 
 - (void)LibraryViewDidFinishDownloading:(NSNotification*)not
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFinishDownloading object:nkIssue];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFailDownloading object:nkIssue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLibraryViewControllerDidFinishDownloading object:nkIssue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLibraryViewControllerDidFailDownloading object:nkIssue];
     [buttonView setTitle:@"Archive" forState:UIControlStateNormal];
 }
 
 - (void)LibraryViewDidFailDownloading:(NSNotification*)not
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFinishDownloading object:nkIssue];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:LibraryViewDidFailDownloading object:nkIssue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLibraryViewControllerDidFinishDownloading object:nkIssue];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kLibraryViewControllerDidFailDownloading object:nkIssue];
     [buttonView setTitle:@"Download" forState:UIControlStateNormal];
 }
 
@@ -143,9 +141,6 @@ NSString *LibraryViewDidFailDownloading = @"LibraryViewDidFailDowloading";
         NSURLRequest *req = [NSURLRequest requestWithURL:downloadURL];
         NKAssetDownload *assetDownload = [nkIssue addAssetWithRequest:req];
         [assetDownload downloadWithDelegate:self];
-        [assetDownload setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithInt:index],@"Index",
-                                    nil]];
     }
     else if (nkIssue.status==NKIssueContentStatusAvailable){
         // archive
