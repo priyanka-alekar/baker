@@ -129,12 +129,15 @@
 }
 
 -(IBAction) btnClicked:(id) sender {
-    
+    /*
     if  (nkIssue.status==NKIssueContentStatusDownloading){
         // still downloading
         [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
     }
-    else if (nkIssue.status==NKIssueContentStatusNone){
+    else */
+    if (nkIssue.status==NKIssueContentStatusNone){
+        // wait message
+        [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
         // start download
         NSURL *downloadURL = [publisher contentURLForIssueWithName:nkIssue.name];
         if(!downloadURL) return;
@@ -158,7 +161,12 @@
 -(IBAction) btnRead:(id) sender{
     if (nkIssue.status == NKIssueContentStatusAvailable) // issue is downloaded
     {       
-        NSLog(@"IssueViewController - Opening BakerViewController");  
+        NSLog(@"IssueViewController - Opening BakerViewController"); 
+        
+        // shows activity view indicator
+        [activityView startAnimating];
+        
+        
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
         UINavigationController* navigationController = [appDelegate navigationController];
 
@@ -178,6 +186,11 @@
         [navigationController setNavigationBarHidden:YES];
         
         [bvc release];
+        
+        
+        // hidden activity view indicator
+        [activityView stopAnimating];
+
         
         [UIView commitAnimations];            
     }

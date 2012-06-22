@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.32</string>
-		<string key="IBDocument.HIToolboxVersion">568.00</string>
+		<int key="IBDocument.SystemTarget">1296</int>
+		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1179</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -17,6 +17,7 @@
 			<string>IBUILabel</string>
 			<string>IBProxyObject</string>
 			<string>IBUIProgressView</string>
+			<string>IBUIActivityIndicatorView</string>
 			<string>IBUITextView</string>
 			<string>IBUIButton</string>
 		</object>
@@ -48,20 +49,6 @@
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIImageView" id="904191746">
-								<reference key="NSNextResponder" ref="564902640"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{37, 36}, {139, 191}}</string>
-								<reference key="NSSuperview" ref="564902640"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="396632227"/>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">cover-frame.png</string>
-								</object>
-							</object>
 							<object class="IBUIImageView" id="396632227">
 								<reference key="NSNextResponder" ref="564902640"/>
 								<int key="NSvFlags">274</int>
@@ -244,6 +231,8 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
 								<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 								<reference key="IBUIHighlightedTitleColor" ref="1020764812"/>
@@ -279,11 +268,22 @@
 									<bytes key="NSRGB">MC42MDAwMDAwMjM4IDAuNjAwMDAwMDIzOCAwLjYwMDAwMDAyMzggMC42MDAwMDAwMjM4AA</bytes>
 								</object>
 							</object>
+							<object class="IBUIActivityIndicatorView" id="851838275">
+								<reference key="NSNextResponder" ref="564902640"/>
+								<int key="NSvFlags">-2147483356</int>
+								<string key="NSFrame">{{87, 109}, {37, 37}}</string>
+								<reference key="NSSuperview" ref="564902640"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIStyle">0</int>
+							</object>
 						</object>
 						<string key="NSFrameSize">{360, 255}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="904191746"/>
+						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="191892722"/>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -364,6 +364,14 @@
 					<int key="connectionID">22</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">activityView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="851838275"/>
+					</object>
+					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">btnClicked:</string>
 						<reference key="source" ref="691318575"/>
@@ -424,8 +432,8 @@
 							<reference ref="691318575"/>
 							<reference ref="866002786"/>
 							<reference ref="874925043"/>
-							<reference ref="904191746"/>
 							<reference ref="157821659"/>
+							<reference ref="851838275"/>
 						</object>
 						<reference key="parent" ref="766721923"/>
 						<string key="objectName">Issue</string>
@@ -467,8 +475,8 @@
 						<reference key="parent" ref="564902640"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">23</int>
-						<reference key="object" ref="904191746"/>
+						<int key="objectID">24</int>
+						<reference key="object" ref="851838275"/>
 						<reference key="parent" ref="564902640"/>
 					</object>
 				</object>
@@ -490,12 +498,12 @@
 					<string>2.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
-					<string>23.IBPluginDependency</string>
+					<string>24.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>IssueViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -528,7 +536,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">25</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -543,7 +551,7 @@
 							<string>btnClicked:</string>
 							<string>btnRead:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>id</string>
 							<string>id</string>
@@ -556,7 +564,7 @@
 							<string>btnClicked:</string>
 							<string>btnRead:</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">btnClicked:</string>
@@ -572,6 +580,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>activityView</string>
 							<string>buttonView</string>
 							<string>coverView</string>
 							<string>descriptionView</string>
@@ -579,8 +588,9 @@
 							<string>labelView</string>
 							<string>progressView</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIActivityIndicatorView</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
 							<string>UITextView</string>
@@ -593,6 +603,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>activityView</string>
 							<string>buttonView</string>
 							<string>coverView</string>
 							<string>descriptionView</string>
@@ -600,8 +611,12 @@
 							<string>labelView</string>
 							<string>progressView</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">activityView</string>
+								<string key="candidateClassName">UIActivityIndicatorView</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">buttonView</string>
 								<string key="candidateClassName">UIButton</string>
@@ -637,6 +652,10 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
+			<real value="1296" key="NS.object.0"/>
+		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
 			<integer value="3100" key="NS.object.0"/>
@@ -644,18 +663,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>BlackButton.png</string>
-				<string>cover-frame.png</string>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{109, 34}</string>
-				<string>{139, 191}</string>
-			</object>
+			<string key="NS.key.0">BlackButton.png</string>
+			<string key="NS.object.0">{109, 34}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1179</string>
 	</data>
 </archive>
