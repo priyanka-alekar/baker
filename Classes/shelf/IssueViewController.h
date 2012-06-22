@@ -36,6 +36,7 @@
     IBOutlet UIImageView* coverView;
     IBOutlet UIButton* buttonView;
     IBOutlet UIProgressView* progressView;
+    IBOutlet UIActivityIndicatorView* activityView;
     NKIssue *nkIssue;
 }
 

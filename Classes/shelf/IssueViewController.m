@@ -161,7 +161,12 @@
 -(IBAction) btnRead:(id) sender{
     if (nkIssue.status == NKIssueContentStatusAvailable) // issue is downloaded
     {       
-        NSLog(@"IssueViewController - Opening BakerViewController");  
+        NSLog(@"IssueViewController - Opening BakerViewController"); 
+        
+        // shows activity view indicator
+        [activityView startAnimating];
+        
+        
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
         UINavigationController* navigationController = [appDelegate navigationController];
 
@@ -181,6 +186,11 @@
         [navigationController setNavigationBarHidden:YES];
         
         [bvc release];
+        
+        
+        // hidden activity view indicator
+        [activityView stopAnimating];
+
         
         [UIView commitAnimations];            
     }
