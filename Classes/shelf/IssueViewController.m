@@ -129,12 +129,15 @@
 }
 
 -(IBAction) btnClicked:(id) sender {
-    
+    /*
     if  (nkIssue.status==NKIssueContentStatusDownloading){
         // still downloading
         [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
     }
-    else if (nkIssue.status==NKIssueContentStatusNone){
+    else */
+    if (nkIssue.status==NKIssueContentStatusNone){
+        // wait message
+        [buttonView setTitle:@"Wait..." forState:UIControlStateNormal];
         // start download
         NSURL *downloadURL = [publisher contentURLForIssueWithName:nkIssue.name];
         if(!downloadURL) return;
