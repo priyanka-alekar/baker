@@ -254,6 +254,14 @@
     numberOfIssuesShown = 0;
     numberOfPagesShown = 0; 
     
+    // Wipe out existing IssueViewControllers if they exist before adding the refreshed ones.
+    if(scrollView!=nil)
+    {
+        while ([scrollView.subviews count] > 0) {
+            NSLog(@"subviews Count=%d",[[scrollView subviews]count]);
+            [[[scrollView subviews] objectAtIndex:0] removeFromSuperview];
+        }
+    }
     
     // iterate over the issues and create the issueview controllers and issues
     issueViewControllers = [[NSMutableArray alloc] initWithCapacity:[publisher numberOfIssues]];
