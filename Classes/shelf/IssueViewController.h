@@ -45,6 +45,7 @@
 
 -(IBAction) btnClicked:(id) sender;
 -(IBAction) btnRead:(id) sender;
+-(void) openBakerThred;
 
 
 @end
