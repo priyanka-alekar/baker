@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1179</string>
+			<string key="NS.object.0">1181</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -69,7 +69,7 @@
 								<string key="NSFrame">{{185, 58}, {142, 24}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="874925043"/>
+								<reference key="NSNextKeyView" ref="846425148"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIAutoresizesSubviews">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -231,8 +231,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
-								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 								<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
 								<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 								<reference key="IBUIHighlightedTitleColor" ref="1020764812"/>
@@ -268,22 +266,27 @@
 									<bytes key="NSRGB">MC42MDAwMDAwMjM4IDAuNjAwMDAwMDIzOCAwLjYwMDAwMDAyMzggMC42MDAwMDAwMjM4AA</bytes>
 								</object>
 							</object>
-							<object class="IBUIActivityIndicatorView" id="851838275">
+							<object class="IBUIActivityIndicatorView" id="846425148">
 								<reference key="NSNextResponder" ref="564902640"/>
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{87, 109}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="564902640"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="874925043"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">0</int>
+								<object class="NSColor" key="IBUIColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xMTE0Mjk5MjA5IDAuMjA4NTQxNTY3OCAwLjk0MDIxNzM5MTMAA</bytes>
+								</object>
 							</object>
 						</object>
 						<string key="NSFrameSize">{360, 255}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="396632227"/>
 						<reference key="IBUIBackgroundColor" ref="191892722"/>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -367,7 +370,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">activityView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="851838275"/>
+						<reference key="destination" ref="846425148"/>
 					</object>
 					<int key="connectionID">25</int>
 				</object>
@@ -427,13 +430,13 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="396632227"/>
-							<reference ref="35784773"/>
 							<reference ref="732320622"/>
 							<reference ref="691318575"/>
 							<reference ref="866002786"/>
 							<reference ref="874925043"/>
 							<reference ref="157821659"/>
-							<reference ref="851838275"/>
+							<reference ref="846425148"/>
+							<reference ref="35784773"/>
 						</object>
 						<reference key="parent" ref="766721923"/>
 						<string key="objectName">Issue</string>
@@ -476,7 +479,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">24</int>
-						<reference key="object" ref="851838275"/>
+						<reference key="object" ref="846425148"/>
 						<reference key="parent" ref="564902640"/>
 					</object>
 				</object>
@@ -666,6 +669,6 @@
 			<string key="NS.key.0">BlackButton.png</string>
 			<string key="NS.object.0">{109, 34}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1179</string>
+		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>

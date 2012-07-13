@@ -158,20 +158,17 @@
     }
 }
 
--(IBAction) btnRead:(id) sender{
-    if (nkIssue.status == NKIssueContentStatusAvailable) // issue is downloaded
-    {       
-        NSLog(@"IssueViewController - Opening BakerViewController"); 
-        
-        // shows activity view indicator
-        [activityView startAnimating];
-        
-        
+
+-(void) openBakerThred {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        sleep(5);  // sleep for 5 seconds
+
+        NSLog(@"IssueViewController - Opening BakerViewController");  
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
         UINavigationController* navigationController = [appDelegate navigationController];
-
-        BakerViewController * bvc = [BakerViewController alloc];
         
+        BakerViewController * bvc = [BakerViewController alloc];
         [bvc initWithMaterial:nkIssue];
         
         [UIView beginAnimations:nil context:NULL];
@@ -180,7 +177,8 @@
         //Hook To MainView
         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:navigationController.view cache:YES];
         
-		[navigationController popViewControllerAnimated:YES];
+        
+        [navigationController popViewControllerAnimated:YES];
         [navigationController pushViewController:(UIViewController*)bvc animated:NO];    
         [navigationController setToolbarHidden:YES animated:NO];
         [navigationController setNavigationBarHidden:YES];
@@ -189,15 +187,33 @@
         
         
         // hidden activity view indicator
-        [activityView stopAnimating];
-
+        [activityView stopAnimating];    
         
-        [UIView commitAnimations];            
+        [UIView commitAnimations]; 
+        
+    });
+    
+}
+
+
+-(IBAction) btnRead:(id) sender{
+    
+    if (nkIssue.status == NKIssueContentStatusAvailable) // issue is downloaded
+    {     
+        NSLog(@"READ");   
+        
+        // shows activity view indicator
+        [activityView startAnimating];
+        
+        // Open Baker in other thred
+        [self performSelectorInBackground:@selector(openBakerThred) withObject:nil];
+        
     }
     else // issue is not downloaded 
     {
         NSLog(@"Cannot read");        
     }
+    
 }
 
 
