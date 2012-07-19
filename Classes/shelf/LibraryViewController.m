@@ -91,139 +91,6 @@
     return YES;
 }
 
--(void) layout:(IssueViewController *)ivc setOrientation:(UIInterfaceOrientation) interfaceOrientation 
-{
-    
-    if (interfaceOrientation != UIInterfaceOrientationLandscapeLeft &&
-        interfaceOrientation != UIInterfaceOrientationLandscapeRight)
-    {
-        // determine position to place the ivc based on 4 views per page 
-        numberOfIssuesShown ++; // note that this may be confusing - just avoiding '+1' everywhere in this method
-        
-        // position indicates position on a page
-        NSInteger position = (numberOfIssuesShown)%4;
-        if (position == 0) position = 4;
-        
-        NSInteger pageWidth = scrollView.frame.size.width;
-        NSInteger pageHeight = scrollView.frame.size.height;
-        NSLog(@"pageWidth=%d, pageHeight=%d", pageWidth, pageHeight);
-        
-        // Scrollview background repeat
-        //[scrollView setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"bg.png"]]];
-        
-        if (position == 1) // new page situation
-        {
-            // extend the scrollview's contentsize height with 1 page
-            [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
-            numberOfPagesShown++;
-        }
-        
-        // 4 ivc's on a page as follows - numbers below indicate the value of the position variable
-        // 1    2
-        // 3    4
-        
-        NSInteger row = 0;
-        NSInteger col = 0;
-        if (position > 2) row = 1;
-        if (position == 2 || position == 4) col = 1;
-        
-        UIView * ivcView = [ivc view];
-        
-        CGRect frame = CGRectMake(col*pageWidth/2 + 20,
-                                  row*pageHeight/2 + (numberOfPagesShown-1)*pageHeight + 20,
-                                  ivcView.frame.size.width, 
-                                  ivcView.frame.size.height
-                                  );
-        [ivcView setFrame:frame];   
-        
-    } else {
-        
-        // Show horizontally
-        NSLog(@"HORIZONTAL!!!!!!!!");
-        
-        // determine position to place the ivc based on 6 views per page 
-        numberOfIssuesShown ++; // note that this may be confusing - just avoiding '+1' everywhere in this method
-        
-        
-        NSLog(@"numberOfIssuesShown=%d", numberOfIssuesShown);
-        
-        // position indicates position on a page
-        NSInteger position = (numberOfIssuesShown)%6;
-        if (position == 0) position = 6;
-        
-        
-        NSLog(@"position=%d", position);
-        
-        
-        NSInteger pageWidth = scrollView.frame.size.width;
-        NSInteger pageHeight = scrollView.frame.size.height;
-        
-        
-        if (position == 1) // new page situation
-        {
-            // extend the scrollview's contentsize height with 1 page
-            [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
-            numberOfPagesShown++;
-        }
-        
-        // 6 ivc's on a page as follows - numbers below indicate the value of the position variable
-        // 1    2   3
-        // 4    5   6
-        
-        NSInteger row = 0;
-        NSInteger col = 0;
-        //const NSInteger w = 320;
-        const NSInteger h = 304;
-        
-        
-        if (position > 3) row = 1;
-        if (position == 2 || position == 5) col = 1;
-        if (position == 3 || position == 6) col = 2;
-        
-        
-        UIView * ivcView = [ivc view];
-        
-        
-        NSLog(@"col0=%d, row0=%d", col, row);
-        NSLog(@"pageWidth=%d, pageHeight=%d", pageWidth, pageHeight);
-        
-        
-        // set col position
-        switch (col) {
-            case  1:
-                //col = pageWidth/2 - 140;
-                col = pageWidth/2 - 165;
-                break;
-            case  2:
-                //col = pageWidth - 300;
-                col = pageWidth - 330;
-                break;
-        }
-        
-        // set row position
-        switch (row) {
-            case  1:
-                row = pageHeight/2 - h/2 + 10;
-                break;
-        }
-        
-        
-        CGRect frame = CGRectMake(col,
-                                  row + ((numberOfPagesShown-1) * pageHeight),
-                                  ivcView.frame.size.width, 
-                                  ivcView.frame.size.height
-                                  );
-        
-        NSLog(@"col=%d, row=%d", col, row + (numberOfPagesShown-1)*pageHeight + 20);
-        
-        [ivcView setFrame:frame];        
-    }
-    
-    
-    return;
-}
-
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -274,15 +141,15 @@
         [ivc setIndex: i];
         
         [issueViewControllers addObject:ivc];
-        
-        // layout the ivc and adapt the scroll view if necessary
-        [self layout:ivc setOrientation:interfaceOrientation];
-        
         [scrollView addSubview:[ivc view]];
         
         [ivc release];
         i++;
     }
+    
+    // Update shelf orientation
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [self willAnimateRotationToInterfaceOrientation:orientation duration:0]; // <-----------
 }
 
 
@@ -290,7 +157,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-     [super viewDidLoad];
+    [super viewDidLoad];
     
     if([publisher isReady]) {
         [self updateShelf:1];
@@ -298,15 +165,13 @@
     else {
         [self loadIssues];
     }
-   
+    
     //Library background
     [[self view] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]]];
     
     if ([self isDownloadingAssets]){
         [self updateDownloadingAssetsOverlay:[self interfaceOrientation]];        
-    }
-    
-    
+    }    
 }
 
 - (void) updateDownloadingAssetsOverlay:(UIInterfaceOrientation)interfaceOrientation
@@ -322,11 +187,11 @@
         [downloadView removeFromSuperview];
         [downloadView release];
     }
-     
+    
     downloadView = [[UIView alloc] init];
     progressView =  [[UIProgressView alloc] init];
     UILabel* l = [[[UILabel alloc] init] retain];
-
+    
     [downloadView setFrame:scrollView.frame];
     [downloadView setBackgroundColor : [UIColor blackColor]];
     [downloadView setAlpha : 0.8f];
@@ -341,7 +206,7 @@
     CGFloat pfw = 200;
     CGFloat pfh = 60;
     CGRect progressFrame;
-
+    
     if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
         interfaceOrientation == UIInterfaceOrientationPortrait)
     {
@@ -420,29 +285,127 @@
 	return YES;
 }
 
-
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                          duration:(NSTimeInterval)duration
-{
+{    
     [shelfToolBar sizeToFit];
-    //shelfToolBar.frame = CGRectMake(0, 0, shelfToolBar.frame.size.width, shelfToolBar.frame.size.height);
+    numberOfPagesShown = 0; 
     
     // Update the size/position of some objects
     if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
         toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
     {
+        NSLog(@"LANDSCAPE");
+
         scrollView.frame = CGRectMake(0, 239, 1024, 785);
 		shelfImage.frame = CGRectMake(0, 44, 1024, 195);
         shelfTitle.frame = CGRectMake(228, 0, shelfTitle.frame.size.width, shelfTitle.frame.size.height);
+        
+        NSInteger number = 0;
+        for (UIView *subview in [scrollView subviews])
+        {
+            number++;
+            
+            // position indicates position on a page
+            NSInteger position = (number) % 6;
+            if (position == 0) position = 6;
+            
+            NSInteger pageWidth = scrollView.frame.size.width;
+            NSInteger pageHeight = scrollView.frame.size.height;
+            
+            if (position == 1) // new page situation
+            {
+                // extend the scrollview's contentsize height with 1 page
+                [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
+                numberOfPagesShown++;
+            }
+            
+            // 6 ivc's on a page as follows - numbers below indicate the value of the position variable
+            // 1    2   3
+            // 4    5   6
+            
+            NSInteger row = 0;
+            NSInteger col = 0;
+            const NSInteger h = 304;
+            
+            if (position > 3) row = 1;
+            if (position == 2 || position == 5) col = 1;
+            if (position == 3 || position == 6) col = 2;
+            
+            // set col position
+            switch (col) {
+                case  1:
+                    col = pageWidth/2 - 165;
+                    break;
+                case  2:
+                    col = pageWidth - 330;
+                    break;
+            }
+            
+            // set row position
+            switch (row) {
+                case  1:
+                    row = pageHeight/2 - h/2 + 10;
+                    break;
+            }
+            
+            CGRect frame = CGRectMake(col,
+                                      row + ((numberOfPagesShown-1) * pageHeight),
+                                      subview.frame.size.width, 
+                                      subview.frame.size.height
+                                      );
+            //[subview setBackgroundColor:[UIColor redColor]];
+            [subview setFrame:frame];
+        }        
     }
     else
     {
+        NSLog(@"PORTRAIT");
+
         scrollView.frame = CGRectMake(0, 239, 768, 785);
 		shelfImage.frame = CGRectMake(0, 44, 768, 195);
         shelfTitle.frame = CGRectMake(100, 0, shelfTitle.frame.size.width, shelfTitle.frame.size.height);
+        
+        NSInteger number = 0;
+        for (UIView *subview in [scrollView subviews]) 
+        {
+            number++;
+            
+            // position indicates position on a page
+            NSInteger position = (number)%4;
+            if (position == 0) position = 4;
+            
+            NSInteger pageWidth = scrollView.frame.size.width;
+            NSInteger pageHeight = scrollView.frame.size.height;
+            NSLog(@"pageWidth=%d, pageHeight=%d", pageWidth, pageHeight);
+            
+            if (position == 1) // new page situation
+            {
+                // extend the scrollview's contentsize height with 1 page
+                [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, pageHeight*(numberOfPagesShown+1))];
+                numberOfPagesShown++;
+            }
+            
+            // 4 ivc's on a page as follows - numbers below indicate the value of the position variable
+            // 1    2
+            // 3    4
+            
+            NSInteger row = 0;
+            NSInteger col = 0;
+            if (position > 2) row = 1;
+            if (position == 2 || position == 4) col = 1;
+
+            CGRect frame = CGRectMake(col*pageWidth/2 + 20,
+                                      row*pageHeight/2 + (numberOfPagesShown-1)*pageHeight + 20,
+                                      subview.frame.size.width, 
+                                      subview.frame.size.height
+                                      );
+            //[subview setBackgroundColor:[UIColor greenColor]];
+            [subview setFrame:frame];
+        }        
     }
     
-    
+    /*
     // Clear existing views from the content
     for (UIView *view in scrollView.subviews)
     {
@@ -457,6 +420,8 @@
     if ([self isDownloadingAssets]){
         [self updateDownloadingAssetsOverlay:toInterfaceOrientation];
     }
+     */
+     
 }
 
 - (void) incrementDownloadingAssets{
@@ -494,14 +459,14 @@
     
     [SSZipArchive unzipFileAtPath:[destinationURL path] toDestination:contentPath];
     if (publisher){
-
+        
         // update the Newsstand icon
         UIImage *img = [publisher coverImageForIssue:dnlIssue];
         if(img) {
             [[UIApplication sharedApplication] setNewsstandIconImage:img]; 
             [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
         }
-
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kLibraryViewControllerDidFinishDownloading object:dnlIssue];
         [self decrementDownloadingAssets];
         if (![self isDownloadingAssets])
