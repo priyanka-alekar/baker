@@ -162,7 +162,7 @@
 -(void) openBakerThred {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        sleep(5);  // sleep for 5 seconds
+        //sleep(5);  // sleep for 5 seconds
 
         NSLog(@"IssueViewController - Opening BakerViewController");  
         BakerAppDelegate *appDelegate = (BakerAppDelegate *)[[UIApplication sharedApplication] delegate];
