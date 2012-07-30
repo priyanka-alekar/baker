@@ -69,5 +69,6 @@
 - (void) incrementDownloadingAssets;
 - (void) decrementDownloadingAssets;
 - (BOOL) isDownloadingAssets;
+- (void) viewWillAppear:(BOOL)animated;
 
 @end
