@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>org.siteless.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.nin9creative.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -69,50 +69,40 @@
 	<key>Subscriptions</key>
 	<array>
 		<dict>
-			<key>Duration</key>
-			<integer>6</integer>
-			<key>LocalizedDuration</key>
-			<string>6 Months</string>
-			<key>Type</key>
-			<string>Auto-Renewable</string>
 			<key>ProductIdentifier</key>
-			<string>org.siteless.magazine.subscription.6months</string>
-		</dict>
-		<dict>
-			<key>Duration</key>
-			<integer>3</integer>
-			<key>LocalizedDuration</key>
-			<string>3 Months</string>
+			<string>com.nin9creative.bakershelf.sub.free</string>
 			<key>Type</key>
-			<string>Auto-Renewable</string>
-			<key>ProductIdentifier</key>
-			<string>org.siteless.magazine.subscription.3months</string>
-		</dict>
-		<dict>
-			<key>Duration</key>
-			<integer>2</integer>
-			<key>LocalizedDuration</key>
-			<string>2 Months</string>
-			<key>Type</key>
-			<string>Auto-Renewable</string>
-			<key>ProductIdentifier</key>
-			<string>org.siteless.magazine.subscription.2months</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>Free Subscription</string>
-			<key>ProductIdentifier</key>
-			<string>org.siteless.magazine.subscription.free</string>
+			<string>Free</string>
 		</dict>
 		<dict>
 			<key>Duration</key>
 			<integer>1</integer>
 			<key>LocalizedDuration</key>
 			<string>1 Month</string>
+			<key>ProductIdentifier</key>
+			<string>com.nin9creative.bakershelf.sub.1month</string>
 			<key>Type</key>
 			<string>Auto-Renewable</string>
+		</dict>
+		<dict>
+			<key>Duration</key>
+			<integer>3</integer>
+			<key>LocalizedDuration</key>
+			<string>3 Months</string>
 			<key>ProductIdentifier</key>
-			<string>org.siteless.magazine.subscription.1month</string>
+			<string>com.nin9creative.bakershelf.sub.3month</string>
+			<key>Type</key>
+			<string>Auto-Renewable</string>
+		</dict>
+		<dict>
+			<key>Duration</key>
+			<string>6</string>
+			<key>LocalizedDuration</key>
+			<string>6 Months</string>
+			<key>ProductIdentifier</key>
+			<string>com.nin9creative.bakershelf.sub.6month</string>
+			<key>Type</key>
+			<string>Auto-Renewable</string>
 		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
