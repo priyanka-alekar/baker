@@ -30,7 +30,7 @@
 //  
 
 #import "Properties.h"
-#import "NSDictionary_JSONExtensions.h"
+#import "JSONKit.h"
 
 
 @implementation Properties
@@ -47,7 +47,7 @@
     if (self) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
         [self loadManifest:filePath];
-        self.defaults = [self initDefaults];
+        self.defaults = [self doInitDefaults];
     }
     return self;
 }
@@ -119,22 +119,25 @@
     }
 }
 
-- (NSDictionary *)initDefaults {
+- (NSDictionary *)doInitDefaults {
     NSString *json = @"{"
-        "\"orientation\": \"both\","
-        "\"zoomable\": false,"
-        "\"-baker-background\": \"#000000\","
-        "\"-baker-vertical-bounce\": true,"
-        "\"-baker-media-autoplay\": true,"
-        "\"-baker-page-numbers-color\": \"#FFFFFF\","
-        "\"-baker-page-numbers-alpha\": 0.3,"
-        "\"-baker-index-height\": null,"
-        "\"-baker-index-bounce\": false,"
-        "\"-baker-vertical-pagination\": false,"
-        "\"-baker-rendering\": \"screenshots\""
+    "\"orientation\": \"both\","
+    "\"zoomable\": false,"
+    "\"-baker-background\": \"#000000\","
+    "\"-baker-vertical-bounce\": true,"
+    "\"-baker-media-autoplay\": true,"
+    "\"-baker-page-numbers-color\": \"#FFFFFF\","
+    "\"-baker-page-numbers-alpha\": 0.3,"
+    "\"-baker-index-width\": null,"
+    "\"-baker-index-height\": null,"
+    "\"-baker-index-bounce\": false,"
+    "\"-baker-vertical-pagination\": false,"
+    "\"-baker-rendering\": \"screenshots\","
+    "\"-baker-page-turn-swipe\": true,"
+    "\"-baker-page-turn-tap\": true"
     "}";
-    NSError *e = nil;
-    return [[NSDictionary dictionaryWithJSONString:json error:&e] retain];
+    NSError *e;
+    return [[json objectFromJSONStringWithParseOptions:JKParseOptionNone error:&e] retain];
 }
 
 - (NSDictionary*)dictionaryFromManifestFile:(NSString*)filePath {
@@ -155,7 +158,7 @@
         NSString *fileJSON = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         
         NSError *e = nil;
-        ret = [NSDictionary dictionaryWithJSONString:fileJSON error:&e];
+        ret = [fileJSON objectFromJSONStringWithParseOptions:JKParseOptionNone error:&e];
         if ([e userInfo] != nil) {
             NSLog(@"Error loading JSON: %@", [e userInfo]);
         }

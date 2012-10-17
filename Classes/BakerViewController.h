@@ -32,7 +32,6 @@
 
 #import <UIKit/UIKit.h>
 #import <NewsstandKit/NewsstandKit.h>
-
 #import "IndexViewController.h"
 #import "Properties.h"
 
@@ -162,7 +161,7 @@
 - (void)scrollPage:(UIWebView *)webView to:(NSString *)offset animating:(BOOL)animating;
 - (void)handleAnchor:(BOOL)animating;
 
-#pragma mark - Close
+#pragma mark - CLOSE
 -(void)Close;
 
 #pragma mark - TOOLBAR
