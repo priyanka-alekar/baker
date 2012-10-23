@@ -57,6 +57,8 @@
 		9E7726F6162658E1006DDE17 /* cover-frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7726F4162658E0006DDE17 /* cover-frame.png */; };
 		9E7726F7162658E1006DDE17 /* cover-frame@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7726F5162658E0006DDE17 /* cover-frame@2X.png */; };
 		9E7726FB16265AE7006DDE17 /* SubscriptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E7726FA16265AE7006DDE17 /* SubscriptionsViewController.xib */; };
+		9E9B977F1636186B009938F1 /* JSONKit.h in Sources */ = {isa = PBXBuildFile; fileRef = 9E2357F2162E28D800990600 /* JSONKit.h */; };
+		9E9B97811636187F009938F1 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2357F3162E28D800990600 /* JSONKit.m */; };
 		9F123763129F133700B7E8C8 /* Downloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F123762129F133700B7E8C8 /* Downloader.m */; };
 		9F242EDA11FB344D00641757 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242ED911FB344D00641757 /* QuartzCore.framework */; };
 		9F6E6B6012AAA1BE0019EFB6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6E6B5F12AAA1BE0019EFB6 /* libz.dylib */; };
@@ -773,6 +775,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E9B97811636187F009938F1 /* JSONKit.m in Sources */,
+				9E9B977F1636186B009938F1 /* JSONKit.h in Sources */,
 				CC7AFD2D152C57B50019D1DC /* IAPReceipt.m in Sources */,
 				CC7AFD29152C52040019D1DC /* NSData+Base64.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
