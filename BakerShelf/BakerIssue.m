@@ -81,7 +81,19 @@
         self.url = [NSURL URLWithString:[issueData objectForKey:@"url"]];
 
         NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        self.coverPath = [cachePath stringByAppendingPathComponent:self.ID];
+        
+        AppDelegate* BakerAppDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        NSString *coverPathAbsolute = self.ID;
+        
+        if (BakerAppDelegate.isRetina){
+            coverPathAbsolute = [coverPathAbsolute stringByAppendingString:@"@2x.png"];
+        }
+        else{
+            coverPathAbsolute = [coverPathAbsolute stringByAppendingString:@".png"];
+        }
+        
+        self.coverPath = [cachePath stringByAppendingPathComponent:coverPathAbsolute];
+        
 
         NKLibrary *nkLib = [NKLibrary sharedLibrary];
         NKIssue *nkIssue = [nkLib issueWithName:self.ID];
