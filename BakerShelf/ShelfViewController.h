@@ -50,7 +50,7 @@
 @property (strong, nonatomic) UIImageView *background;
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIBarButtonItem *subscribeButton;
-@property (strong, nonatomic) UIBarButtonItem *aboutButton;
+@property (strong, nonatomic) UIBarButtonItem *settingsButton;
 
 #pragma mark - Init
 - (id)initWithBooks:(NSArray *)currentBooks;
@@ -78,7 +78,7 @@
 #pragma mark - Buttons management
 -(void)setRefreshButtonEnabled:(BOOL)enabled;
 -(void)setSubscribeButtonEnabled:(BOOL)enabled;
--(void)setAboutButtonEnabled:(BOOL)enabled;
+-(void)setSettingsButtonEnabled:(BOOL)enabled;
 
 #pragma mark - Helper methods
 + (int)getBannerHeight;

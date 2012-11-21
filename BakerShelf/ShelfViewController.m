@@ -53,7 +53,7 @@
 @synthesize issuesManager;
 @synthesize subscribeButton;
 @synthesize refreshButton;
-@synthesize aboutButton;
+@synthesize settingsButton;
 
 #pragma mark - Init
 
@@ -89,7 +89,7 @@
     [issues release];
     [subscribeButton release];
     [refreshButton release];
-    [aboutButton release];
+    [settingsButton release];
 
     [super dealloc];
 }
@@ -129,13 +129,13 @@
                              action:@selector(handleFreeSubscription:)]
                             autorelease];
     
-    UIImage *aboutButtonImage = [UIImage imageNamed:@"about-icon.png"];
+    UIImage *settingsButtonImage = [UIImage imageNamed:@"settings-icon.png"];
     
-    self.aboutButton = [[[UIBarButtonItem alloc]
-                         initWithImage:aboutButtonImage
+    self.settingsButton = [[[UIBarButtonItem alloc]
+                         initWithImage:settingsButtonImage
                          style:UIBarButtonItemStyleBordered
                          target:self
-                         action:@selector(handleAbout:)]
+                         action:@selector(handleSettings:)]
                          autorelease];
 
 
@@ -145,7 +145,7 @@
                                               nil];
     
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
-                                              self.aboutButton,
+                                              self.settingsButton,
                                               nil];
     
     #endif
@@ -271,10 +271,21 @@
     }];
 }
 
-- (void)handleAbout:(NSNotification *)notification {
-    [self setAboutButtonEnabled:NO];
+- (IBAction)handleSettings:(id)sender {
+    [self setSettingsButtonEnabled:NO];
     
-    [self setAboutButtonEnabled:YES];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Baker Shelf"
+                          message:@"Copyright 2012 Baker Project"
+                          delegate:nil
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"OK", nil];
+    
+    [alert show];
+    
+    [alert release];
+    
+    [self setSettingsButtonEnabled:YES];
 
 }
 
@@ -428,8 +439,8 @@
     self.refreshButton.enabled = enabled;
 }
 
--(void)setAboutButtonEnabled:(BOOL)enabled {
-    self.aboutButton.enabled = enabled;
+-(void)setSettingsButtonEnabled:(BOOL)enabled {
+    self.settingsButton.enabled = enabled;
 }
 
 -(void)setSubscribeButtonEnabled:(BOOL)enabled {

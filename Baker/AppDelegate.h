@@ -34,10 +34,14 @@
 #import "InterceptorWindow.h"
 #import "ShelfViewController.h"
 
+BOOL isRetina;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) InterceptorWindow *window;
 @property (strong, nonatomic) UIViewController *rootViewController;
 @property (strong, nonatomic) UINavigationController *rootNavigationController;
+
+@property (nonatomic) BOOL isRetina;
 
 @end

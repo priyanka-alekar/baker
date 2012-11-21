@@ -89,7 +89,7 @@
         issueCover.adjustsImageWhenDisabled = NO;
         
         [issueCover setBackgroundImage:image forState:UIControlStateNormal];
-        
+                
         issueCover.layer.shadowOpacity = 0.5;
         issueCover.layer.shadowOffset = CGSizeMake(0, 2);
         issueCover.layer.shouldRasterize = YES;

@@ -48,6 +48,7 @@
 @synthesize window;
 @synthesize rootViewController;
 @synthesize rootNavigationController;
+@synthesize isRetina;
 
 + (void)initialize {
     // Set user agent (the only problem is that we can't modify the User-Agent later in the program)
@@ -93,6 +94,16 @@
     }
 
     #endif
+
+    // Set isRetina Flag for future use
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+        ([UIScreen mainScreen].scale == 2.0)) {
+        // Retina display
+        self.isRetina = TRUE;
+    } else {
+        // Non-Retina display
+        self.isRetina = FALSE;
+    }
 
     self.rootNavigationController = [[UICustomNavigationController alloc] initWithRootViewController:self.rootViewController];
     UICustomNavigationBar *navigationBar = (UICustomNavigationBar *)self.rootNavigationController.navigationBar;
