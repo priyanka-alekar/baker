@@ -39,6 +39,11 @@
     // Remove this, remove the NewsstandKit.framework and the Newsstand entries in Baker-Info.plist to disable it.
     // See: https://github.com/Simbul/baker/wiki/Newsstand-vs-Bundled-publications-support-in-Baker-4.0
     #define BAKER_NEWSSTAND
+    #define SHELF_NAVIGATION_TITLE @"Baker Shelf"
+    #define ISSUES_TITLE_LABEL_COLOR @"#FFFFFF"
+    #define ISSUES_INFO_LABEL_COLOR @"#FFFFFF"
+    #define ISSUES_BUTTON_COLOR @"#0069ae"
+    #define ISSUES_LOADING_LABEL_COLOR @"#FFFFFF"
 
     #ifdef BAKER_NEWSSTAND
 
@@ -49,7 +54,7 @@
         // Mandatory - This constant defines where the JSON file containing all the publications is located.
         // For more information on this file, see: https://github.com/Simbul/baker/wiki/Newsstand-shelf-JSON
         // E.g. @"http://example.com/books.json"
-        #define NEWSSTAND_MANIFEST_URL @""
+        #define NEWSSTAND_MANIFEST_URL @"http://api.newsstandadmin.com/publication/issues/pubid/abe6d7fa-12e8-427e-b690-5b8e977dd8d1"
 
         // ----------------------------------------------------------------------------------------------------
         // Mandatory - This constant identifies the subscription you set up in iTunesConnect.

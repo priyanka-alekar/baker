@@ -33,6 +33,7 @@
 
 #import "IssueViewController.h"
 #import "SSZipArchive.h"
+#import "Constants.h"
 
 #import "UIColor+Extensions.h"
 
@@ -100,7 +101,8 @@
     int heightOffset = ui.cellPadding;
 
     // SETUP USED FONTS
-    UIFont *textFont = [UIFont fontWithName:@"Helvetica" size:15];
+    UIFont *textFont = [UIFont fontWithName:@"Helvetica" size:14];
+    UIFont *titleFont = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     uint textLineheight = [@"The brown fox jumps over the lazy dog" sizeWithFont:textFont constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)].height;
 
     UIFont *actionFont = [UIFont fontWithName:@"Helvetica-Bold" size:11];
@@ -111,13 +113,13 @@
     uint titleLines = MIN(4, titleSize.height / textLineheight);
 
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ui.contentOffset, heightOffset, 170, textLineheight * titleLines)];
-    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.textColor = [UIColor colorWithHexString:ISSUES_TITLE_LABEL_COLOR];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     titleLabel.textAlignment = UITextAlignmentLeft;
     titleLabel.numberOfLines = titleLines;
     titleLabel.text = self.issue.title;
-    titleLabel.font = textFont;
+    titleLabel.font = titleFont;
 
     [self.view addSubview:titleLabel];
     [titleLabel release];
@@ -130,7 +132,7 @@
     uint infoLines = MIN(4, infoSize.height / textLineheight);
 
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(ui.contentOffset, heightOffset, 170, textLineheight * infoLines)];
-    infoLabel.textColor = [UIColor colorWithHexString:@"#929292"];
+    infoLabel.textColor = [UIColor colorWithHexString:ISSUES_INFO_LABEL_COLOR];
     infoLabel.backgroundColor = [UIColor clearColor];
     infoLabel.lineBreakMode = UILineBreakModeTailTruncation;
     infoLabel.textAlignment = UITextAlignmentLeft;
@@ -147,7 +149,7 @@
     // SETUP ACTION BUTTON
     self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     actionButton.frame = CGRectMake(ui.contentOffset, heightOffset, 80, 30);
-    actionButton.backgroundColor = [UIColor colorWithHexString:@"#b72529"];
+    actionButton.backgroundColor = [UIColor colorWithHexString:ISSUES_BUTTON_COLOR];
     actionButton.titleLabel.font = actionFont;
 
     [actionButton setTitle:ACTION_DOWNLOADED_TEXT forState:UIControlStateNormal];
@@ -164,7 +166,7 @@
     archiveButton.titleLabel.font = actionFont;
 
     [archiveButton setTitle:ARCHIVE_TEXT forState:UIControlStateNormal];
-    [archiveButton setTitleColor:[UIColor colorWithHexString:@"#b72529"] forState:UIControlStateNormal];
+    [archiveButton setTitleColor:[UIColor colorWithHexString:ISSUES_BUTTON_COLOR] forState:UIControlStateNormal];
     [archiveButton addTarget:self action:@selector(archiveButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 
     #ifdef BAKER_NEWSSTAND
@@ -173,13 +175,13 @@
 
 
     // SETUP DOWN/LOADING SPINNER AND LABEL
-    self.spinner = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    self.spinner = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
     spinner.frame = CGRectMake(ui.contentOffset, heightOffset, 30, 30);
     spinner.backgroundColor = [UIColor clearColor];
     spinner.hidesWhenStopped = YES;
 
     self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(ui.contentOffset + self.spinner.frame.size.width + 10, heightOffset, 135, 30)];
-    loadingLabel.textColor = [UIColor colorWithHexString:@"#b72529"];
+    loadingLabel.textColor = [UIColor colorWithHexString:ISSUES_LOADING_LABEL_COLOR];
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.textAlignment = UITextAlignmentLeft;
     loadingLabel.text = DOWNLOADING_TEXT;

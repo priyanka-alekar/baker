@@ -32,6 +32,7 @@
 #import "ShelfViewController.h"
 #import "ShelfManager.h"
 #import "UICustomNavigationBar.h"
+#import "Constants.h"
 
 #import "BakerViewController.h"
 #import "IssueViewController.h"
@@ -52,6 +53,7 @@
 @synthesize issuesManager;
 @synthesize subscribeButton;
 @synthesize refreshButton;
+@synthesize aboutButton;
 
 #pragma mark - Init
 
@@ -87,6 +89,7 @@
     [issues release];
     [subscribeButton release];
     [refreshButton release];
+    [aboutButton release];
 
     [super dealloc];
 }
@@ -97,7 +100,7 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = @"Baker Shelf";
+    self.navigationItem.title = SHELF_NAVIGATION_TITLE;
 
     self.background = [[UIImageView alloc] init];
 
@@ -125,11 +128,26 @@
                              target:self
                              action:@selector(handleFreeSubscription:)]
                             autorelease];
+    
+    UIImage *aboutButtonImage = [UIImage imageNamed:@"about-icon.png"];
+    
+    self.aboutButton = [[[UIBarButtonItem alloc]
+                         initWithImage:aboutButtonImage
+                         style:UIBarButtonItemStyleBordered
+                         target:self
+                         action:@selector(handleAbout:)]
+                         autorelease];
+
 
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:
                                               self.refreshButton,
                                               self.subscribeButton,
                                               nil];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
+                                              self.aboutButton,
+                                              nil];
+    
     #endif
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -233,7 +251,7 @@
 
 #ifdef BAKER_NEWSSTAND
 - (void)handleRefresh:(NSNotification *)notification {
-    [self setrefreshButtonEnabled:NO];
+    [self setRefreshButtonEnabled:NO];
 
     if (!self.issuesManager) {
         self.issuesManager = [[[IssuesManager alloc] initWithURL:NEWSSTAND_MANIFEST_URL] autorelease];
@@ -249,8 +267,15 @@
             [self.issueViewControllers insertObject:ivc atIndex:idx];
             [self.gridView insertItemsAtIndices:[NSIndexSet indexSetWithIndex:idx] withAnimation:AQGridViewItemAnimationNone];
         }
-        [self setrefreshButtonEnabled:YES];
+        [self setRefreshButtonEnabled:YES];
     }];
+}
+
+- (void)handleAbout:(NSNotification *)notification {
+    [self setAboutButtonEnabled:NO];
+    
+    [self setAboutButtonEnabled:YES];
+
 }
 
 #pragma mark - Store Kit
@@ -399,8 +424,12 @@
 
 #pragma mark - Buttons management
 
--(void)setrefreshButtonEnabled:(BOOL)enabled {
+-(void)setRefreshButtonEnabled:(BOOL)enabled {
     self.refreshButton.enabled = enabled;
+}
+
+-(void)setAboutButtonEnabled:(BOOL)enabled {
+    self.aboutButton.enabled = enabled;
 }
 
 -(void)setSubscribeButtonEnabled:(BOOL)enabled {
