@@ -82,18 +82,7 @@
 
         NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
-        AppDelegate* BakerAppDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        NSString *coverPathAbsolute = self.ID;
-        
-        if (BakerAppDelegate.isRetina){
-            coverPathAbsolute = [coverPathAbsolute stringByAppendingString:@"@2x.png"];
-        }
-        else{
-            coverPathAbsolute = [coverPathAbsolute stringByAppendingString:@".png"];
-        }
-        
-        self.coverPath = [cachePath stringByAppendingPathComponent:coverPathAbsolute];
-        
+        self.coverPath = [cachePath stringByAppendingPathComponent:self.ID];
 
         NKLibrary *nkLib = [NKLibrary sharedLibrary];
         NKIssue *nkIssue = [nkLib issueWithName:self.ID];
