@@ -43,7 +43,6 @@
 @synthesize bakerBook;
 @synthesize coverPath;
 @synthesize coverURL;
-@synthesize coverURLRetina;
 
 -(id)initWithBakerBook:(BakerBook *)book {
     self = [super init];
@@ -77,7 +76,6 @@
         self.info = [issueData objectForKey:@"info"];
         self.date = [issueData objectForKey:@"date"];
         self.coverURL = [NSURL URLWithString:[issueData objectForKey:@"cover"]];
-        self.coverURLRetina = [NSURL URLWithString:[issueData objectForKey:@"cover-retina"]];
         self.url = [NSURL URLWithString:[issueData objectForKey:@"url"]];
 
         NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -116,48 +114,27 @@
 #endif
 
 -(void)getCover:(void(^)(UIImage *img))completionBlock {
-    
-    AppDelegate* BakerAppDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
     UIImage *image = [UIImage imageWithContentsOfFile:self.coverPath];
     if (image) {
         completionBlock(image);
     } else {
         NSLog(@"Cover not found for %@ at path '%@'", self.ID, self.coverPath);
-        //Determine if need to get normal Cover or Retina Cover
-        
-        if(BakerAppDelegate.isRetina){
-            if (self.coverURLRetina) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                    NSLog(@"Downloading cover from %@ to %@", self.coverURLRetina, self.coverPath);
-                    NSData *imageData = [NSData dataWithContentsOfURL:self.coverURLRetina];
-                    UIImage *image = [UIImage imageWithData:imageData];
-                    if (image) {
-                        [imageData writeToFile:self.coverPath atomically:YES];
-                        dispatch_async(dispatch_get_main_queue(), ^(void) {
-                            completionBlock(image);
-                        });
-                    }
-                });
-            }
-        }
-        else{
-            if (self.coverURL) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                    NSLog(@"Downloading cover from %@ to %@", self.coverURL, self.coverPath);
-                    NSData *imageData = [NSData dataWithContentsOfURL:self.coverURL];
-                    UIImage *image = [UIImage imageWithData:imageData];
-                    if (image) {
-                        [imageData writeToFile:self.coverPath atomically:YES];
-                        dispatch_async(dispatch_get_main_queue(), ^(void) {
-                            completionBlock(image);
-                        });
-                    }
-                });
-            }
+        if (self.coverURL) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                NSLog(@"Downloading cover from %@ to %@", self.coverURL, self.coverPath);
+                NSData *imageData = [NSData dataWithContentsOfURL:self.coverURL];
+                UIImage *image = [UIImage imageWithData:imageData];
+                if (image) {
+                    [imageData writeToFile:self.coverPath atomically:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        completionBlock(image);
+                    });
+                }
+            });
         }
     }
 }
+
 -(NSString *)getStatus {
 #ifdef BAKER_NEWSSTAND
     NKLibrary *nkLib = [NKLibrary sharedLibrary];
@@ -178,7 +155,6 @@
     [bakerBook release];
     [coverPath release];
     [coverURL release];
-    [coverURLRetina release];
 
     [super dealloc];
 }

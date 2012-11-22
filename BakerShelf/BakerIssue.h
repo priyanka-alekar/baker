@@ -49,7 +49,6 @@
 
 @property (copy, nonatomic) NSString *coverPath;
 @property (copy, nonatomic) NSURL *coverURL;
-@property (copy, nonatomic) NSURL *coverURLRetina;
 
 @property (retain, nonatomic) BakerBook *bakerBook;
 
