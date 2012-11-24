@@ -75,14 +75,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     CGSize cellSize = [IssueViewController getIssueCellSize];
-
+    
     self.view.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
     self.view.backgroundColor = [UIColor clearColor];
-
+    
     UI ui = [IssueViewController getIssueContentMeasures];
-
+    
     // SETUP COVER IMAGE
     [self.issue getCover:^(UIImage *image) {
         UIButton *issueCover = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -98,109 +98,110 @@
         issueCover.layer.shadowOffset = CGSizeMake(0, 2);
         issueCover.layer.shouldRasterize = YES;
         issueCover.layer.rasterizationScale = [UIScreen mainScreen].scale;
-
+        
         [issueCover addTarget:self action:@selector(actionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:issueCover];
     }];
-
+    
     int heightOffset = ui.cellPadding;
-
+    
     // SETUP USED FONTS
     UIFont *textFont = [UIFont fontWithName:@"Helvetica" size:15];
     uint textLineheight = [@"The brown fox jumps over the lazy dog" sizeWithFont:textFont constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)].height;
-
+    
     UIFont *actionFont = [UIFont fontWithName:@"Helvetica-Bold" size:11];
-
-
+    
+    
     // SETUP TITLE LABEL
     CGSize titleSize = [self.issue.title sizeWithFont:textFont constrainedToSize:CGSizeMake(170, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     uint titleLines = MIN(4, titleSize.height / textLineheight);
-
+    
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ui.contentOffset, heightOffset, 170, textLineheight * titleLines)];
-    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.textColor = [UIColor colorWithHexString:ISSUES_TITLE_LABEL_COLOR];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     titleLabel.textAlignment = UITextAlignmentLeft;
     titleLabel.numberOfLines = titleLines;
     titleLabel.text = self.issue.title;
     titleLabel.font = textFont;
-
+    
     [self.view addSubview:titleLabel];
     [titleLabel release];
-
+    
     heightOffset = heightOffset + titleLabel.frame.size.height + 5;
-
-
+    
+    
     // SETUP INFO LABEL
     CGSize infoSize = [self.issue.info sizeWithFont:textFont constrainedToSize:CGSizeMake(170, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     uint infoLines = MIN(4, infoSize.height / textLineheight);
-
+    
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(ui.contentOffset, heightOffset, 170, textLineheight * infoLines)];
-    infoLabel.textColor = [UIColor colorWithHexString:@"#929292"];
+    infoLabel.textColor = [UIColor colorWithHexString:ISSUES_INFO_LABEL_COLOR];
     infoLabel.backgroundColor = [UIColor clearColor];
     infoLabel.lineBreakMode = UILineBreakModeTailTruncation;
     infoLabel.textAlignment = UITextAlignmentLeft;
     infoLabel.numberOfLines = infoLines;
     infoLabel.text = self.issue.info;
     infoLabel.font = textFont;
-
+    
     [self.view addSubview:infoLabel];
     [infoLabel release];
-
+    
     heightOffset = heightOffset + infoLabel.frame.size.height + 10;
-
-
+    
+    
     // SETUP ACTION BUTTON
     self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     actionButton.frame = CGRectMake(ui.contentOffset, heightOffset, 80, 30);
-    actionButton.backgroundColor = [UIColor colorWithHexString:@"#b72529"];
+    actionButton.backgroundColor = [UIColor colorWithHexString:ISSUES_BUTTON_COLOR];
     actionButton.titleLabel.font = actionFont;
-
+    
     [actionButton setTitle:ACTION_DOWNLOADED_TEXT forState:UIControlStateNormal];
-    [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [actionButton setTitleColor:[UIColor colorWithHexString:ISSUES_BUTTON_TEXT_COLOR] forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(actionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [self.view addSubview:actionButton];
-
-
+    
+    
     // SETUP ARCHIVE BUTTON
     self.archiveButton = [UIButton buttonWithType:UIButtonTypeCustom];
     archiveButton.frame = CGRectMake(ui.contentOffset + self.actionButton.frame.size.width + 10, heightOffset, 80, 30);
     archiveButton.backgroundColor = [UIColor clearColor];
     archiveButton.titleLabel.font = actionFont;
-
+    
     [archiveButton setTitle:ARCHIVE_TEXT forState:UIControlStateNormal];
-    [archiveButton setTitleColor:[UIColor colorWithHexString:@"#b72529"] forState:UIControlStateNormal];
+    [archiveButton setTitleColor:[UIColor colorWithHexString:ISSUES_ARCHIVE_TEXT_COLOR] forState:UIControlStateNormal];
     [archiveButton addTarget:self action:@selector(archiveButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
-    #ifdef BAKER_NEWSSTAND
+    
+#ifdef BAKER_NEWSSTAND
     [self.view addSubview:archiveButton];
-    #endif
-
-
+#endif
+    
+    
     // SETUP DOWN/LOADING SPINNER AND LABEL
     self.spinner = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    spinner.color = [UIColor colorWithHexString:ISSUES_LOADING_SPINNER_COLOR];
     spinner.frame = CGRectMake(ui.contentOffset, heightOffset, 30, 30);
     spinner.backgroundColor = [UIColor clearColor];
     spinner.hidesWhenStopped = YES;
-
+    
     self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(ui.contentOffset + self.spinner.frame.size.width + 10, heightOffset, 135, 30)];
-    loadingLabel.textColor = [UIColor colorWithHexString:@"#b72529"];
+    loadingLabel.textColor = [UIColor colorWithHexString:ISSUES_LOADING_LABEL_COLOR];
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.textAlignment = UITextAlignmentLeft;
     loadingLabel.text = DOWNLOADING_TEXT;
     loadingLabel.font = actionFont;
-
+    
     [self.view addSubview:spinner];
     [self.view addSubview:loadingLabel];
-
+    
     heightOffset = heightOffset + self.loadingLabel.frame.size.height + 5;
-
-
+    
+    
     // SETUP PROGRESS BAR
     self.progressBar = [[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar] autorelease];
     self.progressBar.frame = CGRectMake(ui.contentOffset, heightOffset, 170, 30);
-
+    
     [self.view addSubview:progressBar];
 }
 - (void)viewWillAppear:(BOOL)animated

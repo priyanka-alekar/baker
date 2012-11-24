@@ -32,6 +32,9 @@
 #import "ShelfViewController.h"
 #import "ShelfManager.h"
 #import "UICustomNavigationBar.h"
+#import "Constants.h"
+#import "InfoViewControlleriPad.h"
+#import "InfoViewControlleriPhone.h"
 
 #import "BakerViewController.h"
 #import "IssueViewController.h"
@@ -52,6 +55,7 @@
 @synthesize issuesManager;
 @synthesize subscribeButton;
 @synthesize refreshButton;
+@synthesize infoButton;
 
 #pragma mark - Init
 
@@ -87,6 +91,7 @@
     [issues release];
     [subscribeButton release];
     [refreshButton release];
+    [infoButton release];
 
     [super dealloc];
 }
@@ -97,7 +102,7 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = @"Baker Shelf";
+    self.navigationItem.title = SHELF_NAVIGATION_TITLE;
 
     self.background = [[UIImageView alloc] init];
 
@@ -125,11 +130,24 @@
                              target:self
                              action:@selector(handleFreeSubscription:)]
                             autorelease];
+    
+    UIImage *infoButtonImage = [UIImage imageNamed:@"info-icon.png"];
+    
+    self.infoButton = [[[UIBarButtonItem alloc]
+                        initWithImage:infoButtonImage
+                        style: UIBarButtonItemStylePlain
+                        target:self
+                        action:@selector(handleInfo:)]
+                       autorelease];
 
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:
                                               self.refreshButton,
                                               self.subscribeButton,
                                               nil];
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
+                                               self.infoButton,
+                                               nil];
     #endif
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -253,6 +271,30 @@
     }];
 }
 
+- (IBAction)handleInfo:(id)sender {
+    [self setInfoButtonEnabled:NO];
+    
+    NSLog(@"Opening Modal Info View");
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        InfoViewControlleriPad *infoViewController = [[InfoViewControlleriPad alloc]
+                                                      initWithNibName:@"InfoViewControlleriPad"
+                                                      bundle:nil];
+        
+        [self presentModalViewController:infoViewController animated:YES];
+        [infoViewController release];
+        
+    } else {
+        InfoViewControlleriPhone *infoViewController = [[InfoViewControlleriPhone alloc]
+                                                        initWithNibName:@"InfoViewControlleriPhone"
+                                                        bundle:nil];
+        
+        [self presentModalViewController:infoViewController animated:YES];
+        [infoViewController release];
+    }
+    
+    [self setInfoButtonEnabled:YES];
+}
 #pragma mark - Store Kit
 
 - (void)handleFreeSubscription:(NSNotification *)notification {
@@ -401,6 +443,10 @@
 
 -(void)setrefreshButtonEnabled:(BOOL)enabled {
     self.refreshButton.enabled = enabled;
+}
+
+-(void)setInfoButtonEnabled:(BOOL)enabled {
+    self.infoButton.enabled = enabled;
 }
 
 -(void)setSubscribeButtonEnabled:(BOOL)enabled {
