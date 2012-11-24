@@ -93,6 +93,7 @@
 		9E04E26F166122B400095457 /* InfoViewControlleriPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewControlleriPhone.xib; sourceTree = "<group>"; };
 		9E04E2741661252700095457 /* info-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-icon.png"; sourceTree = "<group>"; };
 		9E04E2751661252700095457 /* info-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-icon@2x.png"; sourceTree = "<group>"; };
+		9EDC9AE216615FA5006AD4C6 /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstants.h; sourceTree = "<group>"; };
 		9F1FC71116500A47002C8277 /* navigation-bar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-bar-bg.png"; sourceTree = "<group>"; };
 		9F1FC71216500A47002C8277 /* navigation-bar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-bar-bg@2x.png"; sourceTree = "<group>"; };
 		9F1FC7151650102C002C8277 /* shelf-bg-landscape-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shelf-bg-landscape-568h.png"; sourceTree = "<group>"; };
@@ -393,6 +394,7 @@
 		AB40047B15B4B8B800D87E2A /* BakerShelf */ = {
 			isa = PBXGroup;
 			children = (
+				9EDC9AE216615FA5006AD4C6 /* UIConstants.h */,
 				9E04E268166122A100095457 /* info */,
 				9F58D85E15D6743C0027902C /* img */,
 				9FF7957E15B4C4F600899E51 /* lib */,

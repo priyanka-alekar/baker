@@ -8,7 +8,7 @@
 
 #import "InfoViewControlleriPhone.h"
 #import "ShelfViewController.h"
-#import "Constants.h"
+#import "UIConstants.h"
 #import "UIColor+Extensions.h"
 
 @interface InfoViewControlleriPhone ()

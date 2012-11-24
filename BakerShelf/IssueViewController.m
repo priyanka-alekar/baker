@@ -33,6 +33,7 @@
 
 #import "IssueViewController.h"
 #import "SSZipArchive.h"
+#import "UIConstants.h"
 
 #import "UIColor+Extensions.h"
 
@@ -106,9 +107,9 @@
     int heightOffset = ui.cellPadding;
     
     // SETUP USED FONTS
+    UIFont *titleFont = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     UIFont *textFont = [UIFont fontWithName:@"Helvetica" size:15];
     uint textLineheight = [@"The brown fox jumps over the lazy dog" sizeWithFont:textFont constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)].height;
-    
     UIFont *actionFont = [UIFont fontWithName:@"Helvetica-Bold" size:11];
     
     
@@ -123,7 +124,7 @@
     titleLabel.textAlignment = UITextAlignmentLeft;
     titleLabel.numberOfLines = titleLines;
     titleLabel.text = self.issue.title;
-    titleLabel.font = textFont;
+    titleLabel.font = titleFont;
     
     [self.view addSubview:titleLabel];
     [titleLabel release];

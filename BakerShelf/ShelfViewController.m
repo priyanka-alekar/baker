@@ -32,6 +32,7 @@
 #import "ShelfViewController.h"
 #import "ShelfManager.h"
 #import "UICustomNavigationBar.h"
+#import "UIConstants.h"
 #import "Constants.h"
 #import "InfoViewControlleriPad.h"
 #import "InfoViewControlleriPhone.h"
