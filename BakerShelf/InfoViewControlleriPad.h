@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TPMultiLayoutViewController.h"
 
-@interface InfoViewControlleriPad : UIViewController{
-    
-    UIButton *dismissViewButton;
+@interface InfoViewControlleriPad : TPMultiLayoutViewController{
+    UIButton *dismissViewButtonPortrait;
+    UIButton *dismissViewButtonLandscape;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *dismissViewButton;
+@property (nonatomic, retain) IBOutlet UIButton *dismissViewButtonPortrait;
+@property (nonatomic, retain) IBOutlet UIButton *dismissViewButtonLandscape;
 
 - (IBAction)dismissView:(id)sender;
-
 
 @end

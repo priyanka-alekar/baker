@@ -17,7 +17,8 @@
 
 @implementation InfoViewControlleriPhone
 
-@synthesize dismissViewButton;
+@synthesize dismissViewButtonPortrait;
+@synthesize dismissViewButtonLandscape;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,8 +38,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [dismissViewButton setBackgroundColor:[UIColor colorWithHexString:INFO_VIEW_BUTTON_COLOR]];
-    [dismissViewButton setTitleColor:[UIColor colorWithHexString:INFO_VIEW_BUTTON_TEXT_COLOR] forState:UIControlStateNormal];
+    [dismissViewButtonPortrait setBackgroundColor:[UIColor colorWithHexString:INFO_VIEW_BUTTON_COLOR]];
+    [dismissViewButtonPortrait setTitleColor:[UIColor colorWithHexString:INFO_VIEW_BUTTON_TEXT_COLOR] forState:UIControlStateNormal];
+    [dismissViewButtonLandscape setBackgroundColor:[UIColor colorWithHexString:INFO_VIEW_BUTTON_COLOR]];
+    [dismissViewButtonLandscape setTitleColor:[UIColor colorWithHexString:INFO_VIEW_BUTTON_TEXT_COLOR] forState:UIControlStateNormal];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +56,8 @@
 }
 
 - (void)dealloc {
-	[dismissViewButton release];
+	[dismissViewButtonPortrait release];
+    [dismissViewButtonLandscape release];
     [super dealloc];
 }
 
