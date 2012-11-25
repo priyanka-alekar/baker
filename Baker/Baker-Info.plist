@@ -8,6 +8,15 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>ios-icon-iphone</string>
+		<string>ios-icon-ipad</string>
+		<string>ios-icon-ipad.png</string>
+		<string>ios-icon-ipad@2x.png</string>
+		<string>ios-icon-iphone.png</string>
+		<string>ios-icon-iphone@2x.png</string>
+	</array>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
@@ -16,6 +25,10 @@
 			<array>
 				<string>ios-icon-iphone</string>
 				<string>ios-icon-ipad</string>
+				<string>ios-icon-ipad.png</string>
+				<string>ios-icon-ipad@2x.png</string>
+				<string>ios-icon-iphone.png</string>
+				<string>ios-icon-iphone@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
