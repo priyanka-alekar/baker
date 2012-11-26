@@ -17,6 +17,7 @@
 		9E7135B51662BC330052CC3F /* ios-icon-ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7135B11662BC330052CC3F /* ios-icon-ipad@2x.png */; };
 		9E7135B61662BC330052CC3F /* ios-icon-iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7135B21662BC330052CC3F /* ios-icon-iphone.png */; };
 		9E7135B71662BC330052CC3F /* ios-icon-iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7135B31662BC330052CC3F /* ios-icon-iphone@2x.png */; };
+		9E86C87B1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E86C87A1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib */; };
 		9EDAD0C81662AE1F00CDF3C8 /* TPMultiLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EDAD0C71662AE1F00CDF3C8 /* TPMultiLayoutViewController.m */; };
 		9F1FC71316500A47002C8277 /* navigation-bar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1FC71116500A47002C8277 /* navigation-bar-bg.png */; };
 		9F1FC71416500A47002C8277 /* navigation-bar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1FC71216500A47002C8277 /* navigation-bar-bg@2x.png */; };
@@ -98,6 +99,7 @@
 		9E7135B11662BC330052CC3F /* ios-icon-ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-ipad@2x.png"; sourceTree = "<group>"; };
 		9E7135B21662BC330052CC3F /* ios-icon-iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-iphone.png"; sourceTree = "<group>"; };
 		9E7135B31662BC330052CC3F /* ios-icon-iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-iphone@2x.png"; sourceTree = "<group>"; };
+		9E86C87A1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewControlleriPhone5.xib; sourceTree = "<group>"; };
 		9EDAD0C61662AE1F00CDF3C8 /* TPMultiLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMultiLayoutViewController.h; sourceTree = "<group>"; };
 		9EDAD0C71662AE1F00CDF3C8 /* TPMultiLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMultiLayoutViewController.m; sourceTree = "<group>"; };
 		9EDC9AE216615FA5006AD4C6 /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstants.h; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				9E04E26D166122B400095457 /* InfoViewControlleriPhone.h */,
 				9E04E26E166122B400095457 /* InfoViewControlleriPhone.m */,
 				9E04E26F166122B400095457 /* InfoViewControlleriPhone.xib */,
+				9E86C87A1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib */,
 			);
 			name = info;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				9E7135B51662BC330052CC3F /* ios-icon-ipad@2x.png in Resources */,
 				9E7135B61662BC330052CC3F /* ios-icon-iphone.png in Resources */,
 				9E7135B71662BC330052CC3F /* ios-icon-iphone@2x.png in Resources */,
+				9E86C87B1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

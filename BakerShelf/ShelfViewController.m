@@ -286,12 +286,36 @@
         [infoViewController release];
         
     } else {
-        InfoViewControlleriPhone *infoViewController = [[InfoViewControlleriPhone alloc]
-                                                        initWithNibName:@"InfoViewControlleriPhone"
-                                                        bundle:nil];
         
-        [self presentModalViewController:infoViewController animated:YES];
-        [infoViewController release];
+            if ([UIScreen mainScreen].scale == 2.0f) {
+                CGSize result = [[UIScreen mainScreen] bounds].size;
+                CGFloat scale = [UIScreen mainScreen].scale;
+                result = CGSizeMake(result.width * scale, result.height * scale);
+                
+                if(result.height == 960){
+                    InfoViewControlleriPhone *infoViewController = [[InfoViewControlleriPhone alloc]
+                                                                    initWithNibName:@"InfoViewControlleriPhone"
+                                                                    bundle:nil];
+                    
+                    [self presentModalViewController:infoViewController animated:YES];
+                    [infoViewController release];
+                }
+                if(result.height == 1136){
+                    InfoViewControlleriPhone *infoViewController = [[InfoViewControlleriPhone alloc]
+                                                                    initWithNibName:@"InfoViewControlleriPhone5"
+                                                                    bundle:nil];
+                    
+                    [self presentModalViewController:infoViewController animated:YES];
+                    [infoViewController release];
+                }
+            } else {
+                InfoViewControlleriPhone *infoViewController = [[InfoViewControlleriPhone alloc]
+                                                                initWithNibName:@"InfoViewControlleriPhone"
+                                                                bundle:nil];
+                
+                [self presentModalViewController:infoViewController animated:YES];
+                [infoViewController release];
+            }
     }
     
     [self setInfoButtonEnabled:YES];
