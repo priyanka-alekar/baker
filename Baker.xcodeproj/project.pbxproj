@@ -13,6 +13,7 @@
 		9E04E273166122B400095457 /* InfoViewControlleriPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E04E26F166122B400095457 /* InfoViewControlleriPhone.xib */; };
 		9E04E2761661252700095457 /* info-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E04E2741661252700095457 /* info-icon.png */; };
 		9E04E2771661252700095457 /* info-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E04E2751661252700095457 /* info-icon@2x.png */; };
+		9E6BCAD31665A75F005BDFD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E6BCAD11665A75F005BDFD5 /* Localizable.strings */; };
 		9E7135B41662BC330052CC3F /* ios-icon-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7135B01662BC330052CC3F /* ios-icon-ipad.png */; };
 		9E7135B51662BC330052CC3F /* ios-icon-ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7135B11662BC330052CC3F /* ios-icon-ipad@2x.png */; };
 		9E7135B61662BC330052CC3F /* ios-icon-iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7135B21662BC330052CC3F /* ios-icon-iphone.png */; };
@@ -76,7 +77,6 @@
 		ABAFB58C15AB9A2E002FA498 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABAFB58B15AB9A2E002FA498 /* UIKit.framework */; };
 		ABAFB58E15AB9A2E002FA498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABAFB58D15AB9A2E002FA498 /* Foundation.framework */; };
 		ABAFB59015AB9A2E002FA498 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABAFB58F15AB9A2E002FA498 /* CoreGraphics.framework */; };
-		ABAFB59615AB9A2E002FA498 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABAFB59415AB9A2E002FA498 /* InfoPlist.strings */; };
 		ABAFB59815AB9A2E002FA498 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAFB59715AB9A2E002FA498 /* main.m */; };
 		ABAFB59C15AB9A2E002FA498 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAFB59B15AB9A2E002FA498 /* AppDelegate.m */; };
 		ABC270D11616F3CB00AD97E9 /* IssuesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC270D01616F3CB00AD97E9 /* IssuesManager.m */; };
@@ -95,6 +95,7 @@
 		9E04E26F166122B400095457 /* InfoViewControlleriPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewControlleriPhone.xib; sourceTree = "<group>"; };
 		9E04E2741661252700095457 /* info-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-icon.png"; sourceTree = "<group>"; };
 		9E04E2751661252700095457 /* info-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-icon@2x.png"; sourceTree = "<group>"; };
+		9E6BCAD21665A75F005BDFD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9E7135B01662BC330052CC3F /* ios-icon-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-ipad.png"; sourceTree = "<group>"; };
 		9E7135B11662BC330052CC3F /* ios-icon-ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-ipad@2x.png"; sourceTree = "<group>"; };
 		9E7135B21662BC330052CC3F /* ios-icon-iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-icon-iphone.png"; sourceTree = "<group>"; };
@@ -199,7 +200,6 @@
 		ABAFB58D15AB9A2E002FA498 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ABAFB58F15AB9A2E002FA498 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ABAFB59315AB9A2E002FA498 /* Baker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Baker-Info.plist"; sourceTree = "<group>"; };
-		ABAFB59515AB9A2E002FA498 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABAFB59715AB9A2E002FA498 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABAFB59915AB9A2E002FA498 /* Baker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Baker-Prefix.pch"; sourceTree = "<group>"; };
 		ABAFB59A15AB9A2E002FA498 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -249,6 +249,14 @@
 				9E86C87A1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib */,
 			);
 			name = info;
+			sourceTree = "<group>";
+		};
+		9E6BCAD41665A764005BDFD5 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				9E6BCAD11665A75F005BDFD5 /* Localizable.strings */,
+			);
+			name = en.lproj;
 			sourceTree = "<group>";
 		};
 		9F58D85E15D6743C0027902C /* img */ = {
@@ -475,9 +483,9 @@
 		ABAFB59215AB9A2E002FA498 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E6BCAD41665A764005BDFD5 /* en.lproj */,
 				BF3CCC9D15D080560087B9CA /* icon */,
 				ABAFB59315AB9A2E002FA498 /* Baker-Info.plist */,
-				ABAFB59415AB9A2E002FA498 /* InfoPlist.strings */,
 				ABAFB59715AB9A2E002FA498 /* main.m */,
 				ABAFB59915AB9A2E002FA498 /* Baker-Prefix.pch */,
 			);
@@ -545,7 +553,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABAFB59615AB9A2E002FA498 /* InfoPlist.strings in Resources */,
 				AB40045715B4B83000D87E2A /* back.png in Resources */,
 				AB40045915B4B83000D87E2A /* back@2x.png in Resources */,
 				AB40045B15B4B83000D87E2A /* forward.png in Resources */,
@@ -573,6 +580,7 @@
 				9E7135B61662BC330052CC3F /* ios-icon-iphone.png in Resources */,
 				9E7135B71662BC330052CC3F /* ios-icon-iphone@2x.png in Resources */,
 				9E86C87B1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib in Resources */,
+				9E6BCAD31665A75F005BDFD5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,12 +637,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ABAFB59415AB9A2E002FA498 /* InfoPlist.strings */ = {
+		9E6BCAD11665A75F005BDFD5 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				ABAFB59515AB9A2E002FA498 /* en */,
+				9E6BCAD21665A75F005BDFD5 /* en */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

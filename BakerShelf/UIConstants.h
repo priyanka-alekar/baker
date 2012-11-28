@@ -33,9 +33,6 @@
 #ifndef Baker_UIConstants_h
 #define Baker_UIConstants_h
 
-    // Change the Shelf Navigation Title at the top of the main Issues List
-    #define SHELF_NAVIGATION_TITLE @"NIN9 Creative Baker Shelf"
-
     // Change the colors of individual elements on the Issue display.
     // You can change the Issue Title label color, Info Label Color, Button Colors, Loading Label Color and Spinner Color
     #define ISSUES_TITLE_LABEL_COLOR @"#FFFFFF"

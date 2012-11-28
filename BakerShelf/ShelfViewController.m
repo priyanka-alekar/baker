@@ -43,11 +43,6 @@
 #import "JSONKit.h"
 #import "NSData+Base64.h"
 
-#define SUBSCRIBE_BUTTON_TEXT @"Subscribe"
-#define SUBSCRIBE_BUTTON_DISABLED_TEXT @"Subscribing..."
-#define SUBSCRIPTION_SUCCESSFUL_TITLE @"Subscribed successfully"
-#define SUBSCRIPTION_SUCCESSFUL_MESSAGE @"You have successfully subscribed"
-
 @implementation ShelfViewController
 
 @synthesize issues;
@@ -103,7 +98,7 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = SHELF_NAVIGATION_TITLE;
+    self.navigationItem.title = NSLocalizedString(@"SHELF_NAVIGATION_TITLE", nil);
 
     self.background = [[UIImageView alloc] init];
 
@@ -126,7 +121,7 @@
                                       autorelease];
 
     self.subscribeButton = [[[UIBarButtonItem alloc]
-                             initWithTitle:SUBSCRIBE_BUTTON_TEXT
+                             initWithTitle: NSLocalizedString(@"SUBSCRIBE_BUTTON_TEXT", nil)
                              style:UIBarButtonItemStylePlain
                              target:self
                              action:@selector(handleFreeSubscription:)]
@@ -141,6 +136,11 @@
                         action:@selector(handleInfo:)]
                        autorelease];
 
+    if ([PRODUCT_ID_FREE_SUBSCRIPTION length] == 0) {
+        self.subscribeButton.enabled = NO;
+        NSLog(@"Subscription not enabled: constant PRODUCT_ID_FREE_SUBSCRIPTION not set");
+    }
+    
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:
                                               self.refreshButton,
                                               self.subscribeButton,
@@ -241,6 +241,10 @@
 	}
 
     IssueViewController *controller = [self.issueViewControllers objectAtIndex:index];
+    UIView *removableIssueView = [cell.contentView viewWithTag:42];
+    if (removableIssueView) {
+        [removableIssueView removeFromSuperview];
+    }
     [cell.contentView addSubview:controller.view];
 
     return cell;
@@ -277,16 +281,20 @@
     
     NSLog(@"Opening Modal Info View");
     
+    // We need to handle various different displays for the information modal views.  The iPad is much easier than the iPhone.
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         InfoViewControlleriPad *infoViewController = [[InfoViewControlleriPad alloc]
                                                       initWithNibName:@"InfoViewControlleriPad"
                                                       bundle:nil];
         
+        // Show View Controller as a Presentation Form Sheet for iPad
+        // For iPhone, you cannot show as a Form Sheet, only a full page view.
+        infoViewController.modalPresentationStyle = UIModalPresentationFormSheet;
         [self presentModalViewController:infoViewController animated:YES];
         [infoViewController release];
         
     } else {
-        
+            // Because we need to deal with multiple types of iPhone Displays: Retina 3.5 Inch, Retina 4.0 Inch, Non Retina 3.5 Inch
             if ([UIScreen mainScreen].scale == 2.0f) {
                 CGSize result = [[UIScreen mainScreen] bounds].size;
                 CGFloat scale = [UIScreen mainScreen].scale;
@@ -369,10 +377,10 @@
 }
 
 -(void)completeTransaction:(SKPaymentTransaction *)transaction {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:SUBSCRIPTION_SUCCESSFUL_TITLE
-                                                    message:SUBSCRIPTION_SUCCESSFUL_MESSAGE
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SUBSCRIPTION_SUCCESSFUL_TITLE", nil)
+                                                    message:NSLocalizedString(@"SUBSCRIPTION_SUCCESSFUL_MESSAGE", nil)
                                                    delegate:nil
-                                          cancelButtonTitle:@"Close"
+                                          cancelButtonTitle:NSLocalizedString(@"SUBSCRIPTION_SUCCESSFUL_CLOSE", nil)
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
@@ -415,10 +423,10 @@
 
     // Show an error, unless it was the user who cancelled the transaction
     if (transaction.error.code != SKErrorPaymentCancelled) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Subscription failure"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SUBSCRIPTION_FAILED_TITLE", nil)
                                                         message:[transaction.error localizedDescription]
                                                        delegate:nil
-                                              cancelButtonTitle:@"Close"
+                                              cancelButtonTitle:NSLocalizedString(@"SUBSCRIPTION_FAILED_CLOSE", nil)
                                               otherButtonTitles:nil];
         [alert show];
         [alert release];
@@ -477,9 +485,9 @@
 -(void)setSubscribeButtonEnabled:(BOOL)enabled {
     self.subscribeButton.enabled = enabled;
     if (enabled) {
-        self.subscribeButton.title = SUBSCRIBE_BUTTON_TEXT;
+        self.subscribeButton.title = NSLocalizedString(@"SUBSCRIBE_BUTTON_TEXT", nil);
     } else {
-        self.subscribeButton.title = SUBSCRIBE_BUTTON_DISABLED_TEXT;
+        self.subscribeButton.title = NSLocalizedString(@"SUBSCRIBE_BUTTON_DISABLED_TEXT", nil);
     }
 }
 
