@@ -36,6 +36,7 @@
 #import "Constants.h"
 #import "InfoViewControlleriPad.h"
 #import "InfoViewControlleriPhone.h"
+#import "Parse/Parse.h"
 
 #import "BakerViewController.h"
 #import "IssueViewController.h"
@@ -281,7 +282,7 @@
     
     NSLog(@"Opening Modal Info View");
     
-    // We need to handle various different displays for the information modal views.  The iPad is much easier than the iPhone.
+    // We need to handle various different displays for the information modal views.  The iPad is much easier than the iPhone. 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         InfoViewControlleriPad *infoViewController = [[InfoViewControlleriPad alloc]
                                                       initWithNibName:@"InfoViewControlleriPad"

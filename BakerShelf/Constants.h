@@ -64,4 +64,9 @@
 
     #endif
 
+    // PARSE FRAMEWORK SETTINGS
+    #define PARSE_APPLICATION_ID @"CFTto7CKHLA9uvDbJJemIFkTdghZw3RGaVrIcfEY"
+    #define PARSE_CLIENT_KEY @"Gms8URmvh35yahScD66b0B6be8YAWvCIPJ1GCMew"
+
+
 #endif
