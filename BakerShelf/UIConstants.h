@@ -46,4 +46,16 @@
     #define INFO_VIEW_BUTTON_COLOR @"#0069ae"
     #define INFO_VIEW_BUTTON_TEXT_COLOR @"#FFFFFF"
 
+    // Fonts for Issues
+    #define ISSUES_TITLE_FONT @"Helvetica-Bold"
+    #define ISSUES_TITLE_FONT_SIZE 15
+    #define ISSUES_INFO_FONT @"Helvetica"
+    #define ISSUES_INFO_FONT_SIZE 14
+    #define ISSUES_ACTION_FONT @"Helvetica-Bold"
+    #define ISSUES_ACTION_FONT_SIZE 11
+
+    // Font for Shelf Navigation Title.  The size is computed automatically at run time
+    //#define SHELF_NAVIGATION_TITLE_FONT @"Helvetica"
+    //#define SHELF_NAVIGATION_TITLE_COLOR @"#FFFFFF"
+
 #endif

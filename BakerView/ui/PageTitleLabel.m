@@ -32,6 +32,7 @@
 #import "PageTitleLabel.h"
 #import "Utils.h"
 #import "GTMNSString+HTML.h"
+#import "UIConstants.h"
 
 @implementation PageTitleLabel
 
