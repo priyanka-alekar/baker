@@ -64,9 +64,17 @@
 
     #endif
 
-    // PARSE FRAMEWORK SETTINGS
-    #define PARSE_APPLICATION_ID @"CFTto7CKHLA9uvDbJJemIFkTdghZw3RGaVrIcfEY"
-    #define PARSE_CLIENT_KEY @"Gms8URmvh35yahScD66b0B6be8YAWvCIPJ1GCMew"
+    // ----------------------------------------------------------------------------------------------------
+    // PARSE.COM SUPPORT
+    // The following line, together with other settings, enables Parse.com integration.  This is mainly used
+    // for Push Notifications.
+    #define PARSE_SUPPORT
 
+    #ifdef PARSE_SUPPORT
+
+        #define PARSE_APPLICATION_ID @"CFTto7CKHLA9uvDbJJemIFkTdghZw3RGaVrIcfEY"
+        #define PARSE_CLIENT_KEY @"Gms8URmvh35yahScD66b0B6be8YAWvCIPJ1GCMew"
+
+    #endif
 
 #endif

@@ -34,12 +34,16 @@
 #import "AppDelegate.h"
 #import "UICustomNavigationController.h"
 #import "UICustomNavigationBar.h"
-#import "Parse/Parse.h"
 #import "ShelfManager.h"
 
 #ifdef BAKER_NEWSSTAND
 #import "IssuesManager.h"
 #endif
+
+#ifdef PARSE_SUPPORT
+#import "Parse/Parse.h"
+#endif
+
 
 #import "BakerViewController.h"
 
@@ -71,9 +75,13 @@
     self.window = [[[InterceptorWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    #ifdef PARSE_SUPPORT
+    
     // PARSE FRAMEWORK SETUP
     [Parse setApplicationId: PARSE_APPLICATION_ID
                   clientKey: PARSE_CLIENT_KEY];
+
+    #endif
 
     #ifdef BAKER_NEWSSTAND
 

@@ -54,8 +54,4 @@
     #define ISSUES_ACTION_FONT @"Helvetica-Bold"
     #define ISSUES_ACTION_FONT_SIZE 11
 
-    // Font for Shelf Navigation Title.  The size is computed automatically at run time
-    //#define SHELF_NAVIGATION_TITLE_FONT @"Helvetica"
-    //#define SHELF_NAVIGATION_TITLE_COLOR @"#FFFFFF"
-
 #endif

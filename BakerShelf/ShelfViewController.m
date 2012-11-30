@@ -37,7 +37,6 @@
 #import "Constants.h"
 #import "InfoViewControlleriPad.h"
 #import "InfoViewControlleriPhone.h"
-#import "Parse/Parse.h"
 
 #import "BakerViewController.h"
 #import "IssueViewController.h"
@@ -101,16 +100,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"SHELF_NAVIGATION_TITLE", nil);
-    //TO DO - Fix this so that it actually works
-    //UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-    //label.backgroundColor = [UIColor clearColor];
-    //label.font = [UIFont fontWithName:SHELF_NAVIGATION_TITLE_FONT size:20];
-    //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    //label.textAlignment = UITextAlignmentCenter;
-    //label.textColor = [UIColor colorWithHexString:SHELF_NAVIGATION_TITLE_COLOR];
-    //label.text = NSLocalizedString(@"SHELF_NAVIGATION_TITLE", @"");
-    //[label sizeToFit];
-    //self.navigationItem.titleView = label;
 
     self.background = [[UIImageView alloc] init];
 
