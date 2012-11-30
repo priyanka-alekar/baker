@@ -44,7 +44,6 @@
 #import "Parse/Parse.h"
 #endif
 
-
 #import "BakerViewController.h"
 
 @implementation AppDelegate
@@ -52,6 +51,11 @@
 @synthesize window;
 @synthesize rootViewController;
 @synthesize rootNavigationController;
+
+#ifdef GOOGLE_ANALYTICS
+@synthesize tracker = tracker_;
+#endif
+
 
 + (void)initialize {
     // Set user agent (the only problem is that we can't modify the User-Agent later in the program)
@@ -63,6 +67,10 @@
 
 - (void)dealloc
 {
+    #ifdef GOOGLE_ANALYTICS
+        [tracker_ release];
+    #endif
+    
     [window release];
     [rootViewController release];
     [rootNavigationController release];
@@ -83,6 +91,13 @@
 
     #endif
 
+    #ifdef GOOGLE_ANALYTICS
+        [GAI sharedInstance].debug = NO;
+        [GAI sharedInstance].dispatchInterval = GOOGLE_DISPATCH_PERIOD_SECONDS;
+        [GAI sharedInstance].trackUncaughtExceptions = YES;
+        self.tracker = [[GAI sharedInstance] trackerWithTrackingId:GOOGLE_WEB_PROPERTY_ID];
+    #endif
+    
     #ifdef BAKER_NEWSSTAND
 
     NSLog(@"====== Newsstand is enabled ======");

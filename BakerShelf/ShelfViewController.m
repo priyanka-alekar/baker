@@ -44,6 +44,10 @@
 #import "JSONKit.h"
 #import "NSData+Base64.h"
 
+#ifdef GOOGLE_ANALYTICS
+#import "GAI.h"
+#endif
+
 @implementation ShelfViewController
 
 @synthesize issues;
@@ -150,6 +154,13 @@
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:
                                                self.infoButton,
                                                nil];
+    #endif
+        
+    #ifdef GOOGLE_ANALYTICS
+        [[GAI sharedInstance].defaultTracker trackEventWithCategory:@"Shelf Load"
+                                                         withAction:nil
+                                                          withLabel:NSLocalizedString(@"SHELF_NAVIGATION_TITLE", nil)
+                                                          withValue:nil];
     #endif
 }
 - (void)viewWillAppear:(BOOL)animated

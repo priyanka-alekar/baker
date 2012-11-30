@@ -30,6 +30,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
+
+#ifdef GOOGLE_ANALYTICS
+#import "GAI.h"
+#endif
 
 #import "InterceptorWindow.h"
 #import "ShelfViewController.h"
@@ -39,5 +44,9 @@
 @property (strong, nonatomic) InterceptorWindow *window;
 @property (strong, nonatomic) UIViewController *rootViewController;
 @property (strong, nonatomic) UINavigationController *rootNavigationController;
+
+#ifdef GOOGLE_ANALYTICS
+@property(nonatomic, retain) id<GAITracker> tracker;
+#endif
 
 @end

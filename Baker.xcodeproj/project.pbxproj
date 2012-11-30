@@ -13,6 +13,8 @@
 		9E04E273166122B400095457 /* InfoViewControlleriPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E04E26F166122B400095457 /* InfoViewControlleriPhone.xib */; };
 		9E04E2761661252700095457 /* info-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E04E2741661252700095457 /* info-icon.png */; };
 		9E04E2771661252700095457 /* info-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E04E2751661252700095457 /* info-icon@2x.png */; };
+		9E29F0D616683C4600B7AE08 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E29F0D516683C4600B7AE08 /* libGoogleAnalytics.a */; };
+		9E29F0DE1668436000B7AE08 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E29F0DD1668436000B7AE08 /* CoreData.framework */; };
 		9E6BCAD31665A75F005BDFD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E6BCAD11665A75F005BDFD5 /* Localizable.strings */; };
 		9E6BCADE1665C79E005BDFD5 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6BCADD1665C79E005BDFD5 /* Parse.framework */; };
 		9E6BCAE11665C7EB005BDFD5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6BCAE01665C7EB005BDFD5 /* AudioToolbox.framework */; };
@@ -107,6 +109,13 @@
 		9E04E26F166122B400095457 /* InfoViewControlleriPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewControlleriPhone.xib; sourceTree = "<group>"; };
 		9E04E2741661252700095457 /* info-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-icon.png"; sourceTree = "<group>"; };
 		9E04E2751661252700095457 /* info-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info-icon@2x.png"; sourceTree = "<group>"; };
+		9E29F0D016683C4600B7AE08 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = "Google Analytics/GAI.h"; sourceTree = "<group>"; };
+		9E29F0D116683C4600B7AE08 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = "Google Analytics/GAITrackedViewController.h"; sourceTree = "<group>"; };
+		9E29F0D216683C4600B7AE08 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = "Google Analytics/GAITracker.h"; sourceTree = "<group>"; };
+		9E29F0D316683C4600B7AE08 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransaction.h; path = "Google Analytics/GAITransaction.h"; sourceTree = "<group>"; };
+		9E29F0D416683C4600B7AE08 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransactionItem.h; path = "Google Analytics/GAITransactionItem.h"; sourceTree = "<group>"; };
+		9E29F0D516683C4600B7AE08 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = "Google Analytics/libGoogleAnalytics.a"; sourceTree = "<group>"; };
+		9E29F0DD1668436000B7AE08 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9E6BCAD21665A75F005BDFD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9E6BCADD1665C79E005BDFD5 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9E6BCAE01665C7EB005BDFD5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -244,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E29F0DE1668436000B7AE08 /* CoreData.framework in Frameworks */,
 				9E6BCAF51665C9FB005BDFD5 /* AdSupport.framework in Frameworks */,
 				9E6BCAF11665C854005BDFD5 /* Security.framework in Frameworks */,
 				9E6BCAF21665C854005BDFD5 /* Social.framework in Frameworks */,
@@ -265,6 +275,7 @@
 				AB40048115B4B90200D87E2A /* MessageUI.framework in Frameworks */,
 				AB40048315B4B90A00D87E2A /* libz.dylib in Frameworks */,
 				9E6BCADE1665C79E005BDFD5 /* Parse.framework in Frameworks */,
+				9E29F0D616683C4600B7AE08 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +296,27 @@
 				9E86C87A1662ED9C00EA6D80 /* InfoViewControlleriPhone5.xib */,
 			);
 			name = info;
+			sourceTree = "<group>";
+		};
+		9E29F0CD16683C1400B7AE08 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				9E29F0CF16683C2500B7AE08 /* Google Analytics */,
+			);
+			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		9E29F0CF16683C2500B7AE08 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				9E29F0D016683C4600B7AE08 /* GAI.h */,
+				9E29F0D116683C4600B7AE08 /* GAITrackedViewController.h */,
+				9E29F0D216683C4600B7AE08 /* GAITracker.h */,
+				9E29F0D316683C4600B7AE08 /* GAITransaction.h */,
+				9E29F0D416683C4600B7AE08 /* GAITransactionItem.h */,
+				9E29F0D516683C4600B7AE08 /* libGoogleAnalytics.a */,
+			);
+			name = "Google Analytics";
 			sourceTree = "<group>";
 		};
 		9E6BCAD41665A764005BDFD5 /* en.lproj */ = {
@@ -472,6 +504,7 @@
 		ABAFB57C15AB9A2E002FA498 = {
 			isa = PBXGroup;
 			children = (
+				9E29F0CD16683C1400B7AE08 /* Third Party */,
 				AB5CEB59161E4081008B4943 /* Default-568h@2x.png */,
 				AB40048415B4BB8B00D87E2A /* books */,
 				AB40047B15B4B8B800D87E2A /* BakerShelf */,
@@ -493,6 +526,7 @@
 		ABAFB58A15AB9A2E002FA498 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E29F0DD1668436000B7AE08 /* CoreData.framework */,
 				9E6BCAF41665C9FB005BDFD5 /* AdSupport.framework */,
 				9E6BCAEE1665C853005BDFD5 /* Security.framework */,
 				9E6BCAEF1665C853005BDFD5 /* Social.framework */,
@@ -752,6 +786,10 @@
 				GCC_PREFIX_HEADER = "Baker/Baker-Prefix.pch";
 				INFOPLIST_FILE = "Baker/Baker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Google Analytics\"",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -770,6 +808,10 @@
 				GCC_PREFIX_HEADER = "Baker/Baker-Prefix.pch";
 				INFOPLIST_FILE = "Baker/Baker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Google Analytics\"",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

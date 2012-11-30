@@ -77,4 +77,18 @@
 
     #endif
 
+    // ----------------------------------------------------------------------------------------------------
+    // GOOGLE ANALYTICS SUPPORT
+    // The following line, together with other settings, enables Google Analytics integration.
+    // For more information on setting this up...
+    // See: https://developers.google.com/analytics/devguides/collection/ios/devguide#howItWorks
+    #define GOOGLE_ANALYTICS
+
+    #ifdef GOOGLE_ANALYTICS
+
+        #define GOOGLE_WEB_PROPERTY_ID @"UA-36565388-1"
+        #define GOOGLE_DISPATCH_PERIOD_SECONDS 120
+
+    #endif
+
 #endif
