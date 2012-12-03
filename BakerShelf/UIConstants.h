@@ -35,15 +35,15 @@
 
     // Change the colors of individual elements on the Issue display.
     // You can change the Issue Title label color, Info Label Color, Button Colors, Loading Label Color and Spinner Color
-    #define ISSUES_TITLE_LABEL_COLOR @"#FFFFFF"
-    #define ISSUES_INFO_LABEL_COLOR @"#FFFFFF"
-    #define ISSUES_BUTTON_COLOR @"#0069ae"
+    #define ISSUES_TITLE_LABEL_COLOR @"#000000"
+    #define ISSUES_INFO_LABEL_COLOR @"#929292"
+    #define ISSUES_BUTTON_COLOR @"#b72529"
     #define ISSUES_BUTTON_TEXT_COLOR @"#FFFFFF"
-    #define ISSUES_ARCHIVE_TEXT_COLOR @"#0069ae"
-    #define ISSUES_LOADING_LABEL_COLOR @"#FFFFFF"
-    #define ISSUES_LOADING_SPINNER_COLOR @"#FFFFFF"
-    #define ISSUES_PROGRESSBAR_TINT_COLOR @"0069ae"
-    #define INFO_VIEW_BUTTON_COLOR @"#0069ae"
+    #define ISSUES_ARCHIVE_TEXT_COLOR @"#b72529"
+    #define ISSUES_LOADING_LABEL_COLOR @"#b72529"
+    #define ISSUES_LOADING_SPINNER_COLOR @"#929292"
+    #define ISSUES_PROGRESSBAR_TINT_COLOR @"b72529"
+    #define INFO_VIEW_BUTTON_COLOR @"#b72529"
     #define INFO_VIEW_BUTTON_TEXT_COLOR @"#FFFFFF"
 
     // Fonts for Issues

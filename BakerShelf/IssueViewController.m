@@ -189,7 +189,7 @@
     
     
     // SETUP PROGRESS BAR
-    self.progressBar = [[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar] autorelease];
+    self.progressBar = [[[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault] autorelease];
     self.progressBar.frame = CGRectMake(ui.contentOffset, heightOffset, 170, 30);
     self.progressBar.progressTintColor = [UIColor colorWithHexString:ISSUES_PROGRESSBAR_TINT_COLOR];
     

@@ -43,14 +43,16 @@
     #ifdef BAKER_NEWSSTAND
 
         // Remove the following line once you complete the Newsstand setup below.
-        // #warning Newsstand: Remember to set the AppStore/Newsstand constants and delete this line once you did it.
+        #warning Newsstand: Remember to set the AppStore/Newsstand constants and delete this line once you did it.
 
+        #warning Newsstand: NIN9 Creative - I left  my definition here so that developers could run out of the box.  Obviously change it!
         // ----------------------------------------------------------------------------------------------------
         // Mandatory - This constant defines where the JSON file containing all the publications is located.
         // For more information on this file, see: https://github.com/Simbul/baker/wiki/Newsstand-shelf-JSON
         // E.g. @"http://example.com/books.json"
         #define NEWSSTAND_MANIFEST_URL @"http://api.newsstandadmin.com/publication/issues/pubid/abe6d7fa-12e8-427e-b690-5b8e977dd8d1"
 
+        #warning Newsstand: NIN9 Creative - I left  my definition here so that developers could run out of the box.  Obviously change it!
         // ----------------------------------------------------------------------------------------------------
         // Mandatory - This constant identifies the subscription you set up in iTunesConnect.
         // See: iTunes Connect -> Manage Your Application -> (Your application) -> Manage In App Purchases
@@ -70,6 +72,7 @@
     // for Push Notifications.
     #define PARSE_SUPPORT
 
+    #warning Newsstand: NIN9 Creative - I left  my definition here so that developers could run out of the box.  Obviously change it!
     #ifdef PARSE_SUPPORT
 
         #define PARSE_APPLICATION_ID @"CFTto7CKHLA9uvDbJJemIFkTdghZw3RGaVrIcfEY"
@@ -84,10 +87,11 @@
     // See: https://developers.google.com/analytics/devguides/collection/ios/devguide#howItWorks
     #define GOOGLE_ANALYTICS
 
+    #warning Newsstand: NIN9 Creative - I left  my definition here so that developers could run out of the box.  Obviously change it!
     #ifdef GOOGLE_ANALYTICS
 
         #define GOOGLE_WEB_PROPERTY_ID @"UA-36565388-1"
-        #define GOOGLE_DISPATCH_PERIOD_SECONDS 120
+        #define GOOGLE_DISPATCH_PERIOD_SECONDS 90
 
     #endif
 
