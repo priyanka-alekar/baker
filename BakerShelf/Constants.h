@@ -50,7 +50,7 @@
         // Mandatory - This constant defines where the JSON file containing all the publications is located.
         // For more information on this file, see: https://github.com/Simbul/baker/wiki/Newsstand-shelf-JSON
         // E.g. @"http://example.com/books.json"
-        #define NEWSSTAND_MANIFEST_URL @"http://api.newsstandadmin.com/publication/issues/pubid/abe6d7fa-12e8-427e-b690-5b8e977dd8d1"
+        #define NEWSSTAND_MANIFEST_URL @"http://api.newsstandadmin.com/issues/abe6d7fa-12e8-427e-b690-5b8e977dd8d1"
 
         #warning Newsstand: NIN9 Creative - I left  my definition here so that developers could run out of the box.  Obviously change it!
         // ----------------------------------------------------------------------------------------------------
