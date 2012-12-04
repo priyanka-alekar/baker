@@ -95,4 +95,10 @@
 
     #endif
 
+    // ----------------------------------------------------------------------------------------------------
+    // INFO VIEW SUPPORTED
+    // The following line Enables or Disables the Info / About View
+    #define INFO_VIEW
+
+
 #endif
