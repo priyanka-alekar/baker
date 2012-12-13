@@ -289,6 +289,7 @@
 		9E04E268166122A100095457 /* info */ = {
 			isa = PBXGroup;
 			children = (
+				9E858F161679607B009E4AE4 /* html */,
 				9EDAD0C61662AE1F00CDF3C8 /* TPMultiLayoutViewController.h */,
 				9EDAD0C71662AE1F00CDF3C8 /* TPMultiLayoutViewController.m */,
 				9E04E26A166122B400095457 /* InfoViewControlleriPad.h */,
@@ -491,7 +492,6 @@
 		AB40047B15B4B8B800D87E2A /* BakerShelf */ = {
 			isa = PBXGroup;
 			children = (
-				9E858F161679607B009E4AE4 /* html */,
 				9EDC9AE216615FA5006AD4C6 /* UIConstants.h */,
 				9E04E268166122A100095457 /* info */,
 				9F58D85E15D6743C0027902C /* img */,
